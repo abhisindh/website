@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css?family=Work+Sans:300,600');
+
+:root {
+  --background: rgba(0, 214, 170, .85);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	background: #222;
+	font-family: 'Work Sans', sans-serif;
+	font-weight: 400;
+}
+
+.content {
+  height: 200vh;
+  background-image: url(//unsplash.it/1000/1000);
+  background-color: #333;
+  background-blend-mode: multiply;
+  background-size: cover;
+  display: grid;
+  place-items: center;
+}
+
+/*nav styles start here*/
+
+header {
+    background: var(--background);
+    text-align: center;
+    position: fixed;
+    width:100%
+}
+nav {
+    position:absolute;
+    text-align: left;
+    top:100%;
+    left: 0;
+    background: var(--background);
+    width:100%;
+    transform: scale(1,0);
+    transform-origin:top;
+    transition: transform 400ms ease-in-out;
+}
+nav ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+nav li {
+    margin-top: 1em;
+    margin-left: 1em;
+}
+nav a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.2em;
+    text-transform: uppercase;
+    opacity: 0;
+    transition: opacity 200ms ease-in-out ;
+}
+nav a:hover{
+    color:black
+}
+.nav-toggle {
+    display: none;
+    
+}
+.nav-toggle:checked ~ nav{
+    transform: scale(1,1);
+}
+.nav-toggle:checked ~ nav a{
+    opacity: 1;
+    transition: opacity 200ms ease-in-out 200ms;
+}
+
+label {
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin-left: 1em;
+    display: flex;
+    height:100%;
+    align-items: center;
+}
+.toggle-button {
+    background: transparent;
+    height: 50px;
+    width: 50px;
+    
+}
+
+@media screen and (min-width:800px){
+    .toggle-button{
+       display: none;
+    }
+    header{
+        display:grid;
+        grid-template-columns: 1fr auto minmax(600px,3fr) 1fr;
+    }
+    .logo{
+        grid-column: 2/3;
+    }
+    nav{
+        all: unset;
+        grid-column:3/4;
+        display: flex;
+        justify-content:flex-end;
+        align-items:center;
+    }
+    nav a{
+        opacity: 1;
+    }
+    nav ul{
+        display:flex;
+        justify-content: flex-end;
+    }
+    nav ul li{
+        margin-left: 3em;
+        margin-bottom: 0;
+    }
+}
