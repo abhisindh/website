@@ -1,6 +1,11 @@
 :root {
-    --background: rgba(0, 214, 170, .85);
-    --text:#A17742;
+    --color1: rgba(0, 214, 170, .9);
+    --tint:rgb(128,235,213,0.5);
+    --background:rgba(255, 255, 255);
+    --foreground:rgba(0,0,0);
+    --comp: #AA00D6;
+    --image1:url("../images/background1.jpg");
+    --image2:url("../images/background2.jpg");
   }
   
   *, *::before, *::after {
@@ -11,27 +16,29 @@ html{
 }
 body {
 	margin: 0;
-	background: #222;
+	background: var(--background);
 	font-family: 'Work Sans', sans-serif;
 	font-weight: 400;
 }
 a{
     text-decoration:none;
-    color: var(--background)
+    color: var(--color1)
 }
 a:hover{
-    color: black;
+    color: var(--comp);
     transition:color 1000ms;
 }
 /* home section begin  */
 
 .home {
-    height:100vh;
-    padding-top: 250px;
-    color: #fff;
-    background-image: url("../images/marc-kleen-eRwmBvhfvG8-unsplash.jpg");
-    background-position: top;
-    
+    height:120vh;
+    padding:200px;
+    color:var(--foreground);
+    background-color: var(--tint);
+    background-image: var(--image1);
+    background-size: cover;
+    background-blend-mode: multiply;
+    background-position: 0% 90%;
 }
 .home *{
     max-width: 40ch;
@@ -42,14 +49,27 @@ a:hover{
 
 /* about section begin */
 .about{
-    padding-top:100px;
+    height:120vh;
+    padding-top: 250px;
+    color:var(--foreground);
+    background-color: var(--tint);
+    background-image: var(--image2);
+    background-size: cover;
+    background-blend-mode: multiply;
+    background-position: 0% 80%;
     display: grid;
     grid-template-columns: auto  auto;
     grid-template-rows:  auto auto;
     text-align: center;
-    color:var(--text);
-    height:100vh;
-    background-image: url("../images/marc-kleen-eRwmBvhfvG8-unsplash.jpg");
-    background-position: top right;
 }
+
+@media screen and (max-width:800px){
+    .about{
+        display:block;
+    }
+    .home{
+        padding-top: 250px;
+    }
+}
+
 

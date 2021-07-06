@@ -11,7 +11,7 @@
 
 
 header {
-    background: var(--background);
+    background: var(--color1);
     text-align: center;
     position: fixed;
     width:100%
@@ -21,7 +21,7 @@ nav {
     text-align: left;
     top:100%;
     left: 0;
-    background: var(--background);
+    background: var(--color1);
     width:100%;
     transform: scale(1,0);
     transform-origin:top;
@@ -45,7 +45,6 @@ nav a {
     transition: opacity 200ms ease-in-out ;
 }
 nav a:hover{
-    color:black;
     transition: color 1000ms ease-in-out;
 }
 .nav-toggle {
@@ -108,4 +107,5 @@ label {
         margin-left: 3em;
         margin-bottom: 0;
     }
+    
 }
