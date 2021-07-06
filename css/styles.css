@@ -4,19 +4,34 @@ body {
 	font-family: 'Work Sans', sans-serif;
 	font-weight: 400;
 }
-
-.about {
-    height:200vh;
-    padding-top: 250px;
-    color: #fff;
-    background-image: url("../images/marc-kleen-eRwmBvhfvG8-unsplash.jpg");
-    
-}
-.about h1,p{
-    max-width: 40ch;
-    margin:auto;
-}
 a{
     text-decoration:none;
     color: var(--background)
 }
+a:hover{
+    color: black;
+}
+/* home section begin  */
+
+.home {
+    height:100vh;
+    padding-top: 250px;
+    color: #fff;
+    background-image: url("../images/marc-kleen-eRwmBvhfvG8-unsplash.jpg");
+    background-position: top;
+    
+}
+.home h1,p{
+    max-width: 40ch;
+    margin-left: 1em;
+    margin:auto;
+}
+/* home section end */
+
+/* about section begin */
+.about{
+    height:100vh;
+    background-image: url("../images/marc-kleen-eRwmBvhfvG8-unsplash.jpg");
+    background-position: top right;
+}
+

@@ -84,7 +84,7 @@ label {
 }
 
 @media screen and (min-width:800px){
-    .about {
+    .home {
         padding-top: 100px;
     }
     .toggle-button{
