@@ -1,3 +1,14 @@
+:root {
+    --background: rgba(0, 214, 170, .85);
+    --text:#A17742;
+  }
+  
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+html{
+    scroll-behavior: smooth;
+}
 body {
 	margin: 0;
 	background: #222;
@@ -10,6 +21,7 @@ a{
 }
 a:hover{
     color: black;
+    transition:color 1000ms;
 }
 /* home section begin  */
 
@@ -21,7 +33,7 @@ a:hover{
     background-position: top;
     
 }
-.home h1,p{
+.home *{
     max-width: 40ch;
     margin-left: 1em;
     margin:auto;
@@ -30,6 +42,12 @@ a:hover{
 
 /* about section begin */
 .about{
+    padding-top:100px;
+    display: grid;
+    grid-template-columns: auto  auto;
+    grid-template-rows:  auto auto;
+    text-align: center;
+    color:var(--text);
     height:100vh;
     background-image: url("../images/marc-kleen-eRwmBvhfvG8-unsplash.jpg");
     background-position: top right;
