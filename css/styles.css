@@ -1,0 +1,22 @@
+body {
+	margin: 0;
+	background: #222;
+	font-family: 'Work Sans', sans-serif;
+	font-weight: 400;
+}
+
+.about {
+    height:200vh;
+    padding-top: 250px;
+    color: #fff;
+    background-image: url("../images/marc-kleen-eRwmBvhfvG8-unsplash.jpg");
+    
+}
+.about h1,p{
+    max-width: 40ch;
+    margin:auto;
+}
+a{
+    text-decoration:none;
+    color: var(--background)
+}

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Work+Sans:300,600');
+@import url('https://fonts.googleapis.com/css2?family=Langar&display=swap');
 
 :root {
   --background: rgba(0, 214, 170, .85);
@@ -8,24 +8,14 @@
   box-sizing: border-box;
 }
 
-body {
-	margin: 0;
-	background: #222;
-	font-family: 'Work Sans', sans-serif;
-	font-weight: 400;
-}
-
-.content {
-  height: 200vh;
-  background-image: url(//unsplash.it/1000/1000);
-  background-color: #333;
-  background-blend-mode: multiply;
-  background-size: cover;
-  display: grid;
-  place-items: center;
+.logo span{
+    font-family: Langar;
+    color: #fff;
+    font-size:2.2ch
 }
 
 /*nav styles start here*/
+
 
 header {
     background: var(--background);
@@ -62,7 +52,8 @@ nav a {
     transition: opacity 200ms ease-in-out ;
 }
 nav a:hover{
-    color:black
+    color:black;
+    transition: color 1000ms ease-in-out;
 }
 .nav-toggle {
     display: none;
@@ -93,6 +84,9 @@ label {
 }
 
 @media screen and (min-width:800px){
+    .about {
+        padding-top: 100px;
+    }
     .toggle-button{
        display: none;
     }
