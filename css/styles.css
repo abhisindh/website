@@ -6,6 +6,7 @@
     --comp: #AA00D6;
     --image1:url("../images/background1.jpg");
     --image2:url("../images/background2.jpg");
+    --image3:url("../images/background3.jpg");
   }
   
   *, *::before, *::after {
@@ -62,6 +63,20 @@ a:hover{
     grid-template-rows:  auto auto;
     text-align: center;
 }
+/* about section end  */
+/* contact section begin */
+.contact{
+    height:120vh;
+    padding:200px;
+    color:var(--foreground);
+    background-color: var(--tint);
+    background-image: var(--image3);
+    background-size: cover;
+    background-blend-mode: multiply;
+    background-position: 0% 90%;
+}
+
+
 
 @media screen and (max-width:800px){
     .about,.home{
