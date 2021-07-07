@@ -21,18 +21,34 @@ body {
 	font-family: 'Work Sans', sans-serif;
 	font-weight: 400;
 }
+h1{
+    margin: auto;
+}
 a{
     text-decoration:none;
     color: var(--color1)
 }
 a:hover{
     color: var(--comp);
-    transition:color 1000ms;
+    transition:color 1000ms ease-in-out;
+}
+input,textarea {
+    font-size: larger;
+    border-radius: 30px;
+    width:90vw;
+    padding: 1em;
+    margin: 0.2em;
+}
+input:focus,textarea:focus{
+    outline:none;
+}
+input{
+    height:4ch;
 }
 /* home section begin  */
 
 .home {
-    height:120vh;
+    min-height:120vh;
     padding:200px;
     color:var(--foreground);
     background-color: var(--tint);
@@ -50,7 +66,7 @@ a:hover{
 
 /* about section begin */
 .about{
-    height:100vh;
+    min-height:100vh;
     padding-top: 250px;
     color:var(--foreground);
     background-color: var(--tint);
@@ -66,7 +82,7 @@ a:hover{
 /* about section end  */
 /* contact section begin */
 .contact{
-    height:120vh;
+    min-height:120vh;
     padding:200px;
     color:var(--foreground);
     background-color: var(--tint);
@@ -74,17 +90,41 @@ a:hover{
     background-size: cover;
     background-blend-mode: multiply;
     background-position: 0% 90%;
+    display: grid;
+    grid-template-rows: 1fr 4fr;
+    justify-content:center;
+}
+.contact-form{
+    display:grid;
+    grid-template-rows: 1fr 1fr 3fr 1fr;
+    justify-content: center;
+}
+.submit{
+    width:10vw;
+    margin: auto;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.submit:hover{
+    background-color: var(--comp);
+    transition:background-color 1000ms ease-in-out;
 }
 
 
-
 @media screen and (max-width:800px){
-    .about,.home{
+    h1{
+        margin:auto;
+    }
+    .about,.home,.contact{
         display:block;
         padding:0;
         margin: 0;
         padding-top: 250px;
-        padding-left: 2em;
+        padding-left: 1em;
+    }
+    
+    .submit{
+        width: max-content;
     }
     
 }

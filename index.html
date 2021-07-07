@@ -7,6 +7,15 @@
     <meta name="description" content="Personal website of frontent developer Abhisindh Chatterjee.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Abhisindh</title>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script type="text/javascript">
+(function() {
+emailjs.init("user_5EbI5orzDfnG1kbTlteYs");
+})();
+</script>
+<script src="js/mail.js"></script>
+
+
 </head>
 <body>
     <link rel="stylesheet" href="css/navbar.css">
@@ -30,7 +39,9 @@
     <div id="home" class="home">
         <h1>Hello, my name is Abhisindh Chatterjee.</h1>
         <h1>Welcome to my website</h1>
-        <h2>Wanna know more <a href="#about">about</a> me?</h2>
+        <h2>❧Know more <a href="#about">about</a> me</h2>
+        <h2>❧Read my <a href="blog.html">blog</a></h2>
+        <h2>❧Contact <a href="#contact">me</a></h2> </h2>
 
     </div>
     <div id="about" class="about">
@@ -48,7 +59,18 @@
         </div>
     </div>
     <div id="contact" class="contact">
+        <h1>Contact me</h1>
+        <form id="contact-form" class="contact-form">
+            
+            <input placeholder="Full Name" type="text" id="user_name" name="user_name">
+           
+            <input placeholder="Email id" type="email" id="user_email" name="user_email">
+           
+            <textarea id="message" placeholder="Your message here..." name="message"></textarea>
+            <input class="submit" onclick="sendMail()" type="submit" value="Send">
+        </form>
 
     </div>
+
 </body>
 </html>
