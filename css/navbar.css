@@ -1,11 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Langar&display=swap');
 
 
-
+.logo{
+    cursor: pointer;
+    user-select: none;
+}
 .logo span{
     font-family: Langar;
     color: #fff;
-    font-size:2.2ch
+    font-size:2.2ch;
 }
 
 
