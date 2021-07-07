@@ -4,10 +4,11 @@
 .logo{
     cursor: pointer;
     user-select: none;
+    color: var(--background);
 }
 .logo span{
     font-family: Langar;
-    color: #fff;
+    color: var(--foreground);
     font-size:2.2ch;
 }
 
@@ -41,7 +42,7 @@ nav li {
 }
 nav a {
     text-decoration: none;
-    color: white;
+    color: var(--foreground);
     font-size: 1.2em;
     text-transform: uppercase;
     opacity: 0;

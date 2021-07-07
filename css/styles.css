@@ -44,6 +44,9 @@ input,textarea {
     width:90vw;
     padding: 1em;
     margin: 0.2em;
+    background-color: var(--color1);
+    color: var(--foreground);
+    font-weight: bold;
 }
 input:focus,textarea:focus{
     outline:none;
