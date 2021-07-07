@@ -43,8 +43,8 @@ input,textarea {
     border-radius: 30px;
     width:90vw;
     padding: 1em;
-    margin: 0.2em;
-    background-color: var(--color1);
+    margin: 0.5em;
+    background-color: var(--background);
     color: var(--foreground);
     font-weight: bold;
 }
@@ -52,7 +52,7 @@ input:focus,textarea:focus{
     outline:none;
 }
 input{
-    height:4ch;
+    height:5ch;
 }
 /* home section begin  */
 

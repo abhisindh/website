@@ -4,11 +4,11 @@
 .logo{
     cursor: pointer;
     user-select: none;
-    color: var(--background);
+    color: var(--foreground);
 }
 .logo span{
     font-family: Langar;
-    color: var(--foreground);
+    color: var(--background);
     font-size:2.2ch;
 }
 
