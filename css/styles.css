@@ -39,6 +39,8 @@ a:hover{
     transition:color 1000ms ease-in-out;
 }
 input,textarea {
+    opacity: 0.50;
+    border: none;
     font-size: larger;
     border-radius: 30px;
     width:90vw;
