@@ -8,6 +8,12 @@
     --image2:url("../images/background2.jpg");
     --image3:url("../images/background3.jpg");
   }
+.darkmode{
+    --color1: rgba(0,80,63, .9);
+    --tint:rgba(0,160,127,0.5);
+    --background:rgb(0,0,0);
+    --foreground:rgb(255, 255, 255);
+}
   
   *, *::before, *::after {
     box-sizing: border-box;
