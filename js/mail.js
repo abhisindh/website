@@ -10,8 +10,11 @@ window.onload = function() {
         emailjs.sendForm('service_f77fmp2', 'contact_form', this)
             .then(function() {
                 console.log('SUCCESS!');
+                alert('Message sent');
+                location.reload()
             }, function(error) {
                 console.log('FAILED...', error);
+                console.log('Some error happened! Try again');
             });
     });
 }
