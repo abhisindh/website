@@ -8,15 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Abhisindh</title>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-<script type="text/javascript">
-(function() {
-emailjs.init("user_5EbI5orzDfnG1kbTlteYs");
-})();
-</script>
-<script src="js/mail.js"></script>
-<script src="js/darkmode.js"></script>
-
-
+    <script src="js/mail.js"></script>
+    <script src="js/darkmode.js"></script>
 </head>
 <body>
     <link rel="stylesheet" href="css/navbar.css">
@@ -61,14 +54,12 @@ emailjs.init("user_5EbI5orzDfnG1kbTlteYs");
     </div>
     <div id="contact" class="contact">
         <h1>Contact me</h1>
-        <form id="contact-form" class="contact-form">
-            
-            <input placeholder="Full Name" type="text" id="user_name" name="user_name">
-           
-            <input placeholder="Email id" type="email" id="user_email" name="user_email">
-           
-            <textarea id="message" placeholder="Your message here..." name="message"></textarea>
-            <input class="submit" onclick="sendMail()" type="submit" value="Send">
+        <form id="contact-form">
+            <input type="hidden" name="contact_number">
+            <input type="text"  placeholder="Full Name" name="user_name">
+            <input type="email" placeholder="Email" name="user_email">
+            <textarea placeholder="message" name="message"></textarea>
+            <button class="submit-button" type="submit">Submit</button>
         </form>
 
     </div>
