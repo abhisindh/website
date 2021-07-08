@@ -108,13 +108,19 @@ input{
 .contact-form{
     display:grid;
     grid-template-rows: 1fr 1fr 3fr 1fr;
+    grid-template-columns: auto 1fr auto; 
     justify-content: center;
 }
 .submit{
     width:10vw;
-    margin: auto;
+    margin-left: 35vw;
     padding-top: 5px;
     padding-bottom: 5px;
+    border-radius: 30px;
+    border: none;
+    height:5ch;
+    font-size:larger;
+    opacity: .5;
 }
 .submit:hover{
     background-color: var(--comp);
