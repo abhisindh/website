@@ -10,7 +10,7 @@
   }
 .darkmode{
     --color1: rgba(0,80,63, .9);
-    --tint:rgba(0,160,127,0.5);
+    --tint:rgba(0,100,87,0.5);
     --background:rgb(0,0,0);
     --foreground:rgb(255, 255, 255);
 }
@@ -20,12 +20,13 @@
   }
 html{
     scroll-behavior: smooth;
+    scroll-padding-top: 4rem;
 }
 body {
 	margin: 0;
 	background: var(--background);
-	font-family: 'Work Sans', sans-serif;
 	font-weight: 400;
+    font-family: 'Pacifico', cursive;
 }
 h1{
     margin: auto;
