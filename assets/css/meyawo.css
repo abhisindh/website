@@ -90,6 +90,9 @@ h1, h2, h3, h4, h5, h6 {
 p {
   margin-top: 0;
   margin-bottom: 1rem;
+  text-align: justify;
+  font-weight: 900;
+  line-height: 1.8em;
 }
 
 abbr[title],
@@ -11167,6 +11170,7 @@ p {
   visibility: hidden;
   -webkit-transition: all, 0.3s;
   transition: all, 0.3s;
+  text-align: center;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -11422,7 +11426,9 @@ p {
   -o-object-fit: cover;
      object-fit: cover;
 }
-
+.blog-body{
+  padding: 1em 20em 0 20em;
+}
 .blog-card-body {
   padding: 30px 20px 30px 30px;
 }
@@ -11474,6 +11480,9 @@ p {
     width: 100%;
     max-width: 100%;
     min-width: 100%;
+  }
+  .blog-body{
+    padding: 1em 1em 0 1em;
   }
 }
 

@@ -12,7 +12,8 @@
         <meta property="og:url" content="https://abhisindh.netlify.app/">
         <title>Abhisindh | Personal Portfolio</title>
         <!-- font icons -->
-        <link rel="stylesheet" href="assets/vendors/themify-icons/css/themify-icons.css">
+        <link
+        rel="stylesheet" href="assets/vendors/themify-icons/css/themify-icons.css">
         <!-- Bootstrap + Meyawo main styles -->
         <link rel="stylesheet" href="assets/css/meyawo.css">
         <link rel="shortcut icon" href="images/favicon_io/favicon.ico" type="image/x-icon">
@@ -39,19 +40,19 @@
                         <a class="link" href="#about">About</a>
                     </li>
                     <li class="item">
-                        <a class="link" href="#portfolio">Skills</a>
+                        <a class="link" href="#skills">Skills</a>
                     </li>
                     <li class="item">
-                        <a class="link" href="#testmonial">Projects</a>
+                        <a class="link" href="#projects">Projects</a>
                     </li>
                     <li class="item">
-                        <a class="link" href="#blog">Blog</a>
+                        <a class="link" href="#languages">Languages</a>
                     </li>
                     <li class="item">
                         <a class="link" href="#contact">Contact</a>
                     </li>
                     <li class="item ml-md-3">
-                        <a href="components.html" class="btn btn-primary">Components</a>
+                        <a href="blog.html" class="btn btn-primary">Blogs</a>
                     </li>
                 </ul>
                 <a href="javascript:void(0)" id="nav-toggle" class="hamburger hamburger--elastic">
@@ -72,8 +73,9 @@
                     <span class="down">I am Abhisindh Chatterjee</span>
                 </h1>
                 <p class="header-subtitle">Coding Enthusiast and Algorithm Explorer</p>
-
-                <button class="btn btn-primary">Visit My Works</button>
+                <a href="abhisindh chatterjee.pdf" target="_blank">
+                    <button class="btn-rounded btn btn-outline-primary mt-4">Download CV</button>
+                </a>
             </div>
         </header>
         <!-- end of page header -->
@@ -103,7 +105,11 @@
                             Driven by a thirst for knowledge and creativity, I'm always on the lookout for new challenges and opportunities. My GitHub repositories showcase my projects and growth as a developer. If you're interested in collaborating or have any questions, don't hesitate to reach out. Let's make meaningful contributions to the world of technology together!
                             <br><br>
                         </p>
-                        <button class="btn-rounded btn btn-outline-primary mt-4">Download CV</button>
+
+
+                        <a href="https://github.com/abhisindh">
+                            <button class="btn btn-primary">Visit My Works</button>
+                        </a>
                     </div>
                 </div>
                 <!-- end of about wrapper -->
@@ -114,14 +120,14 @@
 
 
         <!-- portfolio section -->
-        <section class="section" id="portfolio">
+        <section class="section" id="skills">
             <div class="container text-center">
                 <p class="section-subtitle">What I Do ?</p>
                 <h6 class="section-title mb-6">Skills</h6>
                 <!-- row -->
                 <div class="row">
                     <div class="col-md-4">
-                        <a href="#" class="portfolio-card">
+                        <div class="portfolio-card">
                             <img src="assets/imgs/programming.jpg" class="portfolio-card-img" alt="programming languages">
                             <span class="portfolio-card-overlay">
                                 <span class="portfolio-card-caption">
@@ -133,10 +139,10 @@
                                     </p>
                                 </span>
                             </span>
-                        </a>
+                        </div>
                     </div>
                     <div class="col-md-4">
-                        <a href="#" class="portfolio-card">
+                        <div class="portfolio-card">
                             <img class="portfolio-card-img" src="assets/imgs/data-science.jpg" class="img-responsive rounded" alt="data science and analysis">
                             <span class="portfolio-card-overlay">
                                 <span class="portfolio-card-caption">
@@ -148,10 +154,10 @@
                                     </p>
                                 </span>
                             </span>
-                        </a>
+                        </div>
                     </div>
                     <div class="col-md-4">
-                        <a href="#" class="portfolio-card">
+                        <div class="portfolio-card">
                             <img class="portfolio-card-img" src="assets/imgs/web-dev.jpg" class="img-responsive rounded" alt="web development">
                             <span class="portfolio-card-overlay">
                                 <span class="portfolio-card-caption">
@@ -163,7 +169,7 @@
                                     </p>
                                 </span>
                             </span>
-                        </a>
+                        </div>
                     </div>
                 </div>
                 <!-- end of row -->
@@ -173,7 +179,7 @@
         <!-- end of portfolio section -->
 
         <!-- service section -->
-        <section class="section" id="service">
+        <section class="section" id="projects">
             <div class="container text-center">
                 <p class="section-subtitle">What I Did ?</p>
                 <h6 class="section-title mb-6">Projects</h6>
@@ -184,9 +190,13 @@
                             <div class="body">
                                 <img src="assets/imgs/analytics.svg" alt="bellabeat product analysis" class="icon">
                                 <h6 class="title">Bellabeat Product Analysis</h6>
-                                <p class="subtitle">Data analysis case study for Bellabeat, deriving actionable insights from sales data.</p>
+                                <p class="subtitle">
+                                    Data analysis case study for Bellabeat, deriving actionable insights from sales data.
+
+                                </p>
                             </div>
                         </div>
+                        <a href="https://github.com/abhisindh/Bellabeat_Product_Analysis">Repository</a>
                     </div>
                     <div class="col-md-6 col-lg-3">
                         <div class="service-card">
@@ -196,6 +206,8 @@
                                 <p class="subtitle">Developed scanner to obtain top-down view by correcting perspective.</p>
                             </div>
                         </div>
+
+                        <a href="https://github.com/abhisindh/document-scanner">Repository</a>
                     </div>
                     <div class="col-md-6 col-lg-3">
                         <div class="service-card">
@@ -205,27 +217,31 @@
                                 <p class="subtitle">Real-time object tracking for interactive virtual painting.</p>
                             </div>
                         </div>
+                        <a href="https://github.com/abhisindh/Virtual-Paint">Repository</a>
                     </div>
                     <div class="col-md-6 col-lg-3">
                         <div class="service-card">
                             <div class="body">
                                 <img src="assets/imgs/algorithm.png" alt="data structures and algorithms Collection" class="icon">
                                 <h6 class="title">Data Structures and Algorithms Collection</h6>
-                                <p class="subtitle">Implementation of fundamental data structures and algorithms in C and Python.</p>
+                                <p class="subtitle">Implementation of fundamental data structures and algorithms in C.</p>
                             </div>
                         </div>
+
+                        <a href="https://github.com/abhisindh/Data-Structures-and-Algorithms">Repository</a>
                     </div>
                 </div>
                 <!-- end of row -->
-                
-            <button class="btn-rounded btn btn-outline-primary mt-4">View More</button>
+                <a href="https://github.com/abhisindh?tab=repositories">
+                    <button class="btn-rounded btn btn-outline-primary mt-4">View More</button>
+                </a>
             </div>
         </section>
         <!-- end of service section -->
 
 
         <!-- testimonial section -->
-        <section class="section" id="testmonial">
+        <section class="section" id="languages">
             <div class="container text-center">
                 <p class="section-subtitle">What I Use ?</p>
                 <h6 class="section-title mb-6">Languages</h6>
@@ -310,17 +326,17 @@
                             <a href="#">By: Abhisindh</a>
                             <a
                                 href="#"><!-- <i class="ti-heart text-danger"></i>
-                                                                                                        0</a>
-                                                                                                    <a href="#">
-                                                                                                        <i class="ti-comment"></i>
-                                                                                                        123</a> -->
+                                                                                                                                            0</a>
+                                                                                                                                        <a href="#">
+                                                                                                                                            <i class="ti-comment"></i>
+                                                                                                                                            123</a> -->
                             </p>
                         </p>
                         <p>Data structures are fundamental building blocks in computer science, enabling efficient data organization and manipulation. In this article, we'll explore three essential data structures: Arrays, Linked Lists, and Stacks. Understanding these structures is crucial for any aspiring developer or data analyst.
 
                         </p>
 
-                        <a href="#" class="blog-card-link">Read more
+                        <a href="blogs/intro-to-ds.html" class="blog-card-link">Read more
                             <i class="ti-angle-double-right"></i>
                         </a>
                     </div>
@@ -342,7 +358,7 @@
                         <p>Tree data structures play a crucial role in computer science, providing efficient storage and retrieval of data in hierarchical formats. In this article, we'll delve into two important tree structures: Binary Trees and Binary Search Trees (BSTs). Understanding these structures will enable you to solve a wide range of problems efficiently.
                         </p>
 
-                        <a href="#" class="blog-card-link">Read more
+                        <a href="blogs/trees.html" class="blog-card-link">Read more
                             <i class="ti-angle-double-right"></i>
                         </a>
                     </div>
@@ -351,8 +367,8 @@
                 <button class="btn-rounded btn btn-outline-primary mt-4">View More</button>
             </div>
             <!-- end of container -->
-            
-           
+
+
         </section>
         <!-- end of blog section -->
 
@@ -374,12 +390,12 @@
                             <textarea id="message" name="comment" id="comment" rows="6" class="form-control" placeholder="Write Something"></textarea>
                         </div>
                         <!-- <div class="form-group col-sm-12 mt-3">
-                            <button class="btn btn-outline-primary rounded" >Send message</button>
-                        </div> -->
+                                                    <button class="btn btn-outline-primary rounded" >Send message</button>
+                                                </div> -->
                     </div>
                 </form>
                 <!-- end of contact form -->
-                
+
                 <button class="btn btn-outline-primary rounded" onclick="sendMail()">Send Message</button>
             </div>
             <!-- end of container -->
@@ -394,7 +410,7 @@
                         document.write(new Date().getFullYear())
                     </script>
                     &copy;
-                    <a href="http://www.devcrud.com">DevCRUD</a>
+                    <div>DevCRUD</div>
                 </p>
                 <div class="social-links text-right m-auto ml-sm-auto">
                     <a href="javascript:void(0)" class="link">
@@ -429,7 +445,6 @@
 
         <!-- Meyawo js -->
         <script src="assets/js/meyawo.js"></script>
-
 
 
     </body>
