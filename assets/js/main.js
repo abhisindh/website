@@ -13,6 +13,11 @@
 */
 
 // smooth scroll
+import { n_blog_cards } from "./blog_home.js";
+
+const container = document.getElementById("blog_container");
+n_blog_cards(container, 2);
+
 $(document).ready(function(){
     $(".navbar .nav-link").on('click', function(event) {
 

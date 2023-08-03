@@ -189,19 +189,18 @@ a:not([href]):not([tabindex]):focus {
   outline: 0;
 }
 
-pre,
-code,
+
 kbd,
 samp {
   font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   font-size: 1em;
 }
 
-pre {
+/* pre {
   margin-top: 0;
   margin-bottom: 1rem;
   overflow: auto;
-}
+} */
 
 figure {
   margin: 0 0 1rem;
@@ -540,7 +539,7 @@ kbd kbd {
   font-weight: 700;
 }
 
-pre {
+/* pre {
   display: block;
   font-size: 87.5%;
   color: #212529;
@@ -550,12 +549,12 @@ pre code {
   font-size: inherit;
   color: inherit;
   word-break: normal;
-}
+} */
 
-.pre-scrollable {
+/* .pre-scrollable {
   max-height: 340px;
   overflow-y: scroll;
-}
+} */
 
 .container {
   width: 100%;
@@ -11461,11 +11460,17 @@ p {
   margin-top: 20px;
   display: block;
   font-size: 13px;
+  cursor: pointer;
 }
 
 .blog-card-link i {
   position: relative;
   top: 1px;
+  cursor: pointer;
+}
+
+.blog-card-link:hover{
+  color: var(--purple);
 }
 
 @media (max-width: 991.98px) {

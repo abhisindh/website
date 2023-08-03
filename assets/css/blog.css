@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata&display=swap');
+
+
+.sub-heading{
+    text-align: left;
+}
+
+.disclaimer {
+    font-style: italic;
+    color: #0c0b0b;
+    margin-top: 20px;
+}
+
+.bold{
+    font-weight: bold;
+}
+
+li{
+    text-align: left;
+    list-style-position: inside;
+}
+
+p{
+    font-weight: 500;
+}
+
+span{
+    font-weight: bold;
+}
+
+
+
+
+
+
+
+
+
+.navbar {
+    position: relative;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    padding: 0.8rem 1rem;
+  }
+
+  @media (max-width: 575.98px) {
+    .navbar-expand-sm > .container,
+    .navbar-expand-sm > .container-fluid {
+      padding-right: 0;
+      padding-left: 0;
+    }
+  }
+

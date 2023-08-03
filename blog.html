@@ -1,97 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-   <meta charset="utf-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-   <meta name="description" content="Start your development with Meyawo landing page.">
-   <meta name="author" content="Devcrud">
-   <title>Meyawo Landing page | Components</title>
-   <!-- font icons -->
-   <link rel="stylesheet" href="assets/vendors/themify-icons/css/themify-icons.css">
-   <!-- Bootstrap + Steller  -->
-   <link rel="stylesheet" href="assets/css/meyawo.css">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="Welcome to Abhisindh Chatterjee's portfolio website. I am a data science enthusiast and a proficient programmer with expertise in Python, JavaScript, and data analysis. Explore my projects and blogs to see my passion for technology and learning.">
+        <meta name="keywords" content="Abhisindh Chatterjee, data science, programming, portfolio, Python, JavaScript, data analysis, web development, data structures, binary trees, binary search trees, BSTs">
+        <meta name="author" content="Abhisindh Chatterjee">
+        <meta property="og:title" content="Abhisindh Chatterjee - Data Science and Programming Portfolio">
+        <meta property="og:description" content="Explore the projects and blogs of Abhisindh Chatterjee, a data science enthusiast and proficient programmer in Python and JavaScript.">
+        <meta property="og:image" content="images/favicon_io/android-chrome-512x512.png">
+        <meta property="og:url" content="https://abhisindh.netlify.app/">
+        <title>Abhisindh | Personal Portfolio</title>
+        <!-- font icons -->
+        <link
+        rel="stylesheet" href="assets/vendors/themify-icons/css/themify-icons.css">
+        <!-- Bootstrap + Meyawo main styles -->
+        <link rel="stylesheet" href="assets/css/meyawo.css">
+        <link rel="shortcut icon" href="images/favicon_io/favicon.ico" type="image/x-icon">
+    
+    <script type="module" src="assets/js/blog_home.js"></script>
 </head>
 <body>
-
-    <section
-    class="section" id="blog">
-    <!-- container -->
-    <div class="container text-center">
-        <h6 class="section-title mb-6">Blogs</h6>
-        <!-- blog-wrapper -->
-        <div class="blog-card">
-            <div class="blog-card-header">
-                <img src="assets/imgs/array-stack-crop.jpg" class="blog-card-img" alt="arrays,linked lists, stacks">
-            </div>
-            <div class="blog-card-body">
-                <h5 class="blog-card-title">Introduction to Data Structures: Arrays, Linked Lists, and Stacks</h6>
-
-                <p class="blog-card-caption">
-                    <a href="#">By: Abhisindh</a>
-                    <a
-                        href="#"><!-- <i class="ti-heart text-danger"></i>
-                                                                                                0</a>
-                                                                                            <a href="#">
-                                                                                                <i class="ti-comment"></i>
-                                                                                                123</a> -->
-                    </p>
-                </p>
-                <p>Data structures are fundamental building blocks in computer science, enabling efficient data organization and manipulation. In this article, we'll explore three essential data structures: Arrays, Linked Lists, and Stacks. Understanding these structures is crucial for any aspiring developer or data analyst.
-
-                </p>
-
-                <a href="blogs/intro-to-ds.html" class="blog-card-link">Read more
-                    <i class="ti-angle-double-right"></i>
-                </a>
-            </div>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-primary rounded shadow mb-3">
+        <div class="container">
+           <a class="navbar-brand" href="#">Primary Color</a>
+           <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+           <span class="navbar-toggler-icon"></span>
+           </button>
+           <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav ml-auto"> 
+                 <li class="nav-item">
+                    <a class="nav-link" href="#about">About Us</a>
+                 </li>
+                 <li class="nav-item">
+                    <a class="nav-link" href="#service">Our Service</a>
+                 </li>
+                 <li class="nav-item">
+                    <a class="nav-link" href="#team">Our Team</a>
+                 </li>
+                 <li class="nav-item">
+                    <a href="#book-table" class="ml-4 mt-1 btn btn-light btn-sm">navbar button</a>
+                 </li>
+              </ul>                       
+           </div>
         </div>
-        <!-- end of blog wrapper -->
+     </nav>
 
-        <!-- blog-wrapper -->
-        <div class="blog-card">
-            <div class="blog-card-header">
-                <img src="assets/imgs/tree.jpg" class="blog-card-img" alt="trees">
-            </div>
-            <div class="blog-card-body">
-                <h5 class="blog-card-title">Exploring Tree Data Structures: Binary Trees and Binary Search Trees</h6>
-
-                <p class="blog-card-caption">
-                    <a href="#">By: Abhisindh</a>
-                    <a href="#"></p>
-                </p>
-                <p>Tree data structures play a crucial role in computer science, providing efficient storage and retrieval of data in hierarchical formats. In this article, we'll delve into two important tree structures: Binary Trees and Binary Search Trees (BSTs). Understanding these structures will enable you to solve a wide range of problems efficiently.
-                </p>
-
-                <a href="blogs/trees.html" class="blog-card-link">Read more
-                    <i class="ti-angle-double-right"></i>
-                </a>
-            </div>
-        </div>
+    <div id="blogContainer" class="container">
 
     </div>
-    <!-- end of container -->
     
-   
-</section>
-<!-- end of blog section -->
-   <!-- footer -->
-    <div class="container mt-5">
-        <footer class="footer">       
-            <p class="mb-0">Copyright <script>document.write(new Date().getFullYear())</script> &copy; <a href="http://www.devcrud.com">DevCRUD</a></p>
-            <div class="social-links text-right m-auto ml-sm-auto">
-                <a href="javascript:void(0)" class="link"><i class="ti-facebook"></i></a>
-                <a href="javascript:void(0)" class="link"><i class="ti-twitter-alt"></i></a>
-                <a href="javascript:void(0)" class="link"><i class="ti-google"></i></a>
-                <a href="javascript:void(0)" class="link"><i class="ti-pinterest-alt"></i></a>
-                <a href="javascript:void(0)" class="link"><i class="ti-instagram"></i></a>
-                <a href="javascript:void(0)" class="link"><i class="ti-rss"></i></a>
-            </div>
-        </footer>
-    </div> <!-- end of page footer -->
-   
-   <!-- core  -->
-   <script src="assets/vendors/jquery/jquery-3.4.1.js"></script>
-   <script src="assets/vendors/bootstrap/bootstrap.bundle.js"></script>
-
 </body>
+
+
 </html>
