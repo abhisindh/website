@@ -37,13 +37,11 @@ function createBlogCard(blog) {
     description.textContent = blog.description || 'No description available';
     bodyDiv.appendChild(description);
 
-    const readMoreDiv = document.createElement('div');
+    const readMoreDiv = document.createElement('a'); // Changed from 'div' to 'a'
     readMoreDiv.id = blog.id || '000';
     readMoreDiv.classList.add('blog-card-link');
+    readMoreDiv.href = blog.path; // Set the href attribute to the blog path
     readMoreDiv.textContent = 'Read more';
-    readMoreDiv.onclick = function() {
-        gotoBlog(this);
-    };
     const icon = document.createElement('i');
     icon.classList.add('ti-angle-double-right');
     readMoreDiv.appendChild(icon);
@@ -53,6 +51,7 @@ function createBlogCard(blog) {
 
     return blogCard;
 }
+
 
 // Get the container where the blog cards will be added
 

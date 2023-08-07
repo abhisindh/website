@@ -1,10 +1,10 @@
 export const blogList = [
     {
         "id": "001",
-        "header_img": "../blogs/images/001-header.jpg",
+        "header_img": "../blogs/images/001-header.jpeg",
         "title": "Mastering Dynamic Arrays in C: Building Adaptable Data Structures",
         "author": "Abhisindh",
-        "description": "Dynamic arrays, often referred to as resizable arrays, are a fundamental data structure that combines the best of both worlds: the efficient random access of arrays and the flexibility of dynamic memory allocation. Our journey begins by understanding the principles behind dynamic arrays and why they're a crucial tool in any programmer's toolkit.",
+        "description": " Imagine you are a librarian in a busy library, tasked with managing an ever growing collection of books.You start with a set number of bookshelves neatly organized with a fixed number of slots of books.However as more and more book-enthusiasts visit your library, the shelves fill up, and you are faced with a dilemma- what if you run out of space for new books ?",
         "path": "../../blogs/001.html"
     },
     {
