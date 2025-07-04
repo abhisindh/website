@@ -67,7 +67,7 @@ function createNavbar() {
     portfolioNavItem.classList.add('nav-item');
     const portfolioLink = document.createElement('a');
     portfolioLink.classList.add('ml-4', 'mt-1', 'btn', 'btn-light', 'btn-sm');
-    portfolioLink.href = 'https://abhisindh.netlify.app/#contact';
+    portfolioLink.href = 'https://abhisindh.netlify.app';
     portfolioLink.textContent = 'Go to portfolio';
     portfolioNavItem.appendChild(portfolioLink);
     ul.appendChild(portfolioNavItem);

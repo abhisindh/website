@@ -11,15 +11,15 @@ export const blogList = [
     
     {
         "id": "002",
-        "header_img": "../../blogs/images/002-header.jpg",
-        "title": "Exploring Tree Data Structures: Binary Trees and Binary Search Trees",
+        "header_img": "../../blogs/images/002-header.png",
+        "title": "Linked Lists Made Simple: Step-by-Step Implementation in C",
         "author": "Abhisindh",
-        "description": "Tree data structures play a crucial role in computer science, providing efficient storage and retrieval of data in hierarchical formats. In this article, we'll delve into two essential tree structures: Binary Trees and Binary Search Trees (BSTs). Understanding these structures will enable you to solve a wide range of problems efficiently.",
+        "description": "Imagine a scenario where you're managing a contact list for your favorite social media platform. Each user profile is like a node in a linked list, connected by relationships. This real-world example demonstrates the power of linked lists, where connections between data elements pave the way for flexible and dynamic data management. In this blog, we will delve into the depths of linked lists, exploring their types, operations, and implementation using code snippets in the C programming language.",
         "path": "../../blogs/002.html"
     },
     {
         "id": "001",
-        "header_img": "../../blogs/images/001-header.jpeg",
+        "header_img": "../../blogs/images/001-header.png",
         "title": "Mastering Dynamic Arrays in C: Building Adaptable Data Structures",
         "author": "Abhisindh",
         "description": " Imagine you are a librarian in a busy library, tasked with managing an ever growing collection of books.You start with a set number of bookshelves neatly organized with a fixed number of slots of books.However as more and more book-enthusiasts visit your library, the shelves fill up, and you are faced with a dilemma- what if you run out of space for new books ?",

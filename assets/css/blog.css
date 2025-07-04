@@ -71,6 +71,14 @@ body {
 [tabindex="-1"]:focus {
     outline: 0 !important
 }
+.left{
+    float: left;
+    margin-right: 1em;
+    margin-bottom: 1em;
+}
+.clear{
+    clear: both;
+}
 h1,
 h2,
 h3,

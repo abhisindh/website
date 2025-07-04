@@ -1,58 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="Start your development with Meyawo landing page.">
-        <meta name="author" content="Devcrud">
-        <title>Meyawo Landing page | Components</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../assets/css/meyawo.css">
+
+        <title>Mastering Dynamic Arrays in C: Building Adaptable Data Structures</title>
         <!-- font icons -->
         <link
         rel="stylesheet" href="../assets/vendors/themify-icons/css/themify-icons.css">
-        <!-- Bootstrap + Steller  -->
-        <link rel="stylesheet" href="../assets/css/meyawo.css">
-        
+        <!-- Bootstrap + Meyawo main styles -->
+        <link rel="stylesheet" href="../assets/css/blog.css">
         <link rel="shortcut icon" href="../images/favicon_io/favicon.ico" type="image/x-icon">
+
+        <script type="module" src="../assets/js/blog_home.js"></script>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/default.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
     </head>
     <body>
+        <script src="../assets/js/blog_meta.js"></script>
+        <script>
+            hljs.highlightAll();
+        </script>
 
-        <div class="blog-car">
-            <div class="blog-card-header"><!-- Image placeholder -->
-                <!-- <img src="path/to/your/image/placeholder.jpg" class="blog-card-img" alt="trees"> -->
+        <div class="container">
+            <h5 class="blog-card-title">Mastering Dynamic Arrays in C: Building Adaptable Data Structures</h5>
+
+            <p class="blog-card-caption">
+                <a href="#">By: Abhisindh</a>
+                <a href="#">July 31, 2023</a>
+            </p>
+
+            <h5 class="sub-heading">Introduction</h5>
+            <div class="blog-card-header left">
+
+                <img src="images/002-header.png" alt="" class="blog-card-img">
             </div>
-            <div class="blog-body">
-                <h5 class="blog-card-title">Exploring Tree Data Structures: Binary Trees and Binary Search Trees</h5>
+            <p>
+                
+In the world of data structures, linked lists stand as one of the fundamental building blocks for efficient data manipulation and storage. Imagine a scenario where you're managing a contact list for your favorite social media platform. Each user profile is like a node in a linked list, connected by relationships. This real-world example demonstrates the power of linked lists, where connections between data elements pave the way for flexible and dynamic data management. In this blog, we will delve into the depths of linked lists, exploring their types, operations, and implementation using code snippets in the C programming language.
+            </p>
 
-                <p class="blog-card-caption">
-                    <a href="#">By: Abhisindh</a>
-                    <a href="#">July 31, 2023</a>
+
+            <div class="clear"></div>
+
+Table of Contents:
+
+Understanding Linked Lists
+1.1 What are Linked Lists?
+1.2 Why Use Linked Lists?
+1.3 Types of Linked Lists: Singly, Doubly, and Circular
+1.4 Advantages and Disadvantages of Linked Lists
+
+Anatomy of a Linked List
+2.1 Nodes: The Building Blocks
+2.2 Creating a Node Structure in C
+2.3 Constructing a Linked List
+2.4 Visualizing Linked List Operations
+
+Basic Operations on Linked Lists
+3.1 Insertion
+3.1.1 Inserting at the Beginning
+3.1.2 Inserting at the End
+3.1.3 Inserting at a Specific Position
+3.2 Deletion
+3.2.1 Deleting from the Beginning
+3.2.2 Deleting from the End
+3.2.3 Deleting from a Specific Position
+
+Traversing and Searching
+4.1 Iterative Traversal
+4.2 Recursive Traversal
+4.3 Searching for an Element
+
+Advanced Linked List Concepts
+5.1 Doubly Linked Lists
+5.2 Circular Linked Lists
+5.3 Operations in Doubly and Circular Lists
+5.4 Memory Management and Avoiding Memory Leaks
+
+Practical Applications
+6.1 Implementing Stacks and Queues using Linked Lists
+6.2 Polynomial Representation using Linked Lists
+6.3 Applications in Operating Systems: Process Management
+
+Tips and Best Practices
+7.1 Keeping the List Sorted
+7.2 Handling Edge Cases
+7.3 Writing Modular and Reusable Code
+
+Conclusion
+In this journey through linked lists, we've uncovered their significance, dissected their components, and mastered their operations. Armed with code snippets in C, you are now equipped to wield the power of linked lists in your programming endeavors. Whether you're building data structures from scratch or optimizing existing systems, the versatility and efficiency of linked lists will undoubtedly play a pivotal role.
                 </p>
-                <p>Tree data structures play a crucial role in computer science, providing efficient storage and retrieval of data in hierarchical formats. In this article, we'll delve into two essential tree structures: Binary Trees and Binary Search Trees (BSTs). Understanding these structures will enable you to solve a wide range of problems efficiently.</p>
-                    
-                    <p>Binary Trees are simple data structures where each node has at most two children: left and right. They are called "binary" because they follow a branching structure with two child nodes at most. The topmost node is known as the root, and its children form subtrees. Binary Trees are versatile and can represent various hierarchical relationships, such as family trees or file systems.
-                    
-                    <p>One of the most common use cases of Binary Trees is in representing hierarchical data. For example, consider a file system where directories contain subdirectories and files. Each directory can have multiple subdirectories, and each subdirectory can further contain its own subdirectories or files. Such a hierarchical relationship can be effectively represented using a Binary Tree, with each node representing a directory or file.
-                    
-                    <p>Binary Search Trees (BSTs) are a specific type of binary tree that maintains a certain ordering property, making searches, insertions, and deletions more efficient. In a BST, the value of each node in the left subtree is less than the value of its parent node, while the value of each node in the right subtree is greater. This ordering property allows for efficient searching because we can quickly determine which subtree to explore based on the value we are searching for.
-                    
-                    <p>The efficiency of BST operations heavily relies on maintaining the correct ordering property. When inserting a new value, we traverse the tree and find the correct position to place the new node while preserving the ordering. Similarly, when searching for a value, we can efficiently eliminate half of the remaining nodes at each step, reducing the search space drastically.
-                    
-                    <p>Throughout this article, we'll explore the characteristics and properties of Binary Trees and Binary Search Trees. Let's start by understanding the tree traversal algorithms used to navigate through these structures. Three common tree traversal methods are Inorder, Preorder, and Postorder.</p>
-                    
-                    <p>In the Inorder traversal, we visit the left subtree, then the current node, and finally the right subtree. This traversal method results in visiting nodes in ascending order in a BST. For example, if we have a BST with the values 5, 10, 15, 20, and 25, the Inorder traversal will give us the sequence 5, 10, 15, 20, 25.</p>
-                    
-                    <p>The Preorder traversal follows the sequence of the current node, left subtree, and right subtree. It is useful in creating a copy of a tree or evaluating arithmetic expressions represented as a tree.</p>
-                    
-                    <p>The Postorder traversal explores the left subtree, right subtree, and finally the current node. It is commonly used in deleting a tree from memory, as we can safely delete child nodes before deleting their parent.</p>
-                    
-                    <p>In addition to traversal, we'll discuss the operations and time complexities involved in BST operations. The search operation in a BST has an average time complexity of O(log n), where n is the number of nodes. However, in the worst case, a skewed BST can result in a time complexity of O(n), turning the search inefficient.</p>
-                    
-                    <p>Inserting a new value in a BST requires finding the appropriate position based on the ordering property, which also has a time complexity of O(log n) on average. However, a skewed BST can result in an O(n) time complexity for insertion.</p>
-                    
-                    <p>Deletion in a BST involves three cases: a node with no children, a node with one child, and a node with two children. The time complexity for deletion also depends on the height of the tree and ranges from O(log n) to O(n) in the worst case.</p>
-                    
-                    <p>In conclusion, understanding tree data structures like Binary Trees and Binary Search Trees is essential for any programmer. These structures offer efficient storage and retrieval of hierarchical data, and Binary Search Trees, in particular, enable fast searches, insertions, and deletions due to their ordering property. By mastering the traversal algorithms and operation complexities, developers can solve a wide range of problems efficiently using tree data structures.</p>
-            </div>
         </div>
     </body>
 </html>
