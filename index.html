@@ -1,414 +1,305 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="Welcome to Abhisindh Chatterjee's portfolio website. I am a data science enthusiast and a proficient programmer with expertise in Python, JavaScript, and data analysis. Explore my projects and blogs to see my passion for technology and learning.">
-        <meta name="keywords" content="Abhisindh Chatterjee, data science, programming, portfolio, Python, JavaScript, data analysis, web development, data structures, binary trees, binary search trees, BSTs">
-        <meta name="author" content="Abhisindh Chatterjee">
-        <meta property="og:title" content="Abhisindh Chatterjee - Data Science and Programming Portfolio">
-        <meta property="og:description" content="Explore the projects and blogs of Abhisindh Chatterjee, a data science enthusiast and proficient programmer in Python and JavaScript.">
-        <meta property="og:image" content="./images/favicon_io/android-chrome-512x512.png">
-        <meta property="og:url" content="https://abhisindh.netlify.app/">
-        <link rel="manifest" href="./manifest.json">
-        <title>Abhisindh | Personal Portfolio</title>
-        <!-- font icons -->
-        <link rel="stylesheet" href="./assets/vendors/themify-icons/css/themify-icons.css">
-        <!-- Bootstrap + Meyawo main styles -->
-        <link rel="stylesheet" href="./assets/css/meyawo.css">
-        <link rel="shortcut icon" href="./images/favicon_io/favicon.ico" type="image/x-icon">
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-        <script type="text/javascript">
-            (function () {
-                emailjs.init("user_5EbI5orzDfnG1kbTlteYs");
-            })();
-        </script>
-        <script src="./assets/js/mail.js"></script>
-    </head>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Explore the portfolio of Abhisindh Chatterjee, a computational mathematics graduate and Olympiad trainer with a passion for data science, machine learning, and algorithm design.">
+  <meta name="keywords" content="Abhisindh Chatterjee, data science, machine learning, portfolio, Python, C, R, Scilab, mathematics, algorithms, web development, CSIR NET, PhD, PREDICTOR, image processing, OpenCV">
+  <meta name="author" content="Abhisindh Chatterjee">
+  <meta property="og:title" content="Abhisindh Chatterjee - Computational Math & Data Science Portfolio">
+  <meta property="og:description" content="Projects and experience of Abhisindh Chatterjee, specializing in ML, algorithm design, and mathematical modelling.">
+  <meta property="og:image" content="./images/favicon_io/android-chrome-512x512.png">
+  <meta property="og:url" content="https://abhisindh.netlify.app/">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0a192f">
+  <link rel="manifest" href="./manifest.json">
+  <title>Abhisindh | Math & Data Science Portfolio</title>
+  <link rel="stylesheet" href="./assets/vendors/themify-icons/css/themify-icons.css">
+  <link rel="stylesheet" href="./assets/css/meyawo.css">
+  <link rel="icon" href="./images/favicon_io/favicon.ico" type="image/x-icon">
+  <script defer src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script defer src="./assets/js/mail.js"></script>
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
 
-    <body
-        data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
+  <nav class="custom-navbar" data-spy="affix" data-offset-top="20">
+    <div class="container">
+      <a class="logo" href="#">Abhisindh</a>
+      <ul class="nav">
+        <li class="item"><a class="link" href="#home">Home</a></li>
+        <li class="item"><a class="link" href="#about">About</a></li>
+        <li class="item"><a class="link" href="#skills">Skills</a></li>
+        <li class="item"><a class="link" href="#projects">Projects</a></li>
+        <li class="item"><a class="link" href="#languages">Languages</a></li>
+        <li class="item"><a class="link" href="#contact">Contact</a></li>
+        <li class="item ml-md-3"><a href="./blogs/blog.html" class="btn btn-primary">Blogs</a></li>
+      </ul>
+      <a href="javascript:void(0)" id="nav-toggle" class="hamburger hamburger--elastic">
+        <div class="hamburger-box"><div class="hamburger-inner"></div></div>
+      </a>
+    </div>
+  </nav>
 
-        <!-- Page Navbar -->
-        <nav class="custom-navbar" data-spy="affix" data-offset-top="20">
-            <div class="container">
-                <a class="logo" href="#">Abhisindh</a>
-                <ul class="nav">
-                    <li class="item">
-                        <a class="link" href="#home">Home</a>
-                    </li>
-                    <li class="item">
-                        <a class="link" href="#about">About</a>
-                    </li>
-                    <li class="item">
-                        <a class="link" href="#skills">Skills</a>
-                    </li>
-                    <li class="item">
-                        <a class="link" href="#projects">Projects</a>
-                    </li>
-                    <li class="item">
-                        <a class="link" href="#languages">Languages</a>
-                    </li>
-                    <li class="item">
-                        <a class="link" href="#contact">Contact</a>
-                    </li>
-                    <li class="item ml-md-3">
-                        <a href="./blogs/blog.html" class="btn btn-primary">Blogs</a>
-                    </li>
-                </ul>
-                <a href="javascript:void(0)" id="nav-toggle" class="hamburger hamburger--elastic">
-                    <div class="hamburger-box">
-                        <div class="hamburger-inner"></div>
-                    </div>
-                </a>
-            </div>
-        </nav>
-        <!-- End of Page Navbar -->
+  <header id="home" class="header">
+    <div class="overlay"></div>
+    <div class="header-content container">
+      <h1 class="header-title">
+        <span class="up">Hello!</span>
+        <span class="down">I'm Abhisindh Chatterjee</span>
+      </h1>
+      <p class="header-subtitle">Math Researcher | ML Enthusiast | Algorithm Explorer</p>
+      <a href="./abhisindh_chatterjee_cv.pdf" target="_blank">
+        <button class="btn-rounded btn btn-outline-primary mt-4">Download CV</button>
+      </a>
+    </div>
+  </header>
 
-        <!-- page header -->
-        <header id="home" class="header">
-            <div class="overlay"></div>
-            <div class="header-content container">
-                <h1 class="header-title">
-                    <span class="up">HI!</span>
-                    <span class="down">I am Abhisindh Chatterjee</span>
-                </h1>
-                <p class="header-subtitle">Coding Enthusiast and Algorithm Explorer</p>
-                <a href="./abhisindh chatterjee.pdf" target="_blank">
-                    <button class="btn-rounded btn btn-outline-primary mt-4">Download CV</button>
-                </a>
-            </div>
-        </header>
-        <!-- end of page header -->
-
-        <!-- about section -->
-        <section
-            class="section pt-0" id="about">
-            <!-- container -->
-            <div
-                class="container text-center">
-                <!-- about wrapper -->
-                <div class="about">
-                    <div class="about-img-holder">
-                        <img src="./assets/imgs/programmer.png" class="about-img" alt="image not found">
-                    </div>
-                    <div class="about-caption">
-                        <p class="section-subtitle">Who Am I ?</p>
-                        <h2 class="section-title mb-3">About Me</h2>
-                        <p>
-
-                            Hi, I'm Abhisindh, an aspiring data scientist and versatile programmer. Python is my absolute favorite language, and I've honed my skills in various domains. From automating tasks to analyzing data using Pandas and NumPy, Python has become my trusty sidekick. I also enjoy working with JavaScript, building interactive web experiences that captivate users. Delving into computer vision with OpenCV has been awe-inspiring, witnessing machines "understand" images.
-                            <br><br>
-
-                            Data science is where my heart lies; I love exploring data, extracting insights, and building predictive models using machine learning. Web development is another realm I'm comfortable with, crafting attractive and responsive websites with HTML and CSS. SQL helps me manage data efficiently, and Git streamlines collaborative projects.
-                            <br><br>
-
-                            Driven by a thirst for knowledge and creativity, I'm always on the lookout for new challenges and opportunities. My GitHub repositories showcase my projects and growth as a developer. If you're interested in collaborating or have any questions, don't hesitate to reach out. Let's make meaningful contributions to the world of technology together!
-                            <br><br>
-                        </p>
-
-
-                        <a href="https://github.com/abhisindh">
-                            <button class="btn btn-primary">Visit My Works</button>
-                        </a>
-                    </div>
-                </div>
-                <!-- end of about wrapper -->
-            </div>
-            <!-- end of container -->
-        </section>
-        <!-- end of about section -->
-
-
-        <!-- portfolio section -->
-        <section class="section" id="skills">
-            <div class="container text-center">
-                <p class="section-subtitle">What I Do ?</p>
-                <h6 class="section-title mb-6">Skills</h6>
-                <!-- row -->
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="portfolio-card">
-                            <img src="./assets/imgs/programming.jpg" class="portfolio-card-img" alt="programming languages">
-                            <span class="portfolio-card-overlay">
-                                <span class="portfolio-card-caption">
-                                    <h4>Programming Languages</h5>
-                                    <p class="font-weight-normal">
-                                        Python: ◉◉◉◉◉◉◉◉◉◉<br>
-                                        JavaScript: ◉◉◉◉◉◉◉◉◎◎<br>
-                                        C: ◉◉◉◎◎◎◎◎◎◎<br>
-                                    </p>
-                                </span>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="portfolio-card">
-                            <img class="portfolio-card-img" src="./assets/imgs/data-science.jpg" class="img-responsive rounded" alt="data science and analysis">
-                            <span class="portfolio-card-overlay">
-                                <span class="portfolio-card-caption">
-                                    <h4>Data Science and Analysis</h5>
-                                    <p class="font-weight-normal">
-                                        Data Analysis ◉◉◉◉◉◉◉◎◎◎<br>
-                                        Machine Learning ◉◉◉◉◉◉◎◎◎◎<br>
-                                        OpenCV ◉◉◉◉◉◉◎◎◎◎<br>
-                                    </p>
-                                </span>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="portfolio-card">
-                            <img class="portfolio-card-img" src="./assets/imgs/web-dev.jpg" class="img-responsive rounded" alt="web development">
-                            <span class="portfolio-card-overlay">
-                                <span class="portfolio-card-caption">
-                                    <h4>Web Development</h5>
-                                    <p class="font-weight-normal">
-                                        HTML ◉◉◉◉◉◉◎◎◎◎<br>
-                                        CSS ◉◉◉◉◉◉◎◎◎◎<br>
-                                        Node.js ◉◎◎◎◎◎◎◎◎◎<br>
-                                    </p>
-                                </span>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <!-- end of row -->
-            </div>
-            <!-- end of container -->
-        </section>
-        <!-- end of portfolio section -->
-
-        <!-- service section -->
-        <section class="section" id="projects">
-            <div class="container text-center">
-                <p class="section-subtitle">What I Did ?</p>
-                <h6 class="section-title mb-6">Projects</h6>
-                <!-- row -->
-                <div class="row">
-                    <div class="col-md-6 col-lg-3">
-                        <div class="service-card">
-                            <div class="body">
-                                <img src="./assets/imgs/analytics.svg" alt="bellabeat product analysis" class="icon">
-                                <h6 class="title">Bellabeat Product Analysis</h6>
-                                <p class="subtitle">
-                                    Data analysis case study for Bellabeat, deriving actionable insights from sales data.
-
-                                </p>
-                            </div>
-                        </div>
-                        <a href="https://github.com/abhisindh/Bellabeat_Product_Analysis">Repository</a>
-                    </div>
-                    <div class="col-md-6 col-lg-3">
-                        <div class="service-card">
-                            <div class="body">
-                                <img src="./assets/imgs/scanner.png" alt="document scanner with OpenCV" class="icon">
-                                <h6 class="title">Document Scanner with OpenCV</h6>
-                                <p class="subtitle">Developed scanner to obtain top-down view by correcting perspective.</p>
-                            </div>
-                        </div>
-
-                        <a href="https://github.com/abhisindh/document-scanner">Repository</a>
-                    </div>
-                    <div class="col-md-6 col-lg-3">
-                        <div class="service-card">
-                            <div class="body">
-                                <img src="./assets/imgs/paint.png" alt="virtual paint with OpenCV" class="icon">
-                                <h6 class="title">Virtual Paint with OpenCV</h6>
-                                <p class="subtitle">Real-time object tracking for interactive virtual painting.</p>
-                            </div>
-                        </div>
-                        <a href="https://github.com/abhisindh/Virtual-Paint">Repository</a>
-                    </div>
-                    <div class="col-md-6 col-lg-3">
-                        <div class="service-card">
-                            <div class="body">
-                                <img src="./assets/imgs/algorithm.png" alt="data structures and algorithms Collection" class="icon">
-                                <h6 class="title">Data Structures and Algorithms Collection</h6>
-                                <p class="subtitle">Implementation of fundamental data structures and algorithms in C.</p>
-                            </div>
-                        </div>
-
-                        <a href="https://github.com/abhisindh/Data-Structures-and-Algorithms">Repository</a>
-                    </div>
-                </div>
-                <!-- end of row -->
-                <a href="https://github.com/abhisindh?tab=repositories">
-                    <button class="btn-rounded btn btn-outline-primary mt-4">View More</button>
-                </a>
-            </div>
-        </section>
-        <!-- end of service section -->
-
-
-        <!-- testimonial section -->
-        <section class="section" id="languages">
-            <div class="container text-center">
-                <p class="section-subtitle">What I Use ?</p>
-                <h6 class="section-title mb-6">Languages</h6>
-
-                <!-- row -->
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="testimonial-card">
-                            <div class="testimonial-card-img-holder">
-                                <img src="./assets/imgs/python.png" class="testimonial-card-img" alt="Python">
-                            </div>
-                            <div class="testimonial-card-body">
-                                <h6 class="testimonial-card-title">Python</h6>
-                                <p class="testimonial-card-subtitle">
-                                    Python has been my primary programming language for data analysis, machine learning, and web development projects. I have leveraged Python's rich ecosystem of libraries, such as Pandas, NumPy, and Matplotlib, to perform data manipulation, visualization, and statistical analysis. I am also familiar with using Jupyter Notebooks for interactive data exploration and modeling.
-                                </p>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="testimonial-card">
-                            <div class="testimonial-card-img-holder">
-                                <img src="./assets/imgs/C_Logo.png" class="testimonial-card-img" alt="C">
-                            </div>
-                            <div class="testimonial-card-body">
-                                <h6 class="testimonial-card-title">C</h6>
-                                <p class="testimonial-card-subtitle">
-                                    I am currently exploring the fundamentals of C programming and honing my skills through various coding exercises and challenges. As a newcomer to C, I find it exciting to discover its powerful capabilities in low-level programming and algorithmic design. I look forward to applying my C knowledge to develop efficient solutions in the future.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="testimonial-card">
-                            <div class="testimonial-card-img-holder">
-                                <img src="./assets/imgs/JavaScript-logo.png" class="testimonial-card-img" alt="javascript">
-                            </div>
-                            <div class="testimonial-card-body">
-                                <h6 class="testimonial-card-title">JavaScript</h6>
-                                <p class="testimonial-card-subtitle">
-                                    While primarily focusing on Python, I have experience in building interactive web applications using modern JavaScript frameworks like React. I'm proficient in frontend development using HTML, CSS, and JavaScript.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="testimonial-card">
-                            <div class="testimonial-card-img-holder">
-                                <img src="./assets/imgs/Rust_logo.png" class="testimonial-card-img" alt="RUST">
-                            </div>
-                            <div class="testimonial-card-body">
-                                <h6 class="testimonial-card-title">RUST</h6>
-                                <p class="testimonial-card-subtitle">
-                                    I recently started learning Rust because it offers the best of both worlds - the performance and control of a low-level language, and the safety and expressiveness of a high-level language. I'm excited to explore Rust's unique features and use it for systems programming and performance-critical tasks.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- end of container -->
-        </section>
-        <!-- end of testimonial section -->
-
-        <!-- blog section -->
-        <section
-            class="section" id="blog">
-            <!-- container -->
-            <div class="container text-center">
-                <p class="section-subtitle">Recent Posts?</p>
-                <h6 class="section-title mb-6">Blog</h6>
-                <div id="blog_container">
-
-                </div>
-                <!-- blog-wrapper -->
-                
-                <!-- end of blog wrapper -->
-
-                <!-- blog-wrapper -->
-                
-                <!-- end of blog wrapper -->
-                <a href="./blogs/blog.html">
-                <button class="btn-rounded btn btn-outline-primary mt-4">View More</button>
-                </a>
-            </div>
-            <!-- end of container -->
-
-
-        </section>
-        <!-- end of blog section -->
-
-        <!-- contact section -->
-        <section class="section" id="contact">
-            <div class="container text-center">
-                <p class="section-subtitle">How can you communicate?</p>
-                <h6 class="section-title mb-5">Contact Me</h6>
-                <!-- contact form -->
-                <form class="contact-form col-md-10 col-lg-8 m-auto" id="contact">
-                    <div class="form-row">
-                        <div class="form-group col-sm-6">
-                            <input id="user_name" type="text" size="50" class="form-control" placeholder="Your Name" required>
-                        </div>
-                        <div class="form-group col-sm-6">
-                            <input id="user_email" type="email" class="form-control" placeholder="Enter Email" requried>
-                        </div>
-                        <div class="form-group col-sm-12">
-                            <textarea id="message" name="comment" id="comment" rows="6" class="form-control" placeholder="Write Something"></textarea>
-                        </div>
-                        <!-- <div class="form-group col-sm-12 mt-3">
-                                                    <button class="btn btn-outline-primary rounded" >Send message</button>
-                                                </div> -->
-                    </div>
-                </form>
-                <!-- end of contact form -->
-
-                <button class="btn btn-outline-primary rounded" onclick="sendMail()">Send Message</button>
-            </div>
-            <!-- end of container -->
-        </section>
-        <!-- end of contact section -->
-
-        <!-- footer -->
-        <div class="container">
-            <footer class="footer">
-                <p class="mb-0">Copyright
-                    <script>
-                        document.write(new Date().getFullYear())
-                    </script>
-                    &copy;
-                    <div>DevCRUD</div>
-                </p>
-                <div class="social-links text-right m-auto ml-sm-auto">
-                    <a href="javascript:void(0)" class="link">
-                        <i class="ti-facebook"></i>
-                    </a>
-                    <a href="javascript:void(0)" class="link">
-                        <i class="ti-twitter-alt"></i>
-                    </a>
-                    <a href="javascript:void(0)" class="link">
-                        <i class="ti-google"></i>
-                    </a>
-                    <a href="javascript:void(0)" class="link">
-                        <i class="ti-pinterest-alt"></i>
-                    </a>
-                    <a href="javascript:void(0)" class="link">
-                        <i class="ti-instagram"></i>
-                    </a>
-                    <a href="javascript:void(0)" class="link">
-                        <i class="ti-rss"></i>
-                    </a>
-                </div>
-            </footer>
+  <section id="about" class="section pt-0">
+    <div class="container text-center">
+      <div class="about">
+        <div class="about-img-holder">
+          <img src="./assets/imgs/programmer.png" class="about-img" alt="Profile illustration">
         </div>
-        <!-- end of page footer -->
+        <div class="about-caption">
+          <p class="section-subtitle">My Journey</p>
+          <h2 class="section-title mb-3">About Me</h2>
+          <p>
+            I'm a mathematics graduate from NIT Trichy with a keen interest in applying theoretical foundations to real-world problems. During my MSc, I specialized in the Moore-Penrose inverse and developed practical applications in image reconstruction and regression analysis. I interned at Mahindra University working on a genetic algorithm for exam timetabling, blending optimization with computation.
+            <br><br>
+            I currently work as an Olympiad math trainer, sharing my love for algorithms and critical thinking. I enjoy working on projects that combine math, machine learning, and programming.
+          </p>
+          <a href="https://github.com/abhisindh">
+            <button class="btn btn-primary">GitHub Projects</button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        <!-- core  -->
-        <script src="./assets/vendors/jquery/jquery-3.4.1.js"></script>
-        <script src="./assets/vendors/bootstrap/bootstrap.bundle.js"></script>
+<section class="section" id="skills">
+  <div class="container text-center">
+    <p class="section-subtitle">What I Do ?</p>
+    <h6 class="section-title mb-6">Skills</h6>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="portfolio-card">
+          <img src="./assets/imgs/programming.jpg" class="portfolio-card-img" alt="programming languages">
+          <span class="portfolio-card-overlay show">
+            <span class="portfolio-card-caption show">
+              <h4>Programming Languages</h4>
+              <p class="font-weight-normal">
+                Python: ◉◉◉◉◉◉◉◉◉◉<br>
+                JavaScript: ◉◉◉◉◉◉◉◉◎◎<br>
+                C: ◉◉◉◎◎◎◎◎◎◎<br>
+              </p>
+            </span>
+          </span>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="portfolio-card">
+          <img src="./assets/imgs/data-science.jpg" class="portfolio-card-img" alt="data science and analysis">
+          <span class="portfolio-card-overlay show">
+            <span class="portfolio-card-caption show">
+              <h4>Data Science and Analysis</h4>
+              <p class="font-weight-normal">
+                Data Analysis ◉◉◉◉◉◉◉◎◎◎<br>
+                Machine Learning ◉◉◉◉◉◉◎◎◎◎<br>
+                OpenCV ◉◉◉◉◉◉◎◎◎◎<br>
+              </p>
+            </span>
+          </span>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="portfolio-card">
+          <img src="./assets/imgs/web-dev.jpg" class="portfolio-card-img" alt="web development">
+          <span class="portfolio-card-overlay show">
+            <span class="portfolio-card-caption show">
+              <h4>Web Development</h4>
+              <p class="font-weight-normal">
+                HTML ◉◉◉◉◉◉◎◎◎◎<br>
+                CSS ◉◉◉◉◉◉◎◎◎◎<br>
+                Node.js ◉◎◎◎◎◎◎◎◎◎<br>
+              </p>
+            </span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <!-- bootstrap 3 affix -->
-        <script src="./assets/vendors/bootstrap/bootstrap.affix.js"></script>
 
-        <!-- Meyawo js -->
-        <script type="module" src="./assets/js/main.js"></script>
+ <!-- projects section with inline repository buttons -->
+<section class="section" id="projects">
+  <div class="container text-center">
+    <p class="section-subtitle">What I Did ?</p>
+    <h6 class="section-title mb-6">Projects</h6>
+    <div class="row">
+      <!-- Project 1 -->
+      <div class="col-md-6 col-lg-3">
+        <div class="service-card h-100 d-flex flex-column justify-content-between">
+          <div class="body">
+            <img src="./assets/imgs/analytics.svg" alt="bellabeat product analysis" class="icon">
+            <h6 class="title">Bellabeat Product Analysis</h6>
+            <p class="subtitle">
+              Data analysis case study for Bellabeat, deriving actionable insights from sales data.
+            <a href="https://github.com/abhisindh/Bellabeat_Product_Analysis" target="_blank" class="btn btn-sm btn-outline-primary mt-2">Repository</a>
+          </p>
+            </div>
+        </div>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="col-md-6 col-lg-3">
+        <div class="service-card h-100 d-flex flex-column justify-content-between">
+          <div class="body">
+            <img src="./assets/imgs/scanner.png" alt="document scanner with OpenCV" class="icon">
+            <h6 class="title">Document Scanner with OpenCV</h6>
+            <p class="subtitle">
+              Developed scanner to obtain top-down view by correcting perspective.
+            <br><a href="https://github.com/abhisindh/document-scanner" target="_blank" class="btn btn-sm btn-outline-primary mt-2">Repository</a>
+          </p>
+            </div>
+        </div>
+      </div>
+
+      <!-- Project 3 -->
+      <div class="col-md-6 col-lg-3">
+        <div class="service-card h-100 d-flex flex-column justify-content-between">
+          <div class="body">
+            <img src="./assets/imgs/paint.png" alt="virtual paint with OpenCV" class="icon">
+            <h6 class="title">Virtual Paint with OpenCV</h6>
+            <p class="subtitle">
+              Real-time object tracking for interactive virtual painting.
+               <a href="https://github.com/abhisindh/Virtual-Paint" target="_blank" class="btn btn-sm btn-outline-primary mt-2">Repository</a>
+            </p>
+           
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 4 -->
+      <div class="col-md-6 col-lg-3">
+        <div class="service-card h-100 d-flex flex-column justify-content-between">
+          <div class="body">
+            <img src="./assets/imgs/algorithm.png" alt="data structures and algorithms Collection" class="icon">
+            <h6 class="title">Data Structures and Algorithms Collection</h6>
+            <p class="subtitle">
+              Implementation of fundamental data structures and algorithms in C.
+            <br><a href="https://github.com/abhisindh/Data-Structures-and-Algorithms" target="_blank" class="btn btn-sm btn-outline-primary mt-2">Repository</a>
+          </p>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <a href="https://github.com/abhisindh?tab=repositories" target="_blank">
+      <button class="btn-rounded btn btn-outline-primary mt-4">View More</button>
+    </a>
+  </div>
+</section>
 
 
-    </body>
+
+  <!-- testimonial section -->
+<section class="section" id="languages">
+    <div class="container text-center">
+        <p class="section-subtitle">What I Use ?</p>
+        <h6 class="section-title mb-6">Languages</h6>
+
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="testimonial-card">
+                    <div class="testimonial-card-img-holder">
+                        <img src="./assets/imgs/python.png" class="testimonial-card-img" alt="Python">
+                    </div>
+                    <div class="testimonial-card-body">
+                        <h6 class="testimonial-card-title">Python</h6>
+                        <p class="testimonial-card-subtitle">
+                            Python has been my primary programming language for data analysis, machine learning, and web development projects. I have leveraged Python's rich ecosystem of libraries, such as Pandas, NumPy, and Matplotlib, to perform data manipulation, visualization, and statistical analysis. I am also familiar with using Jupyter Notebooks for interactive data exploration and modeling.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="testimonial-card">
+                    <div class="testimonial-card-img-holder">
+                        <img src="./assets/imgs/C_Logo.png" class="testimonial-card-img" alt="C">
+                    </div>
+                    <div class="testimonial-card-body">
+                        <h6 class="testimonial-card-title">C</h6>
+                        <p class="testimonial-card-subtitle">
+                            I am currently exploring the fundamentals of C programming and honing my skills through various coding exercises and challenges. As a newcomer to C, I find it exciting to discover its powerful capabilities in low-level programming and algorithmic design. I look forward to applying my C knowledge to develop efficient solutions in the future.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="testimonial-card">
+                    <div class="testimonial-card-img-holder">
+                        <img src="./assets/imgs/JavaScript-logo.png" class="testimonial-card-img" alt="JavaScript">
+                    </div>
+                    <div class="testimonial-card-body">
+                        <h6 class="testimonial-card-title">JavaScript</h6>
+                        <p class="testimonial-card-subtitle">
+                            While primarily focusing on Python, I have experience in building interactive web applications using modern JavaScript frameworks like React. I'm proficient in frontend development using HTML, CSS, and JavaScript.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="testimonial-card">
+                    <div class="testimonial-card-img-holder">
+                        <img src="./assets/imgs/Rust_logo.png" class="testimonial-card-img" alt="Rust">
+                    </div>
+                    <div class="testimonial-card-body">
+                        <h6 class="testimonial-card-title">Rust</h6>
+                        <p class="testimonial-card-subtitle">
+                            I recently started learning Rust because it offers the best of both worlds - the performance and control of a low-level language, and the safety and expressiveness of a high-level language. I'm excited to explore Rust's unique features and use it for systems programming and performance-critical tasks.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end of testimonial section -->
+
+
+  <section id="contact" class="section">
+    <div class="container text-center">
+      <p class="section-subtitle">Let's Collaborate</p>
+      <h6 class="section-title mb-5">Contact Me</h6>
+      <form class="contact-form col-md-10 col-lg-8 m-auto" id="contact">
+        <div class="form-row">
+          <div class="form-group col-sm-6">
+            <input id="user_name" type="text" class="form-control" placeholder="Your Name" required>
+          </div>
+          <div class="form-group col-sm-6">
+            <input id="user_email" type="email" class="form-control" placeholder="Enter Email" required>
+          </div>
+          <div class="form-group col-sm-12">
+            <textarea id="message" rows="6" class="form-control" placeholder="Write Something..."></textarea>
+          </div>
+        </div>
+      </form>
+      <button class="btn btn-outline-primary rounded" onclick="sendMail()">Send Message</button>
+    </div>
+  </section>
+
+  <footer class="footer text-center">
+    <p>&copy; <script>document.write(new Date().getFullYear())</script> Abhisindh Chatterjee</p>
+    <div class="social-links">
+      <a href="https://github.com/abhisindh"><i class="ti-github"></i></a>
+    </div>
+  </footer>
+
+  <script src="./assets/vendors/jquery/jquery-3.4.1.js" defer></script>
+  <script src="./assets/vendors/bootstrap/bootstrap.bundle.js" defer></script>
+  <script src="./assets/vendors/bootstrap/bootstrap.affix.js" defer></script>
+  <script type="module" src="./assets/js/main.js" defer></script>
+</body>
 </html>
