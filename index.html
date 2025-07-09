@@ -236,6 +236,7 @@
                 <a href="https://github.com/abhisindh?tab=repositories">
                     <button class="btn-rounded btn btn-outline-primary mt-4">View More</button>
                 </a>
+                
             </div>
         </section>
         <!-- end of service section -->
@@ -309,30 +310,84 @@
         <!-- end of testimonial section -->
 
         <!-- blog section -->
-        <section
-            class="section" id="blog">
-            <!-- container -->
-            <div class="container text-center">
-                <p class="section-subtitle">Recent Posts?</p>
-                <h6 class="section-title mb-6">Blog</h6>
-                <div id="blog_container">
+        <div id="blogContainer" class="blog-container">
 
-                </div>
-                <!-- blog-wrapper -->
-                
-                <!-- end of blog wrapper -->
+            <div class="blog-card" id="003">
+    <div class="blog-card-header">
+        <img src="../blogs/images/003-header.png" alt="Moore-Penrose Inverse Blog" class="blog-card-img">
+    </div>
+    <div class="blog-card-body">
+        <h5 class="blog-card-title">Demystifying the Moore-Penrose Inverse: Applications and Algorithms</h5>
+        <p class="blog-card-caption">
+            <a href="#">By: Abhisindh</a>
+        </p>
+        <p>
+            This blog dives into the fascinating world of the Moore-Penrose inverse — a generalized inverse of a matrix with wide applications in scientific computing. From solving inconsistent systems to image reconstruction and regression, this deep-dive explores how mathematics empowers technology through elegant linear algebra.
+        </p>
+        <a id="003" class="blog-card-link" href="../../blogs/003.html">
+            Read more
+            <i class="ti-angle-double-right"></i>
+        </a>
+    </div>
+</div>
 
-                <!-- blog-wrapper -->
-                
-                <!-- end of blog wrapper -->
-                <a href="./blogs/blog.html">
-                <button class="btn-rounded btn btn-outline-primary mt-4">View More</button>
-                </a>
-            </div>
-            <!-- end of container -->
 
+  <!-- Blog Card 1 -->
+  <div class="blog-card" id="001">
+    <div class="blog-card-header">
+      <img
+        src="./blogs/images/001-header.png"
+        alt="Mastering Dynamic Arrays in C"
+        class="blog-card-img"
+      />
+    </div>
+    <div class="blog-card-body">
+      <h5 class="blog-card-title">Mastering Dynamic Arrays in C: Building Adaptable Data Structures</h5>
+      <p class="blog-card-caption">
+        <a href="#">By: Abhisindh</a>
+      </p>
+      <p>
+        Imagine you are a librarian in a busy library, tasked with managing an ever growing collection of books.
+        You start with a set number of bookshelves neatly organized with a fixed number of slots...
+      </p>
+      <a href="./blogs/001.html" class="blog-card-link">
+        Read more <i class="ti-angle-double-right"></i>
+      </a>
+    </div>
+  </div>
 
-        </section>
+  <!-- Blog Card 2 -->
+  <div class="blog-card" id="002">
+    <div class="blog-card-header">
+      <img
+        src="./blogs/images/002-header.png"
+        alt="Linked Lists Made Simple"
+        class="blog-card-img"
+      />
+    </div>
+    <div class="blog-card-body">
+      <h5 class="blog-card-title">Linked Lists Made Simple: Step-by-Step Implementation in C</h5>
+      <p class="blog-card-caption">
+        <a href="#">By: Abhisindh</a>
+      </p>
+      <p>
+        Imagine a scenario where you're managing a contact list for your favorite social media platform.
+        Each user profile is like a node in a linked list...
+      </p>
+      <a href="./blogs/002.html" class="blog-card-link">
+        Read more <i class="ti-angle-double-right"></i>
+      </a>
+    </div>
+    
+  </div>
+  <div style="display: flex; justify-content: center;">
+    <a href="./blogs/blog.html">
+        <button class="btn-rounded btn btn-outline-primary mt-4">All blogs</button>
+    </a>
+</div>
+
+</div>
+
         <!-- end of blog section -->
 
         <!-- contact section -->
@@ -409,6 +464,27 @@
         <!-- Meyawo js -->
         <script type="module" src="./assets/js/main.js"></script>
 
+<script> document.addEventListener("DOMContentLoaded", function () {
+    const cards = document.querySelectorAll(".portfolio-card");
 
+    const observer = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in-view");
+            observer.unobserve(entry.target); // remove if you want one-time animation
+          }
+        });
+      },
+      {
+        threshold: 0.3, // trigger when 30% of card is visible
+      }
+    );
+
+    cards.forEach(card => {
+      observer.observe(card);
+    });
+  });</script>
     </body>
+
 </html>

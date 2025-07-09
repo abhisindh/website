@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/meyawo.css">
+
+    <title>Mastering Dynamic Arrays in C: Building Adaptable Data Structures</title>
+    <!-- font icons -->
+    <link rel="stylesheet" href="../assets/vendors/themify-icons/css/themify-icons.css">
+    <!-- Bootstrap + Meyawo main styles -->
+    <link rel="stylesheet" href="../assets/css/blog.css">
+    <link rel="shortcut icon" href="../images/favicon_io/favicon.ico" type="image/x-icon">
+
+    <script type="module" src="../assets/js/blog_home.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+</head>
+
+<body>
+    <script src="../assets/js/blog_meta.js"></script>
+    <script>
+        hljs.highlightAll();
+    </script>
+
+    <div class="container">
+  <head>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- <style>
+      .container { max-width: 800px; margin: auto; font-family: Arial, sans-serif; }
+      .blog-card-title { font-size: 24px; font-weight: bold; margin-bottom: 10px; }
+      .blog-card-caption { font-size: 14px; color: #666; margin-bottom: 20px; }
+      .sub-heading { font-size: 20px; font-weight: bold; margin-top: 20px; }
+      .operation-title { font-weight: bold; }
+      pre { background: #f4f4f4; padding: 10px; border-radius: 5px; }
+      code { font-family: 'Courier New', Courier, monospace; }
+      a { color: #007bff; }
+    </style> -->
+  </head>
+
+  <h5 class="blog-card-title">Binary Search Tree: Building It From Scratch in C</h5>
+  <p class="blog-card-caption">July 6, 2025</p>
+
+  <h5 class="sub-heading">Table of Contents</h5>
+  <ul>
+    <li><a href="#goal">Goal</a></li>
+    <li><a href="#tldr">TL;DR</a></li>
+    <li><a href="#implementation">Step-by-Step Implementation</a></li>
+    <li><a href="#test">Test & Results</a></li>
+    <li><a href="#bonus">Bonus</a></li>
+    <li><a href="#wrapup">Wrap-Up</a></li>
+  </ul>
+
+  <h5 class="sub-heading" id="goal">🎯 Goal</h5>
+  <p>In this post, we’ll build a <span class="operation-title">Binary Search Tree (BST)</span> from scratch in C. A BST is a data structure where each node has at most two children, and for any node, all values in the left subtree are smaller, and all values in the right subtree are larger. This property makes BSTs great for efficient searching, insertion, and deletion. We’ll implement core operations like insertion, searching, and deletion without using any external libraries, and we’ll test it on a small dataset of integers. No dataset like Iris here—just a simple array of numbers to keep things focused!</p>
+
+  <h5 class="sub-heading" id="tldr">⚡ TL;DR</h5>
+  <p>We’re coding a Binary Search Tree in C with functions for insertion, searching, counting nodes, finding min/max, and more. The full code is available [on GitHub](https://github.com/example/bst-c) (placeholder). Below, we’ll break down each step and test it on a sample array.</p>
+
+  <h5 class="sub-heading" id="implementation">🔢 Step-by-Step Implementation</h5>
+
+  <h5 class="sub-heading">Step 1 — Define the BST Node Structure</h5>
+  <p>Let’s start by defining the structure of a BST node. Each node holds an integer value and pointers to its left and right children.</p>
+  <pre><code>
+typedef struct BSTNode BSTNode;
+
+struct BSTNode {
+    int data;
+    BSTNode* left;
+    BSTNode* right;
+};
+  </code></pre>
+  <p>This structure is the building block of our BST. The <code>data</code> field stores the node’s value, while <code>left</code> and <code>right</code> point to child nodes (or <code>NULL</code> if no child exists). Think of it as a tree where each node branches left for smaller values and right for larger ones.</p>
+
+  <h5 class="sub-heading">Step 2 — Create a New Node</h5>
+  <p>We need a function to create a new node with a given value. This will be used during insertion.</p>
+  <pre><code>
+BSTNode* createTree(int data) {
+    BSTNode* tree = malloc(sizeof(BSTNode));
+    tree->data = data;
+    tree->left = NULL;
+    tree->right = NULL;
+    return tree;
+}
+  </code></pre>
+  <p>The <code>createTree</code> function allocates memory for a new node, sets its <code>data</code>, and initializes both child pointers to <code>NULL</code>. This is our starting point for building the tree.</p>
+
+  <h5 class="sub-heading">Step 3 — Insert a Node</h5>
+  <p>Inserting a node involves finding the right spot based on the BST property: smaller values go left, larger values go right.</p>
+  <pre><code>
+void insert(BSTNode* root, int data) {
+    if (data < root->data) {
+        if (!root->left) {
+            BSTNode* new_node = createTree(data);
+            root->left = new_node;
+            return;
+        }
+        insert(root->left, data);
+    } else {
+        if (!root->right) {
+            BSTNode* new_node = createTree(data);
+            root->right = new_node;
+            return;
+        }
+        insert(root->right, data);
+    }
+}
+  </code></pre>
+  <p>This recursive function compares the new <code>data</code> with the current node’s value. If the value is smaller and there’s no left child, we create a new node there. Otherwise, we recurse down the left subtree. The same logic applies for larger values on the right. The BST property ensures that for any node with value \( v \), all left subtree values are \( < v \) and all right subtree values are \( > v \).</p>
+
+  <h5 class="sub-heading">Step 4 — Count Nodes</h5>
+  <p>To verify our tree’s structure, let’s count the total number of nodes.</p>
+  <pre><code>
+int get_node_count(BSTNode* root) {
+    if (!root) return 0;
+    return 1 + get_node_count(root->left) + get_node_count(root->right);
+}
+  </code></pre>
+  <p>This recursive function counts the current node (1) plus the number of nodes in the left and right subtrees. If the root is <code>NULL</code>, we return 0. It’s a simple way to check the size of our tree.</p>
+
+  <h5 class="sub-heading">Step 5 — Print Values (In-Order Traversal)</h5>
+  <p>An in-order traversal visits nodes in ascending order, which is perfect for verifying the BST property.</p>
+  <pre><code>
+void print_values(BSTNode* root) {
+    if (!root) return;
+    if (root->left) print_values(root->left);
+    printf("%d ", root->data);
+    if (root->right) print_values(root->right);
+}
+  </code></pre>
+  <p>In-order traversal follows the pattern: left subtree, current node, right subtree. This ensures values are printed in sorted order, e.g., for a tree with values \( [3, 7, 12] \), it outputs \( 3, 7, 12 \).</p>
+
+  <h5 class="sub-heading">Step 6 — Delete a Node</h5>
+  <p>Deleting a node is trickier because we need to maintain the BST property. There are three cases: leaf node, single child, and two children.</p>
+  <pre><code>
+BSTNode* delete_node(BSTNode* root, int value) {
+    if (!root) return root;
+    else if (value < root->data) root->left = delete_node(root->left, value);
+    else if (value > root->data) root->right = delete_node(root->right, value);
+    else {
+        if (!root->right && !root->left) { // leaf node
+            free(root);
+            root = NULL;
+        } else if (!root->right) { // only left child
+            BSTNode* temp = root;
+            root = root->left;
+            free(temp);
+        } else if (!root->left) { // only right child
+            BSTNode* temp = root;
+            root = root->right;
+            free(temp);
+        } else { // two children
+            int new_value = get_min(root->right);
+            root->data = new_value;
+            root->right = delete_node(root->right, new_value);
+        }
+    }
+    return root;
+}
+  </code></pre>
+  <p>For deletion, we first find the node. If it’s a leaf, we free it. If it has one child, we replace it with that child. For two children, we find the minimum value in the right subtree (the successor), replace the node’s value, and delete the successor. This ensures the BST property is preserved.</p>
+
+  <h5 class="sub-heading">Step 7 — Additional Utilities</h5>
+  <p>We’ll implement helper functions like checking if a value exists, finding the tree’s height, and getting the successor.</p>
+  <pre><code>
+int is_in_tree(BSTNode* root, int value) {
+    if (!root) return 0;
+    if (value < root->data) return is_in_tree(root->left, value);
+    if (value > root->data) return is_in_tree(root->right, value);
+    return 1;
+}
+
+int get_height(BSTNode* root) {
+    if (!root) return 0;
+    int left = get_height(root->left);
+    int right = get_height(root->right);
+    return left > right ? left + 1 : right + 1;
+}
+
+int get_successor(BSTNode* root, int data) {
+    BSTNode* current = find_in_tree(root, data);
+    if (!current) return -1;
+    if (current->right) return get_min(current->right);
+    else {
+        int output = -1;
+        BSTNode* successor = NULL;
+        BSTNode* ancestor = root;
+        while (ancestor != current) {
+            if (data < ancestor->data) {
+                successor = ancestor;
+                output = successor->data;
+                ancestor = ancestor->left;
+            } else {
+                ancestor = ancestor->right;
+            }
+        }
+        return output;
+    }
+}
+  </code></pre>
+  <p><code>is_in_tree</code> searches for a value, returning 1 if found. <code>get_height</code> computes the longest path from root to leaf. <code>get_successor</code> finds the next value in sorted order by checking the right subtree’s minimum or traversing ancestors. These functions make our BST more versatile.</p>
+
+  <h5 class="sub-heading" id="test">🧪 Test & Results</h5>
+  <p>Let’s test our BST with a small dataset: \( [12, 35, 7, 29, 46, 18, 23, 41, 42, 3, 15] \). We’ll insert these values, print the in-order traversal, check the node count, height, and find the successor of 23.</p>
+  <pre><code>
+int main() {
+    int numbers[] = {12, 35, 7, 29, 46, 18, 23, 41, 42, 3, 15, INT_MAX};
+    BSTNode*PUBLISH root = createTree(12);
+    for (int i = 1; numbers[i] != INT_MAX; i++) {
+        insert(root, numbers[i]);
+    }
+    printf("In-order traversal: ");
+    print_values(root);
+    printf("\nNode count: %d\n", get_node_count(root));
+    printf("Height: %d\n", get_height(root));
+    printf("Successor of 23: %d\n", get_successor(root, 23));
+    delete_tree(root);
+    return 0;
+}
+  </code></pre>
+  <p><b>Output:</b></p>
+  <pre><code>
+In-order traversal: 3 7 12 15 18 23 29 35 41 42 46
+Node count: 11
+Height: 5
+Successor of 23: 29
+  </code></pre>
+  <p>The in-order traversal confirms the values are sorted, the node count is correct (11 nodes), the height is 5 (longest path), and the successor of 23 is 29, as expected. The tree works as intended!</p>
+
+  <h5 class="sub-heading" id="bonus">🎁 Bonus</h5>
+  <p>Unlike Python, C doesn’t have a standard library equivalent for BSTs, but libraries like <code>libavl</code> or <code>glib</code> provide similar functionality. Our implementation is lightweight and tailored, avoiding external dependencies. For comparison, using <code>libavl</code> would require installing it and learning its API, but our code is more educational and customizable. If you want to explore, check out <code>glib</code>’s tree functions for a robust alternative.</p>
+
+  <h5 class="sub-heading" id="wrapup">🙌 Wrap-Up</h5>
+  <p>Congratulations! You’ve built a Binary Search Tree from scratch in C, complete with insertion, deletion, and utility functions. Try modifying it to handle duplicate values or implement a balance check for AVL trees. Stay tuned for more data structure adventures, and keep coding! 🚀</p>
+</div>
+</body>
+</html>
