@@ -26,384 +26,167 @@
         </script>
 
         <div class="container">
-            <h5 class="blog-card-title">Mastering Dynamic Arrays in C: Building Adaptable Data Structures</h5>
+        <h5 class="blog-card-title">Dynamic Arrays in C: Building a Vector from Scratch</h5>
+        <p class="blog-card-caption">July 06, 2025 · 10 min read · Data Structures, C Programming</p>
+        
+        <p class="operation-description">Hey there, data structure enthusiasts! Today, we’re diving into the world of dynamic arrays by building a <span class="operation-title">Vector</span> in C from the ground up. Think of it as crafting your own stretchy, resizable array—perfect for those moments when you don’t know how much data you’ll need to store.</p>
+        
+        <p class="operation-description">This implementation is built from scratch and can be used for any scenario where you need a flexible, integer-based array, like storing a sequence of numbers for a machine learning dataset or a simple list of values.</p>
+        
+        <p class="operation-description"><span class="operation-title">TL;DR</span>: We’ll create a Vector in C with dynamic resizing, complete with operations like push, pop, and insert. Check out the full code below, ready to copy and tinker with!</p>
 
-            <p class="blog-card-caption">
-                <a href="#">By: Abhisindh</a>
-                <a href="#">July 31, 2023</a>
-            </p>
+        <h5 class="sub-heading">Step-by-Step Implementation</h5>
+        <p class="operation-description">Let’s break this down into bite-sized pieces. Our Vector is like a Python list or a C++ vector, but we’re building it ourselves in C. Ready? Let’s go!</p>
 
-            <h5 class="sub-heading">Introduction</h5>
-            <div class="blog-card-header left">
-
-                <img src="images/001-header.png" alt="" class="blog-card-img">
-            </div>
-
-            <p>
-                Imagine you are a librarian in a busy library, tasked with managing an ever growing collection of books.
-                                                    You start with a set number of bookshelves neatly organized with a fixed number of slots of books.
-                                                    However as more and more book-enthusiasts visit your library, the shelves fill up, and you are faced with a dilemma
-                                                    - what if you run out of space for new books ?
-            </p>
-            <p>
-                The arrays in normal programming usage is like the book shelf of fixed size. You can access book in any shelf easily and can place a book 
-                                                    in an empty slot. But the problem arises when there are more books than there are slots. What will you do?
-            </p>
-            <p>
-                Enter
-                <span>Dynamic Array</span>
-                the data structre that combines the strength of array - constant-time access - with the flexibility of automatic resizing.With dynamic arrays, you can elegantly handle collections that need to expand or contract as your program runs.
-            </p>
-            <div class="clear"></div>
-            <h5 class="sub-heading">Table of contents</h5>
-            <ol>
-                <li>
-                    <a href="#section1">Understanding Dynamic Arrays: A Primer</a>
-                </li>
-                <li>
-                    <a href="#section2">Anatomy of a Dynamic Array: The Vector Structure</a>
-                </li>
-                <li>
-                    <a href="#section3">Creating and Initializing Dynamic Arrays</a>
-                </li>
-                <li>
-                    <a href="#section4">Essential Dynamic Array Operations</a>
-                </li>
-                <li>
-                    <a href="#section5">Resizing and Optimizing: The Resize Function</a>
-                </li>
-                <li>
-                    <a href="#section6">Error Handling and Validation</a>
-                </li>
-                <li>
-                    <a href="#section7">Putting It All Together: Example Usage</a>
-                </li>
-                <li>
-                    <a href="#section8">Advanced Concepts and Considerations</a>
-                </li>
-            </ol>
-
-
-            <h5 id="section1" class="sub-heading">Secton 1: Understanding Dynamic Arrays: A Primer</h5>
-            <p>
-                A dynamic array is a data structure that provides an adaptable approach to storing collections of elements. Unlike static arrays, whose size is fixed during declaration, dynamic arrays dynamically adjust their capacity to accommodate varying amounts of data. This adjustment, or automatic resizing, ensures that programmers can efficiently manage evolving datasets without the need for manual memory allocation and reallocation.
-            </p>
-
-            <p>Dynamic arrays are very helpful in the following scenarios:</p>
-            <p>
-                <span>Lists and Containers</span>: Dynamic arrays excel in scenarios where the number of elements is uncertain or subject to change, such as implementing lists, stacks, and queues.
-            </p>
-            <p>
-                <span>Data Analysis and Manipulation</span>: Dynamic arrays are pivotal in handling data structures for data analysis, where datasets may vary in size and complexity.
-            </p>
-            <p>
-                <span>User Interfaces</span>: GUI elements like lists or grids benefit from dynamic arrays, accommodating dynamic content changes without compromising user experience.
-            </p>
-            <p>
-                <span>Resizing Image Buffers</span>: Applications dealing with image processing or multimedia often require resizable buffers, making dynamic arrays an ideal choice
-            </p>
-            <h5 id="section2" class="sub-heading">Section 2: Anatomy of a Dynamic Array: The Vector Structure</h5>
-            <p>Within this structure, three essential members—size, capacity, and array—each play a distinct role in enabling dynamic array functionality.</p>
-
-            <pre><code>
-        typedef struct Vector{
-            int size;
-            int capacity;
-            int* array;
-        }Vector;
-    </code></pre>
-            <p>
-                <span>Size :
-                </span>
-                The size member serves as the pulse of the dynamic array, keeping track of the current number of elements it holds. As new elements are added, the size increases; as elements are removed, it decreases. This dynamic tracking ensures that you can access and manipulate elements with precision.
-            </p>
-            <p>
-                <span>Capacity :
-                </span>
-                The capacity member sets the stage for expansion or contraction. It represents the maximum number of elements the dynamic array can currently hold. When the size approaches the capacity, the dynamic array readies itself for a graceful resize to accommodate additional data.
-            </p>
-            <p>
-                <span>Array :</span>
-                The array member is where the true magic happens. It points to a contiguous block of memory that stores the actual elements of the dynamic array. This array dynamically grows or shrinks as elements are added or removed, allowing the dynamic array to adapt seamlessly to changing data requirements.
-            </p>
-
-            <h5 id="section3" class="sub-heading">Section 3: Creating and Initializing Dynamic Arrays</h5>
-            <p>Let's look at how to create and initialize a dynamic array.</p>
-            <pre><code>
-            Vector* createVector(){
-                Vector* new_vector = malloc(sizeof(Vector));
-                new_vector->size = 0;
-                new_vector->capacity = 16;
-                new_vector->array = malloc(new_vector->capacity*sizeof(int));
-                return new_vector;
-            }
+        <h5 class="sub-heading">Step 1 — Defining the Vector Structure</h5>
+        <p class="operation-description">First, we need a way to represent our Vector. It’s not just an array; it needs to keep track of its size (how many elements it holds) and capacity (how much space is allocated).</p>
+        <pre><code class="language-c">
+typedef struct Vector {
+    int size;
+    int capacity;
+    int* array;
+} Vector;
         </code></pre>
-            <p>
-                <span>malloc(sizeof(Vector)):</span>
-                We allocate memory for a Vector object using the
-                <code>malloc</code>
-                function. This memory allocation reserves space for the size, capacity, and array members.
-            </p>
-            <p>
-                <span>new_vector->size = 0;:</span>
-                We initialize the size member to 0. This indicates that the dynamic array currently contains no elements.
-            </p>
-            <p>
-                <span>new_vector->capacity = 16;</span>: We set an initial capacity for the dynamic array. This capacity defines the maximum number of elements the array can hold before needing to be resized.
-            </p>
-            <p>
-                <span>malloc(new_vector->capacity * sizeof(int))</span>: We allocate memory for the actual array using the specified initial capacity. The size of each element is determined by
-                <code>sizeof(int)</code>. Pointer to this array is set in the array member of dynamic array.
-            </p>
-            <p>
+        <p class="operation-description">This struct is the heart of our Vector. <span class="operation-title">size</span> tells us how many integers are currently stored, <span class="operation-title">capacity</span> is the total space allocated, and <span class="operation-title">array</span> is the pointer to the actual data. Think of it as a stretchy backpack: <span class="operation-title">size</span> is how many items are in it, and <span class="operation-title">capacity</span> is how many it <i>could</i> hold before you need a bigger bag.</p>
 
-                Finally, the function returns a pointer to the newly created Vector object.
-            </p>
-            <h5 id="section4" class="sub-heading">Section 4: Essential Dynamic Array Operations</h5>
-            <p>Now that we've laid the groundwork for creating and initializing dynamic arrays, let's delve into the essential operations that make dynamic arrays a powerful tool for managing collections of data. These operations enable us to add, retrieve, and remove elements from the array, transforming it into a versatile data structure. In this section, we'll explore some of the fundamental operations and their corresponding code snippets.</p>
-
-            <span class="operation-title">Pushing Elements: Adding to the End</span>
-
-            <pre><code>
-void push(Vector* vector, int data){
-    if (vector->size >= vector->capacity){
-        resize(vector, 1.5 * vector->capacity); // Resize the array if capacity is exceeded
-    }
-    vector->array[vector->size++] = data; // Add the new element at the end
-}
-</code></pre>
-            <p class="operation-description">The
-                <code>push</code>
-                operation adds elements to the end of the dynamic array. If the array's capacity is exceeded, the array is resized to accommodate the new element.</p>
-
-            <span class="operation-title">Popping Elements: Removing from the End</span>
-
-            <pre><code>
-int pop(Vector* vector){
-    if (vector->size == 0){
-        printf("Cannot pop from an empty array.\n");
-        return 0; // Return a default value or handle error
-    }
-    return vector->array[--vector->size]; // Return and remove the last element
-}
-</code></pre>
-            <p class="operation-description">The
-                <code>pop</code>
-                operation removes and returns the last element from the dynamic array.</p>
-
-            <span class="operation-title">Inserting Elements: Adding at a Specific Position</span>
-
-            <pre><code>
-void vector_insert(Vector* vector, int index, int item){
-    index = minmax(vector, index); // Ensure valid index
-    if (vector->size >= vector->capacity){
-        resize(vector, 1.5 * vector->capacity); // Resize the array if capacity is exceeded
-    }
-    for (int i = vector->size; i > index; i--){
-        vector->array[i] = vector->array[i - 1]; // Shift elements to make space
-    }
-    vector->array[index] = item; // Insert the new element
-    vector->size++;
-}
-</code></pre>
-            <p class="operation-description">The
-                <code>vector_insert</code>
-                operation inserts an element at a specific position within the dynamic array, shifting existing elements as needed.</p>
-
-            <span class="operation-title">Deleting Elements: Removing from a Specific Position</span>
-
-            <pre><code>
-void delete(Vector* vector, int index){
-    index = minmax(vector, index); // Ensure valid index
-    for (int i = index; i < vector->size - 1; i++){
-        vector->array[i] = vector->array[i + 1]; // Shift elements to fill the gap
-    }
-    vector->size--;
-}
-</code></pre>
-            <p class="operation-description">The
-                <code>delete</code>
-                operation removes an element from a specific position within the dynamic array, shifting elements to fill the gap.</p>
-
-            <p>These essential dynamic array operations provide a foundation for manipulating the array's contents. Whether you're adding, removing, or inserting elements, these operations offer a seamless way to manage your data. In the next section, we'll explore a crucial aspect of dynamic arrays: resizing. We'll take a closer look at the
-                <code>resize</code>
-                function and how it ensures that the dynamic array can adapt to changing data demands while maintaining efficiency.</p>
-
-            <h5 id="section5" class="sub-heading">Section 5: Resizing and Optimizing: The Resize Function</h5>
-            <p>In the world of dynamic arrays, adaptability is key. The ability to gracefully handle changes in data demands is what sets dynamic arrays apart from their static counterparts. In this section, we'll delve into the heart of this adaptability: the
-                <code>resize</code>
-                function.</p>
-
-            <p>The
-                <code>resize</code>
-                function plays a pivotal role in ensuring that the dynamic array can gracefully accommodate a growing or shrinking dataset. Let's explore how this function works and why it's essential for the efficiency of dynamic arrays.</p>
-
-            <pre><code>
-void resize(Vector* vector, int new_capacity){
-    int* new_array = malloc(new_capacity * sizeof(int)); // Allocate memory for the new array
-    for (int i = 0; i < vector->size; i++){
-        new_array[i] = vector->array[i]; // Copy elements from the old array to the new array
-    }
-    free(vector->array); // Free memory occupied by the old array
-    vector->array = new_array; // Point to the new array
-    vector->capacity = new_capacity; // Update the capacity
-}
-</code></pre>
-
-            <p class="operation-description">The
-                <code>resize</code>
-                function dynamically adjusts the capacity of the dynamic array to the specified
-                <code>new_capacity</code>. It allocates memory for a new array of the desired capacity, copies elements from the old array to the new one, frees the memory occupied by the old array, and updates the relevant members of the
-                <code>Vector</code>
-                structure.</p>
-
-            <p>By seamlessly managing memory allocation, copying, and updating, the
-                <code>resize</code>
-                function ensures that the dynamic array remains efficient and adaptable. This optimization is crucial for handling datasets of varying sizes while minimizing wastage of system resources.</p>
-
-            <h5 id="section6" class="sub-heading">Section 6: Error Handling and Validation</h5>
-            <p>While dynamic arrays provide a flexible and powerful way to manage data, it's important to be prepared for scenarios where things might not go as planned. Error handling and validation play a crucial role in ensuring that your dynamic array implementation behaves gracefully, even in challenging situations.</p>
-
-            <p>One common scenario to consider is memory allocation failure. The
-                <code>malloc</code>
-                function can fail if there is insufficient memory available. To handle this situation, you can incorporate error checking into your code:</p>
-
-            <pre><code>
+        <h5 class="sub-heading">Step 2 — Creating a Vector</h5>
+        <p class="operation-description">Let’s initialize a Vector with a default capacity. We’ll start with a capacity of 16 (arbitrary but reasonable) and dynamically allocate memory.</p>
+        <pre><code class="language-c">
 Vector* createVector(){
     Vector* new_vector = malloc(sizeof(Vector));
-    if (new_vector == NULL){
-        printf("Memory allocation failed.\n");
-        return NULL;
-    }
     new_vector->size = 0;
     new_vector->capacity = 16;
-    new_vector->array = malloc(new_vector->capacity * sizeof(int));
-    if (new_vector->array == NULL){
-        printf("Memory allocation failed.\n");
-        free(new_vector); // Free the previously allocated Vector object
-        return NULL;
+    new_vector->array = malloc(new_vector->capacity*sizeof(int));
+    if (new_vector == NULL){
+        printf("ERROR!!!  caught error with number %d", errno);
     }
     return new_vector;
 }
+        </code></pre>
+        <p class="operation-description">Here, we allocate memory for the Vector struct and its internal array. If something goes wrong (e.g., out of memory), we print an error with <span class="operation-title">errno</span>. The Vector starts empty (<span class="operation-title">size = 0</span>) but ready to grow.</p>
+
+        <h5 class="sub-heading">Step 3 — Resizing the Vector</h5>
+        <p class="operation-description">Dynamic arrays are all about resizing when they get full. Our <span class="operation-title">resize</span> function creates a new, larger array, copies the old data, and frees the old array.</p>
+        <pre><code class="language-c">
+void resize(Vector* vector, int new_capacity){
+    int* new_array = malloc(new_capacity*sizeof(int));
+    for (int i=0; i<vector->size; i++){
+        new_array[i] = vector->array[i];
+    }
+    free(vector->array);
+    vector->array = new_array;
+    vector->capacity = new_capacity;
+}
+        </code></pre>
+        <p class="operation-description">When the Vector runs out of space, we increase the capacity by 1.5x (a common heuristic to balance memory and performance). We copy the existing elements to the new array and update the capacity. Don’t worry, this is like upgrading to a bigger backpack without losing your stuff!</p>
+
+        <h5 class="sub-heading">Step 4 — Adding Elements (Push and Insert)</h5>
+        <p class="operation-description">Now, let’s add some data. The <span class="operation-title">push</span> function adds an element to the end of the Vector, resizing if needed.</p>
+        <pre><code class="language-c">
+void push(Vector* vector, int data){
+    if (vector->size >= vector->capacity){
+        resize(vector, 1.5*vector->capacity);
+    }
+    vector->array[(++vector->size)-1] = data;
+}
+        </code></pre>
+        <p class="operation-description">If the Vector is full (<span class="operation-title">size >= capacity</span>), we resize it. Then, we increment <span class="operation-title">size</span> and add the new element at the end. The <span class="operation-title">vector_insert</span> function is similar but lets us insert at any index, shifting elements as needed.</p>
+        <pre><code class="language-c">
+void vector_insert(Vector* vector, int index, int item){
+    index = minmax(vector, index);
+    if (vector->size >= vector->capacity){
+        resize(vector, 1.5*vector->capacity);
+    }
+    for (int i=vector->size; i > index; i--){
+        vector->array[i] = vector->array[i-1];
+    }
+    vector->array[index] = item;   
+    vector->size++;
+}
+        </code></pre>
+        <p class="operation-description">The <span class="operation-title">minmax</span> helper ensures the index is valid (clamped between 0 and <span class="operation-title">size</span>). We shift elements right to make room, then insert the new item. This is like squeezing a new book onto a full shelf.</p>
+
+        <h5 class="sub-heading">Step 5 — Removing Elements</h5>
+        <p class="operation-description">We can remove elements with <span class="operation-title">pop</span> (removes the last element) or <span class="operation-title">delete</span> (removes at a specific index).</p>
+        <pre><code class="language-c">
+int pop(Vector* vector){
+    return at(vector, --vector->size);
+}
+
+void delete(Vector* vector, int index){
+    index = minmax(vector, index);
+    for (int i=index; i<vector->size; i++){
+        vector->array[i] = at(vector, i+1);
+    }
+    vector->size--;
+}
+        </code></pre>
+        <p class="operation-description"><span class="operation-title">pop</span> decrements the size and returns the last element. <span class="operation-title">delete</span> shifts elements left to fill the gap. We also have <span class="operation-title">removeItem</span> to remove all instances of a specific value, which is handy for cleaning up data.</p>
+
+        <h5 class="sub-heading">Step 6 — Utility Functions</h5>
+        <p class="operation-description">We’ve got helper functions like <span class="operation-title">size</span>, <span class="operation-title">capacity</span>, <span class="operation-title">is_empty</span>, <span class="operation-title">at</span>, and <span class="operation-title">find</span> to manage the Vector. For example:</p>
+        <pre><code> class="language-c">
+int at(Vector* vector, int index){
+    if (!vector){
+        printf("Vector does://github.com/user/repo/vector.c">full implementation here</a> and tinker with it!</p>
 </code></pre>
-
-            <p class="operation-description">In the
-                <code>createVector</code>
-                function, we first check if the memory allocation for the
-                <code>Vector</code>
-                object is successful. If not, we print an error message and return
-                <code>NULL</code>. Similarly, we check if the memory allocation for the array is successful. If it fails, we print an error message, free the previously allocated memory, and return
-                <code>NULL</code>.</p>
-
-            <p>By incorporating error handling, you ensure that your dynamic array implementation gracefully handles memory allocation failures and prevents potential crashes or undefined behavior.</p>
-
-            <h5 id="section7" class="sub-heading">Section 7: Putting It All Together: Example Usage</h5>
-
-            <p>Now that we've explored the fundamental concepts and operations of dynamic arrays, it's time to put our knowledge into action with real-world examples. In this section, we'll walk you through a complete example that demonstrates how to create, manipulate, and manage dynamic arrays in practical scenarios.</p>
-
-            <p>Let's consider a use case where we need to maintain a list of temperature readings. We'll leverage the dynamic array operations we've learned to build a temperature log.</p>
-
-            <pre><code>
-int main(){
-    Vector* temperatureLog = createVector();
-
-    // Add temperature readings to the log
-    push(temperatureLog, 25);
-    push(temperatureLog, 28);
-    push(temperatureLog, 23);
-
-    // Insert a new reading at a specific position
-    vector_insert(temperatureLog, 1, 26);
-
-    // Display the temperature log
-    printf("Temperature Log: ");
-    printVector(temperatureLog);
-
-    // Remove a reading from the log
-    delete(temperatureLog, 2);
-
-    // Display the updated temperature log
-    printf("Updated Log: ");
-    printVector(temperatureLog);
-
-    // Clean up
-    deleteVector(temperatureLog);
-
+        <h5 class="sub-heading">Test & Results</h5>
+        <p class="operation-description">Let’s test our Vector with a simple program. We’ll create a Vector, add some numbers, manipulate it, and print the results.</p>
+        <pre><code class="language-c">
+int main() {
+    Vector* v = createVector();
+    push(v, 10);
+    push(v, 20);
+    push(v, 30);
+    prepend(v, 5);
+    printf("Vector: ");
+    printVector(v); // Expected: 5 10 20 30
+    printf("Size: %d, Capacity: %d\n", size(v), capacity(v)); // Expected: Size: 4, Capacity: 16
+    pop(v);
+    printf("After pop: ");
+    printVector(v); // Expected: 5 10 20
+    delete(v, 1);
+    printf("After delete index 1: ");
+    printVector(v); // Expected: 5 20
+    removeItem(v, 5);
+    printf("After removing 5: ");
+    printVector(v); // Expected: 20
+    printf("Find 20: %d\n", find(v, 20)); // Expected: 0
+    deleteVector(v);
     return 0;
 }
-</code></pre>
-
-            <p class="operation-description">In this example, we create a temperature log using a dynamic array. We add temperature readings using the
-                <code>push</code>
-                operation, insert a new reading using
-                <code>vector_insert</code>, and remove a reading using
-                <code>delete</code>. The log is displayed using
-                <code>printVector</code>. Finally, we clean up by deleting the dynamic array using
-                <code>deleteVector</code>.</p>
-
-            <h5 id="section8" class="sub-heading">Section 8: Advanced Concepts and Considerations</h5>
-            <p>As you've now mastered the fundamentals of dynamic arrays and explored their practical usage, let's delve into some advanced concepts and considerations that can further enhance your understanding and implementation of dynamic arrays.</p>
-
-            <span>Optimizing Resizing Strategies</span>
-
-            <p>While the
-                <code>resize</code>
-                function we've covered ensures adaptability, the choice of resizing strategy can impact performance. Depending on your application's characteristics, you might explore different strategies, such as exponential resizing or incremental resizing, to balance memory overhead and reallocation frequency.</p>
-
-            <span>Performance vs. Memory Trade-offs</span>
-
-            <p>Dynamic arrays offer efficient access and manipulation, but it's important to recognize the trade-off between performance and memory usage. Choosing a larger initial capacity can reduce the frequency of resizes but may lead to higher memory consumption. Striking the right balance is crucial and depends on your specific use case.</p>
-
-            <span>Common Challenges and Solutions</span>
-
-            <p>Working with dynamic arrays may present challenges, such as fragmentation or choosing appropriate growth factors. Addressing these challenges often involves a combination of thoughtful design and testing. Exploring community resources, discussions, and algorithms can provide valuable insights into overcoming common hurdles.</p>
-
-            <p>By delving into these advanced concepts, you can optimize the efficiency and reliability of your dynamic array implementation, making it a powerful asset in your programming toolkit.</p>
+        </code></pre>
+        <p class="operation-description"><span class="operation-title">Output</span>:</p>
+        <pre><code>
+Vector: 5 10 20 30
+Size: 4, Capacity: 16
+After pop: 5 10 20
+After delete index 1: 5 20
+After removing 5: 20
+Find 20: 0
+        </code></pre>
 
 
-            <h5 id="conclusion" class="sub-heading">Conclusion:</h5>
+        <p class="operation-description">Whew! Our Vector works like a charm. It handles adding, removing, and finding elements, all while managing memory dynamically.</p>
 
-            <p>
-                Dynamic arrays empower you to elegantly manage evolving datasets, from temperature logs to complex data structures.</p>
+        <h5 class="sub-heading">Bonus: Comparison to Standard Libraries</h5>
+        <p class="operation-description">In C++, you’d use <span class="operation-title">std::vector</span> from the STL, which is similar but more polished. For example, <span class="operation-title">std::vector<int> v; v.push_back(10);</span> is equivalent to our <span class="operation-title">push(v, 10)</span>. The STL version handles memory management and provides more features (like iterators), but our implementation is lightweight and great for learning. In Python, this is like a <span class="operation-title">list</span>, but we get to see the magic under the hood.</p>
+        <p class="operation-description"><span class="operation-title">Why build it ourselves?</span></p>
+        <ul>
+            <li>Understand memory management in C.</li>
+            <li>Customize behavior for specific use cases (e.g., a machine learning dataset).</li>
+            <li>Feel like a coding wizard! 🧙‍♂️</li>
+        </ul>
 
-            <p>I encourage you to continue exploring and experimenting with dynamic arrays in your projects. As you encounter challenges and opportunities, remember the flexibility and adaptability that dynamic arrays provide, and leverage the knowledge you've gained to create efficient and robust solutions.</p>
-
-            <p>Thank you for joining this adventure through the world of dynamic arrays. I hope this exploration enhances your programming skills and empowers you to tackle a wide range of data management challenges with confidence.</p>
-
-
-            <h5 class="sub-heading">Additional Resources</h5>
-            <p>Dynamic arrays are just one facet of the fascinating world of data structures and algorithms. If you're eager to explore further or deepen your understanding, here are some additional resources that can help you expand your knowledge:</p>
-
-            <ul>
-                <li>
-                    <a href="https://www.geeksforgeeks.org/how-do-dynamic-arrays-work/" target="_blank">GeeksforGeeks: How do dynamic arrays work</a>
-                </li>
-                <li>
-                    <a href="https://en.wikipedia.org/wiki/Dynamic_array" target="_blank">Wikipedia</a>
-                </li>
-                <li>
-                    <a href="https://www.coursera.org/courses?query=data%20structures%20and%20algorithms" target="_blank">Coursera: Data Structures and Algorithms Courses</a>
-                </li>
-                <li>
-                    For hands-on experience and implementation details of the dynamic array data structure we've discussed, you can explore the accompanying code repository on GitHub:
-                    <a href="https://github.com/abhisindh/Data-Structures-and-Algorithms/blob/master/DataStructures/Vector.c">Dynamic Array Implementation</a>
-                </li>
-            </ul>
-
-            <h5 class="sub-heading">Acknowledgments and Feedback</h5>
-            <p>I extend a sincere thank you for accompanying me on this adventure. Your feedback, insights, and experiences are immensely valuable to me and the broader programming community. I welcome you to share your thoughts, questions, and suggestions through the
-                <a href="../../index.html">contact section of my portfolio</a>.</p>
-
-            <h5 class="sub-heading">Author Bio</h5>
-            <p>Abhisindh is a passionate programmer and tech enthusiast who enjoys exploring the fascinating world of data structures and algorithms. With a background in computer science and a keen interest in software development, Abhisindh aims to share insights and knowledge that empower fellow learners and developers.</p>
-
-
-            <p class="disclaimer">
-                <span>Disclaimer:</span>
-                While the core ideas, concepts, and expressions presented throughout this article are entirely my own, I wish to acknowledge that certain sections have been enriched and refined with suggestions provided by OpenAI's GPT-3. It's important to clarify that the content remains a reflection of my thoughts and perspectives, and the AI's role was limited to offering guidance and shaping the structure of the post. I greatly value the collaborative potential of AI technology in enhancing creative processes while ensuring that the content remains a genuine representation of my authorship.
-            </p>
-
-        </div>
+        <h5 class="sub-heading">Wrapping Up</h5>
+        <p class="operation-description">Congratulations! You’ve built a dynamic array in C from scratch. This Vector is perfect for storing sequences of data, like features for a machine learning model or scores in a game. Try extending it by:</p>
+        <ul>
+            <li>Adding type safety for different data types.</li>
+            <li>Implementing a shrink function to reduce capacity when the Vector is underused.</li>
+            <li>Using it in a real ML project, like storing feature vectors.</li>
+        </ul>
+        <p class="operation-description">Stay tuned for more data structure adventures, and happy coding! 🚀</p>
+    </div>
 
 
     </body>
