@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Building a Circular Queue from Scratch in C</title>
+
+  <!-- Meyawo Theme CSS -->
+  <link rel="stylesheet" href="../assets/css/meyawo.css" />
+
+  <!-- Blog Custom CSS -->
+  <link rel="stylesheet" href="../assets/css/blog.css" />
+
+  <!-- Font Icons -->
+  <link rel="stylesheet" href="../assets/vendors/themify-icons/css/themify-icons.css" />
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="../images/favicon_io/favicon.ico" type="image/x-icon" />
+
+  <!-- Blog Home Script -->
+  <script type="module" src="../assets/js/blog_home.js"></script>
+
+  <!-- Highlight.js for code syntax highlighting -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/default.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+  <!-- MathJax for LaTeX rendering -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <!-- Inline Styling -->
+  <style>
+    .container {
+      max-width: 800px;
+      margin: auto;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .blog-card-title {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .blog-card-caption {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 20px;
+    }
+    .sub-heading {
+      font-size: 20px;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+    .operation-title {
+      font-weight: bold;
+    }
+    pre {
+      background: #f4f4f4;
+      padding: 10px;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    code {
+      font-family: 'Courier New', Courier, monospace;
+    }
+    a {
+      color: #007bff;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Inject meta and dynamic blog info -->
+  <script src="../assets/js/blog_meta.js"></script>
+
+  <!-- Initialize code highlighting -->
+  <script>
+    hljs.highlightAll();
+  </script>
+
+  <!-- Blog Content Container -->
+  <div class="container">
+  <head>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+      .container { max-width: 800px; margin: auto; font-family: Arial, sans-serif; }
+      .blog-card-title { font-size: 24px; font-weight: bold; margin-bottom: 10px; }
+      .blog-card-caption { font-size: 14px; color: #555; margin-bottom: 20px; }
+      .sub-heading { font-size: 20px; font-weight: bold; margin-top: 20px; }
+      .operation-title { font-weight: bold; }
+      pre { background: #f4f4f4; padding: 10px; border-radius: 5px; }
+      code { font-family: Consolas, monospace; }
+      a { color: #007bff; text-decoration: none; }
+      a:hover { text-decoration: underline; }
+    </style>
+  </head>
+
+  <h5 class="blog-card-title">Building a Circular Queue from Scratch in C</h5>
+  <p class="blog-card-caption">By Abhisindh, July 11, 2025</p>
+
+  <h5 class="sub-heading">Table of Contents</h5>
+  <ul>
+    <li><a href="#goal">Goal</a></li>
+    <li><a href="#tldr">TL;DR</a></li>
+    <li><a href="#implementation">Step-by-step Implementation</a></li>
+    <li><a href="#test">Test & Results</a></li>
+    <li><a href="#bonus">Bonus</a></li>
+    <li><a href="#wrapup">Wrap-up</a></li>
+  </ul>
+
+  <h5 class="sub-heading" id="goal">Goal</h5>
+  <p>Hey there! Today, we’re diving into building a <span class="operation-title">circular queue</span> from scratch in C. A circular queue is a data structure that efficiently uses a fixed-size array by wrapping around when it reaches the end, perfect for scenarios like task scheduling or buffering data. We’ll implement it without any external libraries, using just C’s standard features. No dataset is needed here since we’re focusing on the data structure itself, but we’ll test it with a simple sequence of numbers.</p>
+
+  <h5 class="sub-heading" id="tldr">TL;DR</h5>
+  <p>We’re creating a circular queue in C with a fixed-size array, supporting enqueue, dequeue, and print operations. It uses modular arithmetic to handle the wrap-around. Check out the full code <a href="https://github.com/abhisindh/Data-Structures-and-Algorithms/blob/master/DataStructures/Queue_.c">here</a>.</p>
+
+  <h5 class="sub-heading" id="implementation">Step-by-step Implementation</h5>
+
+  <p><span class="operation-title">Step 1 — Define the Queue Structure and Initialize</span></p>
+  <p>We start by defining the <code>Queue</code> structure with an array to hold data and two pointers, <code>start</code> and <code>end</code>, to track the front and rear of the queue. The <code>create_queue</code> function allocates memory and sets initial values.</p>
+  <pre><code>#define MAX_SIZE 10
+
+typedef struct Queue {
+    int* array;
+    int start;
+    int end;
+} Queue;
+
+Queue* create_queue() {
+    Queue* queue = malloc(sizeof(Queue));
+    int* array = malloc(MAX_SIZE * sizeof(int));
+    queue->array = array;
+    queue->start = -1;
+    queue->end = -1;
+    return queue;
+}
+</code></pre>
+  <p>The <code>MAX_SIZE</code> is set to 10, meaning our queue can hold up to 10 integers. We initialize <code>start</code> and <code>end</code> to -1 to indicate an empty queue. The <code>malloc</code> calls allocate memory dynamically for both the queue structure and the array.</p>
+
+  <p><span class="operation-title">Step 2 — Helper Functions for Circular Indexing</span></p>
+  <p>A circular queue wraps around when indices reach the array’s end. We use modular arithmetic to handle this, defined in <code>increment</code> and <code>decrement</code> functions:</p>
+  <pre><code>int increment(int index) {
+    return (index + 1) % MAX_SIZE;
+}
+
+int decrement(int index) {
+    return (index + MAX_SIZE - 1) % MAX_SIZE;
+}
+</code></pre>
+  <p>The <code>increment</code> function moves the index forward, wrapping around to 0 if it exceeds <code>MAX_SIZE - 1</code>. For example, if <code>index = 9</code>, then <code>(9 + 1) % 10 = 0</code>. The <code>decrement</code> function does the reverse, ensuring we stay within bounds.</p>
+
+  <p><span class="operation-title">Step 3 — Check Queue Status</span></p>
+  <p>We need to know when the queue is full or empty to avoid errors. The <code>full</code> function checks if adding one more element would overwrite the start, and <code>empty</code> checks if the queue has no elements:</p>
+  <pre><code>int full(Queue* queue) {
+    if (increment(queue->end) == queue->start) return 1;
+    return 0;
+}
+
+int empty(Queue* queue) {
+    if (queue->end == -1) return 1;
+    return 0;
+}
+</code></pre>
+  <p>The queue is full when the next position after <code>end</code> equals <code>start</code>. It’s empty when <code>end</code> is -1, indicating no elements have been added.</p>
+
+  <p><span class="operation-title">Step 4 — Enqueue Operation</span></p>
+  <p>The <code>enqueue</code> function adds an element to the rear of the queue:</p>
+  <pre><code>void enqueue(Queue* queue, int data) {
+    if (full(queue)) {
+        printf("out of range\n");
+        return;
+    }
+    if (queue->start == -1) queue->start = 0;
+    
+    queue->end = increment(queue->end);
+    queue->array[queue->end] = data;
+}
+</code></pre>
+  <p>If the queue is full, we print an error. If it’s empty (<code>start = -1</code>), we set <code>start</code> to 0. Then, we increment <code>end</code> and add the data at that index. The operation can be thought of as adding to the rear: \( \text{queue}[\text{end}] = \text{data} \).</p>
+
+  <p><span class="operation-title">Step 5 — Dequeue Operation</span></p>
+  <p>The <code>dequeue</code> function removes and returns the front element:</p>
+  <pre><code>int dequeue(Queue* queue) {
+    int index;
+    if (empty(queue)) return -1;
+    if (queue->start == queue->end) {
+        index = queue->start;
+        queue->start = queue->end = -1;
+        return queue->array[index];
+    }
+    index = increment(queue->start);
+    int return_value = queue->array[queue->start];
+    queue->start = index;
+    return return_value;
+}
+</code></pre>
+  <p>If the queue is empty, we return -1. If there’s only one element (<code>start == end</code>), we reset the queue to empty after returning the value. Otherwise, we return the element at <code>start</code> and move <code>start</code> forward.</p>
+
+  <p><span class="operation-title">Step 6 — Print the Queue</span></p>
+  <p>To visualize the queue, we implement a <code>printQueue</code> function:</p>
+  <pre><code>void printQueue(Queue* queue) {
+    if (empty(queue)) return;
+    int current;
+    for (current = queue->start; current != queue->end; current = increment(current)) {
+        printf("%d, ", queue->array[current]);
+    }
+    printf("%d\n", queue->array[queue->end]);
+}
+</code></pre>
+  <p>This loops from <code>start</code> to <code>end</code>, printing each element. The loop uses <code>increment</code> to handle the circular nature, and we print the last element separately to include it.</p>
+
+  <h5 class="sub-heading" id="test">Test & Results</h5>
+  <p>Let’s test the queue with a simple sequence. We’ll enqueue numbers 0 to 9, dequeue a few, enqueue more, and print the queue at each step. Here’s the test code:</p>
+  <pre><code>int main(void) {
+    Queue* queue = create_queue();
+    for (int i = 0; i < 10; i++) {
+        enqueue(queue, i);
+    }
+    printQueue(queue); // Expected: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+    for (int i = 0; i < 5; i++) {
+        dequeue(queue);
+    }
+    printQueue(queue); // Expected: 5, 6, 7, 8, 9
+    for (int i = 0; i < 3; i++) {
+        enqueue(queue, i + 10);
+    }
+    printQueue(queue); // Expected: 5, 6, 7, 8, 9, 10, 11, 12
+    return EXIT_SUCCESS;
+}
+</code></pre>
+  <p>Running this, we get:
+  <ul>
+    <li>First print: <code>0, 1, 2, 3, 4, 5, 6, 7, 8, 9</code></li>
+    <li>After dequeuing 5 elements: <code>5, 6, 7, 8, 9</code></li>
+    <li>After enqueuing 10, 11, 12: <code>5, 6, 7, 8, 9, 10, 11, 12</code></li>
+  </ul>
+  The queue correctly handles insertions and deletions, wrapping around as needed.</p>
+
+  <h5 class="sub-heading" id="bonus">Bonus</h5>
+  <p>Since C doesn’t have a standard library queue like Python’s <code>queue.Queue</code>, let’s compare with a hypothetical equivalent. Python’s queue uses a dynamic list, while our implementation uses a fixed-size array with circular indexing. Our version is more memory-efficient for fixed-size needs but lacks dynamic resizing. For a dynamic queue in C, you’d need to implement a linked list or resize the array manually, which adds complexity.</p>
+
+  <h5 class="sub-heading" id="wrapup">Wrap-up</h5>
+  <p>Woohoo! You’ve just built a circular queue from scratch in C! Try modifying it to handle dynamic resizing or add error handling for memory allocation. Stay tuned for more data structure adventures, like stacks or priority queues. Happy coding!</p>
+</div>
+</body>
+</html>

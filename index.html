@@ -24,6 +24,7 @@
             })();
         </script>
         <script src="./assets/js/mail.js"></script>
+        
     </head>
 
     <body
@@ -309,86 +310,95 @@
         </section>
         <!-- end of testimonial section -->
 
-        <!-- blog section -->
-        <div id="blogContainer" class="blog-container">
+       <!-- blog section -->
+<div class="container">
+  <h4 class="mb-4">Latest Blogs</h4>
+  <div id="latestBlogs" class="blog-container"></div>
 
-            <div class="blog-card" id="003">
-    <div class="blog-card-header">
-        <img src="../blogs/images/003-header.png" alt="Moore-Penrose Inverse Blog" class="blog-card-img">
-    </div>
-    <div class="blog-card-body">
-        <h5 class="blog-card-title">Demystifying the Moore-Penrose Inverse: Applications and Algorithms</h5>
-        <p class="blog-card-caption">
-            <a href="#">By: Abhisindh</a>
-        </p>
-        <p>
-            This blog dives into the fascinating world of the Moore-Penrose inverse — a generalized inverse of a matrix with wide applications in scientific computing. From solving inconsistent systems to image reconstruction and regression, this deep-dive explores how mathematics empowers technology through elegant linear algebra.
-        </p>
-        <a id="003" class="blog-card-link" href="../../blogs/003.html">
-            Read more
-            <i class="ti-angle-double-right"></i>
-        </a>
-    </div>
-</div>
-
-
-  <!-- Blog Card 1 -->
-  <div class="blog-card" id="001">
-    <div class="blog-card-header">
-      <img
-        src="./blogs/images/001-header.png"
-        alt="Mastering Dynamic Arrays in C"
-        class="blog-card-img"
-      />
-    </div>
-    <div class="blog-card-body">
-      <h5 class="blog-card-title">Mastering Dynamic Arrays in C: Building Adaptable Data Structures</h5>
-      <p class="blog-card-caption">
-        <a href="#">By: Abhisindh</a>
-      </p>
-      <p>
-        Imagine you are a librarian in a busy library, tasked with managing an ever growing collection of books.
-        You start with a set number of bookshelves neatly organized with a fixed number of slots...
-      </p>
-      <a href="./blogs/001.html" class="blog-card-link">
-        Read more <i class="ti-angle-double-right"></i>
-      </a>
-    </div>
-  </div>
-
-  <!-- Blog Card 2 -->
-  <div class="blog-card" id="002">
-    <div class="blog-card-header">
-      <img
-        src="./blogs/images/002-header.png"
-        alt="Linked Lists Made Simple"
-        class="blog-card-img"
-      />
-    </div>
-    <div class="blog-card-body">
-      <h5 class="blog-card-title">Linked Lists Made Simple: Step-by-Step Implementation in C</h5>
-      <p class="blog-card-caption">
-        <a href="#">By: Abhisindh</a>
-      </p>
-      <p>
-        Imagine a scenario where you're managing a contact list for your favorite social media platform.
-        Each user profile is like a node in a linked list...
-      </p>
-      <a href="./blogs/002.html" class="blog-card-link">
-        Read more <i class="ti-angle-double-right"></i>
-      </a>
-    </div>
-    
-  </div>
   <div style="display: flex; justify-content: center;">
     <a href="./blogs/blog.html">
-        <button class="btn-rounded btn btn-outline-primary mt-4">All blogs</button>
+      <button class="btn-rounded btn btn-outline-primary mt-4">All blogs</button>
     </a>
+  </div>
 </div>
+<script>
+  const apiURL = "https://script.google.com/macros/s/AKfycbzgr7Y8jo3Gh4_YIYNNiCFVYWa7-Sil5KaxjsQUhuIjNDZMd4yfPIDBcqYDtr6NZjrt/exec";
+  const latestContainer = document.getElementById("latestBlogs");
+  let blogData = [];
 
-</div>
+  // Show loading placeholder
+  function showLatestSkeleton() {
+    latestContainer.innerHTML = "";
+    for (let i = 0; i < 3; i++) {
+      const skeleton = document.createElement("div");
+      skeleton.className = "blog-card loading-placeholder";
+      skeleton.innerHTML = `
+        <div class="blog-card-header skeleton" style="height: 180px; background-color: #eee;"></div>
+        <div class="blog-card-body">
+          <h5 class="blog-card-title skeleton" style="height: 20px; width: 60%; background-color: #eee;"></h5>
+          <p class="blog-card-caption skeleton" style="height: 16px; width: 40%; background-color: #eee;"></p>
+          <p class="skeleton" style="height: 48px; width: 100%; background-color: #eee;"></p>
+        </div>`;
+      latestContainer.appendChild(skeleton);
+    }
+  }
 
-        <!-- end of blog section -->
+  // Render the latest 3 blogs
+  function renderLatestBlogs(data) {
+    latestContainer.innerHTML = "";
+
+    const latestThree = [...data]
+      .sort((a, b) => new Date(b.date) - new Date(a.date))
+      .slice(0, 3);
+
+    latestThree.forEach((item, index) => {
+      const blogCard = document.createElement("div");
+      blogCard.className = "blog-card";
+      blogCard.id = `latest-${index.toString().padStart(3, "0")}`;
+
+      blogCard.innerHTML = `
+        <div class="blog-card-header">
+          <img src="${item.thumbnail}" alt="${item.title}" class="blog-card-img">
+        </div>
+        <div class="blog-card-body">
+          <h5 class="blog-card-title">${item.title}</h5>
+          <p class="blog-card-caption">
+            <a href="#">By: ${item.author || "Abhisindh"}</a>${item.date ? ` | ${item.date}` : ""}
+          </p>
+          <p>${item.summary}</p>
+          <a href="${item.url}" class="blog-card-link">
+            Read more <i class="ti-angle-double-right"></i>
+          </a>
+        </div>`;
+      latestContainer.appendChild(blogCard);
+    });
+  }
+
+  // Initial load
+  showLatestSkeleton();
+
+  const cached = localStorage.getItem("blogData");
+  if (cached) {
+    try {
+      blogData = JSON.parse(cached);
+      renderLatestBlogs(blogData);
+    } catch {
+      localStorage.removeItem("blogData");
+    }
+  }
+
+  fetch(apiURL)
+    .then(res => res.json())
+    .then(data => {
+      blogData = data;
+      localStorage.setItem("blogData", JSON.stringify(data));
+      renderLatestBlogs(data);
+    })
+    .catch(err => {
+      console.error("Fetch error:", err);
+    });
+</script>
+
 
         <!-- contact section -->
         <section class="section" id="contact">
