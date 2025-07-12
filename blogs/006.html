@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../assets/css/meyawo.css">
+
+        <title>Mastering Heaps in C: Building a Min-Heap from Scratch</title>
+        <!-- font icons -->
+        <link
+        rel="stylesheet" href="../assets/vendors/themify-icons/css/themify-icons.css">
+        <!-- Bootstrap + Meyawo main styles -->
+        <link rel="stylesheet" href="../assets/css/blog.css">
+        <link rel="shortcut icon" href="../images/favicon_io/favicon.ico" type="image/x-icon">
+
+        <script type="module" src="../assets/js/blog_home.js"></script>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/default.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+    </head>
+    <body>
+        <script src="../assets/js/blog_meta.js"></script>
+        <script>
+            hljs.highlightAll();
+        </script>
+
+        <div class="container">
+            <h5 class="blog-card-title">Mastering Heaps in C: Building a Min-Heap from Scratch</h5>
+<p class="blog-card-caption">By Abhisindh, July 12, 2025</p>
+
+<p>Ever wondered how to efficiently manage prioritized data? Let’s dive into the world of heaps! In this post, we’ll build a min-heap in C from scratch, based on the code from <a href="https://github.com/abhisindh/Data-Structures-and-Algorithms/blob/master/DataStructures/Heap.c">this GitHub repository</a>. Heaps are fantastic for tasks like priority queues or sorting algorithms (think heapsort!). We’ll break down each function, explain the logic, and even test it with a toy dataset. Whether you’re prepping for coding interviews or just love data structures, this is for you!</p>
+
+<h5 class="sub-heading">Table of Contents</h5>
+<ul>
+    <li><a href="#goal">Goal</a></li>
+    <li><a href="#tldr">TL;DR</a></li>
+    <li><a href="#implementation">Step-by-step Implementation</a></li>
+    <li><a href="#test">Test & Results</a></li>
+    <li><a href="#bonus">Bonus: Comparison with a Library</a></li>
+    <li><a href="#wrapup">Wrap-up</a></li>
+</ul>
+
+<h5 class="sub-heading" id="goal">🎯 Goal</h5>
+<p>The code implements a min-heap in C, a complete binary tree where each parent node’s value is less than or equal to its children’s values. This ensures the smallest element is always at the root, perfect for priority queues or algorithms like Dijkstra’s. We’re building it from scratch, using an array to store the heap and dynamic memory allocation for flexibility. No external dataset is used here, but we’ll test it with a simple array of integers to see the heap in action.</p>
+
+<h5 class="sub-heading" id="tldr">⚡ TL;DR</h5>
+<p>We’re crafting a min-heap in C with functions to insert, extract the minimum, and maintain the heap property. The full code is available <a href="https://github.com/abhisindh/Data-Structures-and-Algorithms/blob/master/DataStructures/Heap.c">here</a>. Below, we’ll dissect each part and test it with a small dataset!</p>
+
+<h5 class="sub-heading" id="implementation">🔢 Step-by-step Implementation</h5>
+
+<p>Let’s break down the code into digestible steps. Each function plays a role in building or manipulating the min-heap. We’ll use inline math to clarify concepts where needed.</p>
+
+<span class="operation-title">Step 1 — Define the Heap Structure</span>
+<p>First, we define the <code>Heap</code> structure to hold our array, its size, and capacity. This sets the foundation for our min-heap.</p>
+<pre><code class="language-c">
+typedef struct {
+    int *harr;      // pointer to array of elements in heap
+    int capacity;   // maximum possible size of min heap
+    int heap_size;  // Current number of elements in min heap
+} Heap;
+</code></pre>
+<p>The <code>harr</code> array stores the heap elements, <code>capacity</code> is the maximum size, and <code>heap_size</code> tracks the current number of elements. Using a pointer allows dynamic allocation, making our heap adaptable. The structure is simple but powerful, enabling efficient operations like insertion and extraction.</p>
+
+<span class="operation-title">Step 2 — Initialize the Heap</span>
+<p>The constructor allocates memory and initializes an empty heap. It’s like setting up a blank canvas for our data structure.</p>
+<pre><code class="language-c">
+Heap* createMinHeap(int capacity) {
+    Heap* minHeap = (Heap*)malloc(sizeof(Heap));
+    minHeap->heap_size = 0;
+    minHeap->capacity = capacity;
+    minHeap->harr = (int*)malloc(capacity * sizeof(int));
+    return minHeap;
+}
+</code></pre>
+<p>We allocate memory for the <code>Heap</code> struct and its <code>harr</code> array using <code>malloc</code>. The <code>heap_size</code> starts at 0, and <code>capacity</code> sets the maximum size. This function ensures our heap is ready for action with \( O(1) \) complexity.</p>
+
+<span class="operation-title">Step 3 — Utility Functions for Navigation</span>
+<p>To navigate the heap, we need functions to find parent and child indices. These are crucial for maintaining the heap property.</p>
+<pre><code class="language-c">
+int parent(int i) { return (i - 1) / 2; }
+int left(int i) { return (2 * i + 1); }
+int right(int i) { return (2 * i + 2); }
+</code></pre>
+<p>For a node at index \( i \), the parent is at \( \lfloor (i-1)/2 \rfloor \), and the left and right children are at \( 2i+1 \) and \( 2i+2 \), respectively. These formulas come from the array-based representation of a binary tree, allowing quick access to related nodes in \( O(1) \) time.</p>
+
+<span class="operation-title">Step 4 — Insert a New Key</span>
+<p>Inserting a key adds it to the end of the array and “bubbles it up” to maintain the min-heap property.</p>
+<pre><code class="language-c">
+void insertKey(Heap* minHeap, int k) {
+    if (minHeap->heap_size == minHeap->capacity) {
+        printf("\nOverflow: Could not insertKey\n");
+        return;
+    }
+    minHeap->heap_size++;
+    int i = minHeap->heap_size - 1;
+    minHeap->harr[i] = k;
+    while (i != 0 && minHeap->harr[parent(i)] > minHeap->harr[i]) {
+        swap(&minHeap->harr[i], &minHeap->harr[parent(i)]);
+        i = parent(i);
+    }
+}
+</code></pre>
+<p>We append the key at the end (index <code>heap_size</code>) and compare it with its parent. If the parent is larger, we swap them and continue up the tree. This “bubble-up” process ensures the smallest value stays at the root, with a time complexity of \( O(\log n) \), where \( n \) is the heap size.</p>
+
+<span class="operation-title">Step 5 — Maintain the Heap Property with MinHeapify</span>
+<p>The <code>MinHeapify</code> function fixes violations of the min-heap property by “sinking” a node down the tree.</p>
+<pre><code class="language-c">
+void MinHeapify(Heap* minHeap, int i) {
+    int l = left(i);
+    int r = right(i);
+    int smallest = i;
+    if (l < minHeap->heap_size && minHeap->harr[l] < minHeap->harr[i])
+        smallest = l;
+    if (r < minHeap->heap_size && minHeap->harr[r] < minHeap->harr[smallest])
+        smallest = r;
+    if (smallest != i) {
+        swap(&minHeap->harr[i], &minHeap->harr[smallest]);
+        MinHeapify(minHeap, smallest);
+    }
+}
+</code></pre>
+<p>We compare the node at index \( i \) with its children. If a child is smaller, we swap with the smallest child and recursively call <code>MinHeapify</code>. This ensures the subtree rooted at \( i \) satisfies the min-heap property, with a complexity of \( O(\log n) \).</p>
+
+<span class="operation-title">Step 6 — Extract the Minimum Element</span>
+<p>Extracting the minimum removes and returns the root, then restores the heap property.</p>
+<pre><code class="language-c">
+int extractMin(Heap* minHeap) {
+    if (minHeap->heap_size <= 0)
+        return INT_MAX;
+    if (minHeap->heap_size == 1) {
+        minHeap->heap_size--;
+        return minHeap->harr[0];
+    }
+    int root = minHeap->harr[0];
+    minHeap->harr[0] = minHeap->harr[minHeap->heap_size - 1];
+    minHeap->heap_size--;
+    MinHeapify(minHeap, 0);
+    return root;
+}
+</code></pre>
+<p>We return the root (smallest element), replace it with the last element, reduce the heap size, and call <code>MinHeapify</code> to fix the heap. This operation also runs in \( O(\log n) \), making it efficient for priority queue applications.</p>
+
+<span class="operation-title">Step 7 — Decrease a Key’s Value</span>
+<p>This function reduces a key’s value and adjusts the heap to maintain the min-heap property.</p>
+<pre><code class="language-c">
+void decreaseKey(Heap* minHeap, int i, int new_val) {
+    minHeap->harr[i] = new_val;
+    while (i != 0 && minHeap->harr[parent(i)] > minHeap->harr[i]) {
+        swap(&minHeap->harr[i], &minHeap->harr[parent(i)]);
+        i = parent(i);
+    }
+}
+</code></pre>
+<p>We update the value at index \( i \) and bubble it up if it’s smaller than its parent. This is useful in algorithms like Dijkstra’s, with a complexity of \( O(\log n) \).</p>
+
+<span class="operation-title">Step 8 — Delete a Key</span>
+<p>Deleting a key involves reducing it to a very small value and extracting it.</p>
+<pre><code class="language-c">
+void deleteKey(Heap* minHeap, int i) {
+    decreaseKey(minHeap, i, INT_MIN);
+    extractMin(minHeap);
+}
+</code></pre>
+<p>We set the key to <code>INT_MIN</code>, bubble it to the root, and extract it. This combines <code>decreaseKey</code> and <code>extractMin</code>, running in \( O(\log n) \).</p>
+
+<h5 class="sub-heading" id="test">🧪 Test & Results</h5>
+<p>Let’s test our min-heap with a toy dataset: an array of integers <code>[10, 5, 20, 3, 15]</code>. We’ll insert these into the heap and extract elements to verify the min-heap property.</p>
+<pre><code class="language-c">
+int main() {
+    Heap* minHeap = createMinHeap(10);
+    int arr[] = {10, 5, 20, 3, 15};
+    for (int i = 0; i < 5; i++)
+        insertKey(minHeap, arr[i]);
+    printf("Extracted minimum: %d\n", extractMin(minHeap)); // Should print 3
+    printf("Extracted minimum: %d\n", extractMin(minHeap)); // Should print 5
+    return 0;
+}
+</code></pre>
+<p>Running this, we get:</p>
+<pre><code>
+Extracted minimum: 3
+Extracted minimum: 5
+</code></pre>
+<p>The smallest elements are correctly extracted, confirming our heap maintains the min-heap property. The heap rearranges itself after each extraction, ensuring the next smallest element is always at the root.</p>
+
+<h5 class="sub-heading" id="bonus">🎁 Bonus: Comparison with a Library</h5>
+<p>C doesn’t have a standard heap library, but C++’s <code>std::priority_queue</code> (from the STL) offers similar functionality. Here’s how we’d achieve the same result using C++:</p>
+<pre><code class="language-cpp">
+#include <queue>
+#include <vector>
+#include <iostream>
+int main() {
+    std::priority_queue<int, std::vector<int>, std::greater<int>> minHeap;
+    int arr[] = {10, 5, 20, 3, 15};
+    for (int i = 0; i < 5; i++)
+        minHeap.push(arr[i]);
+    std::cout << "Extracted minimum: " << minHeap.top() << "\n"; // Prints 3
+    minHeap.pop();
+    std::cout << "Extracted minimum: " << minHeap.top() << "\n"; // Prints 5
+    return 0;
+}
+</code></pre>
+<p>The C++ version is more concise, as <code>std::priority_queue</code> handles the heap mechanics internally. However, our C implementation gives us full control and is great for learning the nuts and bolts of heaps. Both achieve the same result, but our code is more explicit about the underlying operations.</p>
+
+<h5 class="sub-heading" id="wrapup">🙌 Wrap-up</h5>
+<p>Congratulations, you’ve built a min-heap from scratch in C! You now understand how to insert, extract, and maintain the heap property, all while juggling pointers and memory allocation. Try modifying the code to implement a max-heap or use it in a heapsort algorithm. Stay tuned for more data structure adventures, and keep coding! 🚀</p>
+</div>

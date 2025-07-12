@@ -120,15 +120,25 @@ void delete(Vector* vector, int index){
     }
     vector->size--;
 }
-        </code></pre>
-        <p class="operation-description"><span class="operation-title">pop</span> decrements the size and returns the last element. <span class="operation-title">delete</span> shifts elements left to fill the gap. We also have <span class="operation-title">removeItem</span> to remove all instances of a specific value, which is handy for cleaning up data.</p>
+</code></pre>
+<p class="operation-description"><span class="operation-title">pop</span> decrements the size and returns the last element. <span class="operation-title">delete</span> shifts elements left to fill the gap. We also have <span class="operation-title">removeItem</span> to remove all instances of a specific value, which is handy for cleaning up data.</p>
 
-        <h5 class="sub-heading">Step 6 — Utility Functions</h5>
-        <p class="operation-description">We’ve got helper functions like <span class="operation-title">size</span>, <span class="operation-title">capacity</span>, <span class="operation-title">is_empty</span>, <span class="operation-title">at</span>, and <span class="operation-title">find</span> to manage the Vector. For example:</p>
-        <pre><code> class="language-c">
+<h5 class="sub-heading">Step 6 — Utility Functions</h5>
+<p class="operation-description">We’ve got helper functions like <span class="operation-title">size</span>, <span class="operation-title">capacity</span>, <span class="operation-title">is_empty</span>, <span class="operation-title">at</span>, and <span class="operation-title">find</span> to manage the Vector. For example:</p>
+<pre><code class="language-c">
 int at(Vector* vector, int index){
     if (!vector){
-        printf("Vector does://github.com/user/repo/vector.c">full implementation here</a> and tinker with it!</p>
+        printf("Vector does not exist. Returning zero...\n");
+        return 0;
+    }
+    if (index >= vector->size){
+        printf("Index out of range. Returning zero...\n");
+        return 0;
+    }
+    return *(vector->array + index);
+}
+</code></pre>
+<p class="operation-description">The <span class="operation-title">at</span> function safely accesses an element at a given index, with checks for null pointers or out-of-bounds indices. These utility functions make our Vector robust and user-friendly. You can explore the full implementation in the code provided at the top of this post and tinker with it!</p>
 </code></pre>
         <h5 class="sub-heading">Test & Results</h5>
         <p class="operation-description">Let’s test our Vector with a simple program. We’ll create a Vector, add some numbers, manipulate it, and print the results.</p>

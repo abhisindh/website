@@ -1090,101 +1090,199 @@ p {
     width: 45px;
     margin-bottom: 15px
 }
+/* Portfolio Card */
 .portfolio-card {
     display: block;
     position: relative;
-    overflow: hidden
+    overflow: hidden;
+    margin-bottom: 20px; /* Consistent margin across all screens */
 }
+
 .portfolio-card .portfolio-card-img {
-    width: 100%
+    width: 100%;
+    height: auto; /* Ensure image scales properly */
+    object-fit: cover; /* Maintain aspect ratio */
 }
-@media(max-width:767.98px) {
-    .portfolio-card {
-        margin-bottom: 30px
-    }
-    .service-card {
-        margin-bottom: 30px
-    }
-}
+
+/* Blog Card */
 .blog-card {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
     text-align: left;
     border: 1px solid #dee2e6;
     margin-bottom: 30px;
     border-radius: 0;
-    overflow: hidden
+    overflow: hidden;
 }
+
 .blog-card-header {
     min-width: 350px;
-    max-width: 350px
+    max-width: 350px;
 }
+
 .blog-card-img {
     border-radius: 0;
     width: 100%;
     height: 100%;
-    -o-object-fit: cover;
-    object-fit: cover
+    object-fit: cover; /* Standard property for image scaling */
 }
-.blog-body {
-    padding: 1em 20em 0
-}
+
 .blog-card-body {
-    padding: 30px 20px 30px 30px
+    padding: 30px;
 }
+
+.blog-body {
+    padding: 1em 2em 0;
+}
+
 .blog-card-title {
-    font-weight: 100
+    font-weight: 100;
+    font-size: 1.5rem; /* Responsive font size */
 }
+
 .blog-card-caption {
-    margin: 15px 0 !important
+    margin: 15px 0 !important;
 }
+
 .blog-card-caption i {
     display: inline-block;
-    width: 15px
+    width: 15px;
 }
+
 .blog-card-caption a {
     margin-right: 10px;
     color: #444;
     text-decoration: none;
     display: inline-block;
     font-weight: 600;
-    opacity: .7;
-    font-size: 13px
+    opacity: 0.7;
+    font-size: 13px;
 }
+
 .blog-card-link {
     text-decoration: none;
     margin-top: 20px;
     display: block;
     font-size: 13px;
-    cursor: pointer
+    cursor: pointer;
 }
+
 .blog-card-link i {
     position: relative;
     top: 1px;
-    cursor: pointer
+    cursor: pointer;
 }
+
 .blog-card-link:hover {
-    color: var(--purple)
+    color: var(--purple);
 }
-@media(max-width:991.98px) {
-    .blog-card {
-        -webkit-box-orient: vertical;
-        -webkit-box-direction: normal;
-        -webkit-flex-direction: column;
-        -ms-flex-direction: column;
-        flex-direction: column
+
+/* Responsive Design */
+
+/* Mobile Devices (up to 576px) */
+@media (max-width: 576px) {
+    .portfolio-card {
+        margin-bottom: 20px;
     }
+
+    .service-card {
+        margin-bottom: 20px;
+    }
+
+    .blog-card {
+        flex-direction: column;
+    }
+
+    .blog-card-header {
+        min-width: 100%;
+        max-width: 100%;
+    }
+
+    .blog-card-body {
+        padding: 20px; /* Reduced padding for smaller screens */
+    }
+
+    .blog-body {
+        padding: 0.5em; /* Adjusted padding for mobile */
+    }
+
+    .blog-card-title {
+        font-size: 1.2rem; /* Smaller font for mobile */
+    }
+
+    .blog-card-caption a {
+        font-size: 12px; /* Slightly smaller font for captions */
+    }
+
+    .blog-card-link {
+        font-size: 12px;
+    }
+}
+
+/* Tablet Devices (576px to 991.98px) */
+@media (min-width: 576.01px) and (max-width: 991.98px) {
+    .portfolio-card {
+        margin-bottom: 25px;
+    }
+
+    .service-card {
+        margin-bottom: 25px;
+    }
+
+    .blog-card {
+        flex-direction: column; /* Stack vertically for tablets */
+    }
+
+    .blog-card-header {
+        min-width: 100%;
+        max-width: 100%;
+    }
+
+    .blog-card-body {
+        padding: 25px; /* Moderate padding for tablets */
+    }
+
+    .blog-body {
+        padding: 1em; /* Adjusted padding for tablets */
+    }
+
+    .blog-card-title {
+        font-size: 1.4rem; /* Moderate font size for tablets */
+    }
+}
+
+/* Existing Media Query for Larger Tablets and Small Desktops (up to 991.98px) */
+@media (max-width: 991.98px) {
+    .blog-card {
+        flex-direction: column;
+    }
+
     .blog-card .blog-card-header {
         width: 100%;
         max-width: 100%;
-        min-width: 100%
+        min-width: 100%;
     }
+
     .blog-body {
-        padding: 1em 1em 0
+        padding: 1em;
     }
-} /*!
+}
+
+/* Small Mobile Devices (up to 400px) */
+@media (max-width: 400px) {
+    .blog-card-body {
+        padding: 15px; /* Further reduced padding for very small screens */
+    }
+
+    .blog-card-title {
+        font-size: 1.1rem; /* Even smaller font for very small screens */
+    }
+
+    .blog-card-caption a,
+    .blog-card-link {
+        font-size: 11px; /* Adjust font size for readability */
+    }
+}
+/*
  * Hamburgers
  * @description Tasty CSS-animated hamburgers
  * @author Jonathan Suh @jonsuh

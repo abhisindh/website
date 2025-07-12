@@ -38,7 +38,7 @@ function createNavbar() {
 
     const brandLink = document.createElement('a');
     brandLink.classList.add('navbar-brand');
-    brandLink.href = '#';
+    brandLink.href = './blog.html';
     brandLink.textContent = 'Blogs';
 
     const toggleButton = document.createElement('button');

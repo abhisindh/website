@@ -1,0 +1,93 @@
+I will provide some code. Your task is to write a complete technical blog post explaining it, using:
+
+🧠 Structure and Tone
+Follow the section sequence and writing style of the Medium article "Perceptron: Building it from scratch in Python" by Becaye Baldé.
+
+Sections should include:
+
+🎯 Goal: Short intro about what the code does, if it’s from scratch, and the dataset used (if any).
+
+⚡ TL;DR: Quick summary with a link to full code (GitHub or placeholder).
+
+🔢 Step-by-step Implementation:
+
+Numbered steps with section headings (e.g., “Step 1 — Initialize weights”).
+
+For each step: short intro, code block, clear explanation.
+
+Use inline LaTeX math where helpful 
+
+🧪 Test & Results:
+
+Run the code on a toy or standard dataset (e.g., Iris).
+
+Show accuracy or output.
+
+🎁 Bonus: Compare with equivalent library method (e.g., sklearn).
+
+🙌 Wrap-up: End with a fun or motivating note like “Try modifying it for…” or “Stay tuned for…”
+
+The tone should be conversational, clear, and encouraging. Assume the reader knows Python but is learning ML.
+
+🖼️ HTML Styling and Format
+Wrap the entire blog inside:
+
+
+<div class="container"> ... </div>
+
+Use the following tag structure:
+
+Blog Title: <h5 class="blog-card-title">
+
+Metadata (author - Abhisindh, date- today's date): <p class="blog-card-caption">
+
+Section Headings: <h5 class="sub-heading">
+
+Code blocks: <pre><code> (Highlight.js friendly)
+
+Paragraphs: <p>, inline headers use <span class="operation-title">
+
+Math: Use inline or block LaTeX expressions within \( ... \) or \[ ... \]
+
+Add a Table of Contents with anchor links to each section
+
+Use <img> tags for diagrams if needed (or placeholders with alt text)
+
+📦 Extra: Include MathJax for LaTeX
+Add this in the <head> to enable math rendering:
+
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+
+The beginning of file will look like 
+"<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../assets/css/meyawo.css">
+
+        <title>Mastering Dynamic Arrays in C: Building Adaptable Data Structures</title>
+        <!-- font icons -->
+        <link
+        rel="stylesheet" href="../assets/vendors/themify-icons/css/themify-icons.css">
+        <!-- Bootstrap + Meyawo main styles -->
+        <link rel="stylesheet" href="../assets/css/blog.css">
+        <link rel="shortcut icon" href="../images/favicon_io/favicon.ico" type="image/x-icon">
+
+        <script type="module" src="../assets/js/blog_home.js"></script>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/default.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+    </head>
+    <body>
+        <script src="../assets/js/blog_meta.js"></script>
+        <script>
+            hljs.highlightAll();
+        </script>
+
+        <div class="container">"

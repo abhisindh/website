@@ -2,119 +2,170 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../assets/css/meyawo.css">
-
-  <title>Mastering Dynamic Arrays in C: Building Adaptable Data Structures</title>
-  <!-- font icons -->
-  <link rel="stylesheet" href="../assets/vendors/themify-icons/css/themify-icons.css">
-  <!-- Bootstrap + Meyawo main styles -->
-  <link rel="stylesheet" href="../assets/css/blog.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Blog</title>
   <link rel="shortcut icon" href="../images/favicon_io/favicon.ico" type="image/x-icon">
 
-  <!-- <script type="module" src="../assets/js/blog_home.js"></script> -->
+  <!-- Font Icons & CSS -->
+  <link rel="stylesheet" href="../assets/vendors/themify-icons/css/themify-icons.css" />
+  <link rel="stylesheet" href="../assets/css/meyawo.css" />
+  <link rel="stylesheet" href="../assets/css/blog.css" />
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/default.min.css">
+  <!-- Syntax Highlighting -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/default.min.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+  <style>.skeleton {
+  animation: pulse 1.5s infinite ease-in-out;
+  border-radius: 4px;
+}
 
+@keyframes pulse {
+  0% { background-color: #f0f0f0; }
+  50% { background-color: #e0e0e0; }
+  100% { background-color: #f0f0f0; }
+}
+</style>
 </head>
 
 <body>
+  <nav class="navbar navbar-expand-sm navbar-dark bg-primary rounded shadow mb-3">
+  <div class="container">
+    <a class="navbar-brand" href="#">Blogs</a>
 
-  <!-- <script src="../assets/js/blog_meta.js"></script> -->
+    <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="blog.html">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="ml-4 mt-1 btn btn-light btn-sm" href="https://abhisindh.netlify.app">Go to portfolio</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container mb-3">
+  <select id="sortSelector" class="form-select form-control">
+    <option value="date-desc">Newest First</option>
+    <option value="date-asc">Oldest First</option>
+    <option value="title">Title (A–Z)</option>
+  </select>
+</div>
+
 
   <div id="blogContainer" class="container">
-
-    <div class="blog-card" id="003">
-      <div class="blog-card-header">
-        <img src="../blogs/images/003-header.png" alt="Moore-Penrose Inverse Blog" class="blog-card-img">
-      </div>
-      <div class="blog-card-body">
-        <h5 class="blog-card-title">Demystifying the Moore-Penrose Inverse: Applications and Algorithms</h5>
-        <p class="blog-card-caption">
-          <a href="#">By: Abhisindh</a>
-        </p>
-        <p>
-          This blog dives into the fascinating world of the Moore-Penrose inverse — a generalized inverse of a matrix
-          with wide applications in scientific computing. From solving inconsistent systems to image reconstruction and
-          regression, this deep-dive explores how mathematics empowers technology through elegant linear algebra.
-        </p>
-        <a id="003" class="blog-card-link" href="../../blogs/003.html">
-          Read more
-          <i class="ti-angle-double-right"></i>
-        </a>
-      </div>
-    </div>
-
-
-    <!-- Blog Card 1 -->
-    <div class="blog-card" id="001">
-      <div class="blog-card-header">
-        <img src="../blogs/images/001-header.png" alt="Mastering Dynamic Arrays in C" class="blog-card-img" />
-      </div>
-      <div class="blog-card-body">
-        <h5 class="blog-card-title">Mastering Dynamic Arrays in C: Building Adaptable Data Structures</h5>
-        <p class="blog-card-caption">
-          <a href="#">By: Abhisindh</a>
-        </p>
-        <p>
-          Imagine you are a librarian in a busy library, tasked with managing an ever growing collection of books.
-          You start with a set number of bookshelves neatly organized with a fixed number of slots...
-        </p>
-        <a href="./blogs/001.html" class="blog-card-link">
-          Read more <i class="ti-angle-double-right"></i>
-        </a>
-      </div>
-    </div>
-
-    <!-- Blog Card 2 -->
-    <div class="blog-card" id="002">
-      <div class="blog-card-header">
-        <img src="../blogs/images/002-header.png" alt="Linked Lists Made Simple" class="blog-card-img" />
-      </div>
-      <div class="blog-card-body">
-        <h5 class="blog-card-title">Linked Lists Made Simple: Step-by-Step Implementation in C</h5>
-        <p class="blog-card-caption">
-          <a href="#">By: Abhisindh</a>
-        </p>
-        <p>
-          Imagine a scenario where you're managing a contact list for your favorite social media platform.
-          Each user profile is like a node in a linked list...
-        </p>
-        <a href="../blogs/002.html" class="blog-card-link">
-          Read more <i class="ti-angle-double-right"></i>
-        </a>
-      </div>
-    </div>
-
-    <div class="blog-card" id="002">
-      <div class="blog-card-header">
-        <img src="../blogs/images/004-header.png" alt="Binary Search Tree in C" class="blog-card-img" />
-      </div>
-      <div class="blog-card-body">
-        <h5 class="blog-card-title">Binary Search Tree: Building It From Scratch in C</h5>
-        <p class="blog-card-caption">
-          <a href="#">By: Grok</a> | July 6, 2025
-        </p>
-        <p>
-          Picture yourself organizing a collection of numbers in a tree where smaller values branch left and larger ones
-          right.
-          This is the essence of a Binary Search Tree (BST), a powerful data structure for efficient searching and
-          sorting...
-        </p>
-        <a href="../blogs/004.html" class="blog-card-link">
-          Read more <i class="ti-angle-double-right"></i>
-        </a>
-      </div>
-    </div>
-
-
-
-
+    <!-- Blog cards will be injected here -->
   </div>
 
-</body>
+<script>
+  const apiURL = "https://script.google.com/macros/s/AKfycbzgr7Y8jo3Gh4_YIYNNiCFVYWa7-Sil5KaxjsQUhuIjNDZMd4yfPIDBcqYDtr6NZjrt/exec";
+  const container = document.getElementById("blogContainer");
+  const sortSelector = document.getElementById("sortSelector");
+  let blogData = [];
 
+  // Function to show skeleton loader
+  function showSkeleton() {
+    container.innerHTML = "";
+    const skeleton = document.createElement("div");
+    skeleton.classList.add("blog-card", "loading-placeholder");
+    skeleton.innerHTML = `
+      <div class="blog-card-header skeleton" style="height: 180px; background-color: #eee;"></div>
+      <div class="blog-card-body">
+        <h5 class="blog-card-title skeleton" style="height: 20px; width: 60%; background-color: #eee;"></h5>
+        <p class="blog-card-caption skeleton" style="height: 16px; width: 40%; background-color: #eee;"></p>
+        <p class="skeleton" style="height: 48px; width: 100%; background-color: #eee;"></p>
+      </div>`;
+    container.appendChild(skeleton);
+  }
+
+  // Initial load: show skeleton
+  showSkeleton();
+
+  // Load from cache if available
+  const cached = localStorage.getItem("blogData");
+  if (cached) {
+    try {
+      blogData = JSON.parse(cached);
+      sortAndRender("date-desc");
+    } catch {
+      localStorage.removeItem("blogData");
+    }
+  }
+
+  // Fetch from Google Sheets App Script
+  fetch(apiURL)
+    .then(res => res.json())
+    .then(data => {
+      blogData = data;
+      localStorage.setItem("blogData", JSON.stringify(data));
+      sortAndRender(sortSelector?.value || "date-desc");
+    })
+    .catch(err => {
+      console.error("Fetch error:", err);
+    });
+
+  // Handle sorting
+  if (sortSelector) {
+    sortSelector.addEventListener("change", (e) => {
+      sortAndRender(e.target.value);
+    });
+  }
+
+  function sortAndRender(sortType) {
+    showSkeleton();
+
+    setTimeout(() => {
+      const data = [...blogData];
+
+      if (sortType === "date-desc") {
+        data.sort((a, b) => new Date(b.date) - new Date(a.date));
+      } else if (sortType === "date-asc") {
+        data.sort((a, b) => new Date(a.date) - new Date(b.date));
+      } else if (sortType === "title") {
+        data.sort((a, b) => a.title.localeCompare(b.title));
+      }
+
+      renderBlogs(data);
+    }, 400); // Delay for skeleton display
+  }
+
+  function renderBlogs(data) {
+    container.innerHTML = "";
+
+    data.forEach((item, index) => {
+      const blogCard = document.createElement("div");
+      blogCard.className = "blog-card";
+      blogCard.id = index.toString().padStart(3, "0");
+
+      blogCard.innerHTML = `
+        <div class="blog-card-header">
+          <img src="${item.thumbnail}" alt="${item.title}" class="blog-card-img">
+        </div>
+        <div class="blog-card-body">
+          <h5 class="blog-card-title">${item.title}</h5>
+          <p class="blog-card-caption">
+            <a href="#">By: ${item.author || "Abhisindh"}</a>${item.date ? ` | ${item.date}` : ""}
+          </p>
+          <p>${item.summary}</p>
+          <a href="${item.url}" class="blog-card-link">
+            Read more <i class="ti-angle-double-right"></i>
+          </a>
+        </div>
+      `;
+
+      container.appendChild(blogCard);
+    });
+  }
+</script>
+
+
+
+</body>
 
 </html>
