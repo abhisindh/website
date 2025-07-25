@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>The Magic of Numbers: Exploring Number Theory</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reset.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/black.min.css" id="theme">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Roboto+Slab:wght@400;700&family=Quicksand:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section class="title-slide">
+                <div class="digit-animation"></div>
+                <h1>The Magic of Numbers:<br>Exploring Number Theory</h1>
+                <button class="mute-button" id="muteButton">🔊 Mute Music</button>
+                <audio id="bgMusic" loop>
+                    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+                <span class="mascot">✨</span>
+            </section>
+
+            <section>
+                <section>
+                    <h2>What is Number Theory?</h2>
+                    <p>It's the branch of pure mathematics concerned with the properties and relationships of numbers,
+                        especially <strong>integers</strong>.</p>
+                </section>
+                <section>
+                    <div class="math-timeline">
+                        <div class="math-bubble fragment fade-in" data-fragment-index="1">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Euclid_-_Euclides_Alexandrinus.jpg/220px-Euclid_-_Euclides_Alexandrinus.jpg"
+                                alt="Euclid">
+                            <p>Euclid (c. 300 BC)</p>
+                            <div class="speech-bubble">"Numbers are the essence of everything."</div>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <div class="math-timeline">
+                        <div class="math-bubble fragment fade-in" data-fragment-index="1">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Pierre_de_Fermat.jpg/220px-Pierre_de_Fermat.jpg"
+                                alt="Fermat">
+                            <p>Pierre de Fermat (1601-1665)</p>
+                            <div class="speech-bubble">"I have a truly marvelous proof..." (but the margin is too
+                                small!)</div>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <div class="math-timeline">
+                        <div class="math-bubble fragment fade-in" data-fragment-index="1">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Srinivasa_Ramanujan.jpg/220px-Srinivasa_Ramanujan.jpg"
+                                alt="Ramanujan">
+                            <p>Srinivasa Ramanujan (1887-1920)</p>
+                            <div class="speech-bubble">"An equation has no meaning to me unless it expresses a thought
+                                of God."</div>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <p>Think of it as exploring the deep secrets hidden within ordinary counting numbers.</p>
+                    <span class="mascot">🤔</span>
+                </section>
+            </section>
+
+            <section>
+                <section>
+                    <div class="slide-inner">
+                    <h2>Divisibility Rules: Your Number Detectives!</h2>
+                    <p>Ever wondered if a large number can be divided perfectly without a calculator?</p>
+                    <div class="divisibility-checker">
+                        <input type="number" id="numberInput" placeholder="Enter a number (e.g., 246)">
+                        <button onclick="checkDivisibility()">Check Rules</button>
+                        <div id="divisibilityResults" class="divisibility-result"></div>
+                    </div>
+                    <ul class="divisibility-rules-list">
+                        <li onclick="showRule(2)">Rule for 2</li>
+                        <li onclick="showRule(3)">Rule for 3</li>
+                        <li onclick="showRule(4)">Rule for 4</li>
+                        <li onclick="showRule(5)">Rule for 5</li>
+                        <li onclick="showRule(6)">Rule for 6</li>
+                        <li onclick="showRule(9)">Rule for 9</li>
+                        <li onclick="showRule(10)">Rule for 10</li>
+                    </ul>
+                    <div id="ruleExplanation" class="gcd-explanation"></div>
+                    <span class="mascot">🔎</span>
+                    </div>
+                </section>
+                <section>
+                    <h2>Divisibility Rule for 2</h2>
+                    <p><strong>Rule:</strong> A number is divisible by 2 if the last digit is even (0, 2, 4, 6, 8).</p>
+                    <span class="mascot">💡</span>
+        
+                </section>
+                <section>
+                    <h2>Divisibility Rule for 3</h2>
+                    <p><strong>Rule:</strong> A number is divisible by 3 if the sum of its digits is divisible by 3.</p>
+                    <span class="mascot">💡</span>
+                </section>
+                <section>
+                    <h2>Divisibility Rule for 4</h2>
+                    <p><strong>Rule:</strong> A number is divisible by 4 if the number formed by the last two digits is
+                        divisible by 4.</p>
+                    <span class="mascot">💡</span>
+                </section>
+                <section>
+                    <h2>Divisibility Rule for 5</h2>
+                    <p><strong>Rule:</strong> A number is divisible by 5 if the last digit is 0 or 5.</p>
+                    <span class="mascot">💡</span>
+                </section>
+                <section>
+                    <h2>Divisibility Rule for 6</h2>
+                    <p><strong>Rule:</strong> A number is divisible by 6 if it is divisible by both 2 and 3.</p>
+                    <span class="mascot">💡</span>
+                </section>
+                <section>
+                    <h2>Divisibility Rule for 9</h2>
+                    <p><strong>Rule:</strong> A number is divisible by 9 if the sum of its digits is divisible by 9.</p>
+                    <span class="mascot">💡</span>
+                </section>
+                <section>
+                    <h2>Divisibility Rule for 10</h2>
+                    <p><strong>Rule:</strong> A number is divisible by 10 if the last digit is 0.</p>
+                    <span class="mascot">💡</span>
+                </section>
+            </section>
+
+            <section>
+                <section class="slide-inner">
+                    <h2>Prime Numbers: The Unbreakable Building Blocks</h2>
+                    <p>Primes are numbers greater than 1 that have only two divisors: 1 and themselves.</p>
+                    <p class="fragment fade-in">Think of them as the LEGO® bricks of all other numbers!</p>
+                    <div class="lego-block-container fragment fade-in">
+                        <div class="lego-block">2</div>
+                        <div class="lego-block">3</div>
+                        <div class="lego-block">5</div>
+                        <div class="lego-block">7</div>
+                        <div class="lego-block">11</div>
+                    </div>
+                    <p class="fragment fade-in">Scroll down to discover Eratosthenes' Sieve!</p>
+                    <span class="mascot">🧱</span>
+                </section>
+                <section>
+                    <h3>Eratosthenes' Sieve: Finding Primes</h3>
+                    <p>Let's find primes up to 100 using this ancient method.</p>
+                    <div class="sieve-grid" id="sieveGrid"></div>
+                    <button onclick="startSieve()">Start Sieve Animation</button>
+                    <span class="mascot">⚙️</span>
+                </section>
+                <section>
+                    <h2>Test Your Prime Knowledge!</h2>
+                    <div class="prime-quiz">
+                        <h3>Is this number prime?</h3>
+                        <input type="number" id="primeQuizInput" placeholder="Enter a number (e.g., 17)">
+                        <button onclick="checkPrime()">Check</button>
+                        <div id="primeQuizResult" class="prime-quiz-result"></div>
+                    </div>
+                    <span class="mascot">❓</span>
+                </section>
+            </section>
+
+            <section>
+                <section>
+                    <h2>Euclid’s Lemma & The Great GCD Hunt</h2>
+                    <p><strong>Euclid's Lemma:</strong> If a prime $p$ divides a product $ab$, then $p$ must divide $a$
+                        or $p$ must divide $b$.</p>
+                    <p class="fragment fade-in">This simple idea is incredibly powerful in Number Theory!</p>
+                    <h3>Greatest Common Divisor (GCD)</h3>
+                    <p class="fragment fade-in">The largest positive integer that divides two or more integers without
+                        leaving a remainder.</p>
+                    <p class="fragment fade-in">Scroll down to see the Euclidean Algorithm in action!</p>
+                    <span class="mascot">📐</span>
+                </section>
+                <section>
+                    <h3>Euclidean Algorithm (The GCD Machine!)</h3>
+                    <p>A super efficient way to find GCD. It's based on repeated division!</p>
+                    <div class="gcd-animation-container">
+                        <div id="gcdBlocks"></div>
+                        <div id="gcdExplanation" class="gcd-explanation"></div>
+                    </div>
+                    <button class="animate-gcd-button" onclick="animateGCD(1071, 1029)">Animate GCD(1071, 1029)</button>
+                    <span class="mascot">🌀</span>
+                </section>
+                <section>
+                    <h2>Try Euclidean Algorithm in Python!</h2>
+                    <div class="code-sandbox">
+                        <textarea id="pythonCode" rows="8">
+def gcd(a, b):
+    while b:
+        a, b = b, a % b
+    return a
+
+# Try with your own numbers!
+num1 = 48
+num2 = 18
+print(f"GCD of {num1} and {num2} is: {gcd(num1, num2)}")
+                        </textarea>
+                        <button onclick="runPythonCode()">Run Code</button>
+                        <div id="codeOutput" class="code-output"></div>
+                    </div>
+                    <span class="mascot">💻</span>
+                </section>
+            </section>
+
+            <section>
+                <section>
+                    <h2>Fundamental Theorem of Arithmetic: The Unique Fingerprint</h2>
+                    <p>Every integer greater than 1 is either a prime number itself or can be represented as a product
+                        of prime numbers, and this representation is <strong>unique</strong>, apart from the order of
+                        the factors.</p>
+                    <p class="fragment fade-in">Think of it: every number has its own unique prime "DNA"!</p>
+                    <p class="fragment fade-in">Scroll down to build a Factorization Tree!</p>
+                    <span class="mascot">🧬</span>
+                </section>
+                <section>
+                    <div class="slid-inner">
+                    <h2>Interactive Prime Factorization Tree</h2>
+                    <p>Enter a number and watch its unique prime factorization tree grow!</p>
+                    <input type="number" id="factorInput" class="input-number-factor"
+                        placeholder="Enter a number (e.g., 72)">
+                    <button onclick="generateFactorTree()">Generate Tree</button>
+                    <div id="factorTreeContainer" class="factorization-tree-container"></div>
+                    <span class="mascot">🌳</span>
+                    </div>
+                </section>
+            </section>
+
+            <section>
+                <section>
+                    <h2>Congruences & Modular Arithmetic: Clockwork Math!</h2>
+                    <p>Modular arithmetic is like arithmetic on a clock. When you go past 12, you cycle back to 1.</p>
+                    <p>We say $a$ is <strong>congruent</strong> to $b$ modulo $n$, written as $a \equiv b \pmod n$, if
+                        $n$ divides $(a-b)$.</p>
+                    <p class="fragment fade-in">Scroll down to try the clock and a challenge problem!</p>
+                    <span class="mascot">⏱️</span>
+                </section>
+                <section>
+                    <h2>Clock Animation (Modulo 12)</h2>
+                    <div class="clock-container">
+                        <div class="clock-center"></div>
+                        <div class="clock-hand" id="clockHand"></div>
+                        <div class="clock-number" style="top: 10%; left: 50%;">12</div>
+                        <div class="clock-number" style="top: 50%; right: 0%;">3</div>
+                        <div class="clock-number" style="bottom: -20%; left: 50%;">6</div>
+                        <div class="clock-number" style="top: 50%; left: 10%;">9</div>
+                    </div>
+                    <button class="animate-gcd-button" onclick="moveClock(50)">What time in 50 hours?</button>
+                    <div id="clockResult" style="margin-top: 20px; font-size: 1.3em;"></div>
+                    <p class="fragment fade-in">If it's 9 PM now, what time will it be in 50 hours?</p>
+                    <span class="mascot">⏰</span>
+                </section>
+                <section>
+                    <h2>Modular Arithmetic: Deep Dive</h2>
+                    <p>We've seen clock arithmetic. Now let's formally explore its powerful properties!</p>
+                    <p>Remember: $a \equiv b \pmod n$ means $n$ divides $(a-b)$.</p>
+                    <span class="mascot">✨</span>
+                </section>
+                <section>
+                    <h2>Properties of Congruences</h2>
+                    <p>Congruences behave like equalities due to these properties:</p>
+                    <ul>
+                        <li class="fragment fade-in"><strong>Reflexive:</strong> $a \equiv a \pmod n$</li>
+                        <li class="fragment fade-in"><strong>Symmetric:</strong> If $a \equiv b \pmod n$, then $b \equiv
+                            a \pmod n$</li>
+                        <li class="fragment fade-in"><strong>Transitive:</strong> If $a \equiv b \pmod n$ and $b \equiv
+                            c \pmod n$, then $a \equiv c \pmod n$</li>
+                    </ul>
+                    <span class="mascot">🧠</span>
+                </section>
+                <section>
+                    <section>
+                        <h2>Basic Operations with Congruences</h2>
+                        <p>Congruences support arithmetic operations:</p>
+                        <ul style="list-style-type: none; padding: 0;">
+                            <li class="fragment fade-in"><strong>Addition:</strong> If $a \equiv b \pmod n$ and $c
+                                \equiv d \pmod n$, then $a+c \equiv b+d \pmod n$.</li>
+                            <li class="fragment fade-in"><strong>Subtraction:</strong> If $a \equiv b \pmod n$ and $c
+                                \equiv d \pmod n$, then $a-c \equiv b-d \pmod n$.</li>
+                            <li class="fragment fade-in"><strong>Multiplication:</strong> If $a \equiv b \pmod n$ and $c
+                                \equiv d \pmod n$, then $ac \equiv bd \pmod n$.</li>
+                            <li class="fragment fade-in"><strong>Exponentiation:</strong> If $a \equiv b \pmod n$, then
+                                $a^k \equiv b^k \pmod n$ for any positive integer $k$.</li>
+                        </ul>
+                        <span class="mascot">➕</span>
+                    </section>
+                    <section>
+                        <h3>Modular Calculator</h3>
+                        <div class="modular-calculator fragment fade-in">
+                            <div class="input-group">
+                                <input type="number" id="modCalcA" placeholder="a" value="15">
+                                <select id="modCalcOp">
+                                    <option value="add">+</option>
+                                    <option value="multiply">*</option>
+                                    <option value="power">^</option>
+                                </select>
+                                <input type="number" id="modCalcB" placeholder="b" value="7">
+                                <span style="font-size: 1.5em; margin: 0 10px;">mod</span>
+                                <input type="number" id="modCalcN" placeholder="n" value="4">
+                            </div>
+                            <button onclick="calculateModular()">Calculate</button>
+                            <div id="modCalcResult" class="result-box"></div>
+                        </div>
+                        <span class="mascot">🧮</span>
+                    </section>
+                </section>
+                <section>
+                    <section>
+                        <h2>Modular Inverse</h2>
+                        <p>The multiplicative inverse of $a$ modulo $n$ is an integer $x$ such that $ax \equiv 1 \pmod
+                            n$.</p>
+                        <p class="fragment fade-in">Exists <strong>if and only if</strong> $\text{gcd}(a, n) = 1$ (i.e.,
+                            $a$ and $n$ are coprime).</p>
+                        <p class="fragment fade-in">Found using the Extended Euclidean Algorithm or trial and error for
+                            small numbers.</p>
+                        <span class="mascot">➗</span>
+                    </section>
+                    <section>
+                        <h3>Find Modular Inverse</h3>
+                        <div class="modular-inverse-finder fragment fade-in">
+                            <div class="input-group">
+                                <input type="number" id="invA" placeholder="a (e.g., 3)" value="3">
+                                <span style="font-size: 1.5em; margin: 0 10px;">mod</span>
+                                <input type="number" id="invN" placeholder="n (e.g., 7)" value="7">
+                            </div>
+                            <button onclick="findModularInverse()">Find Inverse</button>
+                            <div id="invResult" class="result-box"></div>
+                        </div>
+                        <span class="mascot">🔍</span>
+                    </section>
+                </section>
+                <section>
+                    <section>
+                        <h2>Fermat's Little Theorem (FLT)</h2>
+                        <p>If $p$ is a <strong>prime number</strong> and $a$ is not divisible by $p$:</p>
+                        <p class="math-formula fragment fade-in">$$ a^{p-1} \equiv 1 \pmod p $$</p>
+                        <p class="fragment fade-in">Also, for any integer $a$, $a^p \equiv a \pmod p$.</p>
+                        <p class="fragment fade-in">Simplifies large powers in modular arithmetic!</p>
+                        <span class="mascot">🚀</span>
+                    </section>
+                    <section>
+                        <h3>FLT Demo</h3>
+                        <div class="flt-demo fragment fade-in">
+                            <div class="input-group">
+                                <input type="number" id="fltA" placeholder="a (e.g., 2)" value="2">
+                                <span style="font-size: 1.5em; margin: 0 10px;">^ (p-1) mod</span>
+                                <input type="number" id="fltP" placeholder="p (prime, e.g., 7)" value="7">
+                            </div>
+                            <button onclick="runFLTDemo()">Run Demo</button>
+                            <div id="fltResult" class="result-box"></div>
+                        </div>
+                        <span class="mascot">⚡</span>
+                    </section>
+                </section>
+                <section>
+                    <section>
+                        <h2>Euler's Totient Theorem</h2>
+                        <p><strong>Euler's Totient function $\phi(n)$</strong> counts integers up to $n$ that are
+                            coprime to $n$.</p>
+                        <p class="fragment fade-in"><strong>Theorem:</strong> If $\text{gcd}(a, n) = 1$, then:</p>
+                        <p class="math-formula fragment fade-in">$$ a^{\phi(n)} \equiv 1 \pmod n $$</p>
+                        <p class="fragment fade-in">Generalizes Fermat's Little Theorem for non-prime $n$!</p>
+                        <span class="mascot">🧠</span>
+                    </section>
+                    <section>
+                        <h3>Calculate $\phi(n)$</h3>
+                        <div class="phi-calc fragment fade-in">
+                            <div class="input-group">
+                                <input type="number" id="phiN" placeholder="n (e.g., 10)" value="10">
+                            </div>
+                            <button onclick="calculatePhi()">Calculate $\phi(n)$</button>
+                            <div id="phiResult" class="result-box"></div>
+                        </div>
+                        <span class="mascot">🔢</span>
+                    </section>
+                </section>
+                <section>
+                    <section>
+                        <h2>Chinese Remainder Theorem (CRT)</h2>
+                        <p>Solves systems of linear congruences:</p>
+                        <p class="math-formula fragment fade-in">
+                            $$ x \equiv a_1 \pmod{n_1} $$
+                            $$ x \equiv a_2 \pmod{n_2} $$
+                            $$ \dots $$
+                        </p>
+                        <p class="fragment fade-in">If $n_1, n_2, \dots$ are pairwise coprime, a unique solution exists
+                            modulo $N = n_1 n_2 \dots$.</p>
+                        <span class="mascot">🧩</span>
+                    </section>
+                    <section>
+                        <h3>CRT Solver (2 Congruences)</h3>
+                        <div class="crt-solver fragment fade-in">
+                            <div class="crt-input-row">
+                                <span>$x \equiv$</span> <input type="number" id="crtA1" value="2"> <span>mod</span>
+                                <input type="number" id="crtN1" value="3">
+                            </div>
+                            <div class="crt-input-row">
+                                <span>$x \equiv$</span> <input type="number" id="crtA2" value="3"> <span>mod</span>
+                                <input type="number" id="crtN2" value="5">
+                            </div>
+                            <button onclick="solveCRT()">Solve CRT</button>
+                            <div id="crtResult" class="result-box"></div>
+                        </div>
+                        <span class="mascot">🛠️</span>
+                    </section>
+                </section>
+                <section>
+                    <h2>Modular Algebra in Olympiads</h2>
+                    <p>A cornerstone of Number Theory problems!</p>
+                    <h3 class="fragment fade-in">Key Strategies:</h3>
+                    <ul class="fragment fade-in">
+                        <li><strong>Reducing Powers:</strong> Use FLT or Euler's Theorem to simplify $a^k \pmod n$.</li>
+                        <li><strong>Finding Inverses:</strong> Solve $ax \equiv b \pmod n$ using $x \equiv b \cdot
+                            a^{-1} \pmod n$.</li>
+                        <li><strong>Pattern Recognition:</strong> Look for cycles in powers modulo $n$.</li>
+                        <li><strong>Chinese Remainder Theorem:</strong> Solve systems of congruences.</li>
+                        <li><strong>Small Moduli:</strong> Test modulo 2, 3, 4, 5 for insights.</li>
+                    </ul>
+                    <span class="mascot">🏆</span>
+                </section>
+                <section>
+                    <h2>Olympiad Challenge</h2>
+                    <div class="question-box">
+                        <h4>Find the remainder when $2^{100}$ is divided by 7</h4>
+                        <button class="solution-toggle" onclick="toggleSolution('pyq1')">Show Solution</button>
+                        <div id="pyq1" class="solution-content">
+                            <p>We need to find $2^{100} \pmod 7$.</p>
+                            <p>Pattern in powers of 2 modulo 7:</p>
+                            <ul>
+                                <li>$2^1 \equiv 2 \pmod 7$</li>
+                                <li>$2^2 \equiv 4 \pmod 7$</li>
+                                <li>$2^3 \equiv 8 \equiv 1 \pmod 7$</li>
+                            </ul>
+                            <p>Since $2^3 \equiv 1 \pmod 7$:</p>
+                            <p>$100 = 3 \times 33 + 1$, so $2^{100} = 2^{3 \times 33 + 1} = (2^3)^{33} \times 2^1$.</p>
+                            <p>$(1)^{33} \times 2^1 \equiv 1 \times 2 \equiv 2 \pmod 7$.</p>
+                            <p><strong>Remainder: 2</strong></p>
+                        </div>
+                    </div>
+                    <span class="mascot">💡</span>
+                </section>
+                <section>
+                    <h2>Diophantine Equations: Seeking Integer Solutions</h2>
+                    <p>These are polynomial equations where we only look for <strong>integer solutions</strong>.</p>
+                    <p>The simplest type is the linear Diophantine equation: $ax + by = c$.</p>
+                    <p class="fragment fade-in">Scroll down to try to find solutions on a grid!</p>
+                    <span class="mascot">🧐</span>
+                </section>
+                <section>
+                    <h2>Interactive Diophantine Grid</h2>
+                    <h3>Example: Find integer solutions to $3x + 5y = 1$</h3>
+                    <p>Drag the sliders to change X and Y values.</p>
+                    <div class="diophantine-grid" id="diophantineGrid"></div>
+                    <div class="slider-container">
+                        <label for="xSlider">x: <span id="xValue">0</span></label>
+                        <input type="range" id="xSlider" min="-10" max="10" value="0" oninput="updateDiophantine()">
+                        <label for="ySlider">y: <span id="yValue">0</span></label>
+                        <input type="range" id="ySlider" min="-10" max="10" value="0" oninput="updateDiophantine()">
+                        <div id="diophantineResult" style="margin-left: 30px; font-weight: bold; font-size: 1.2em;">
+                        </div>
+                    </div>
+                    <span class="mascot">📊</span>
+                </section>
+                <section>
+                    <h2>Bézout's Identity: The GCD Connection!</h2>
+                    <p>For any non-zero integers $a$ and $b$, there exist integers $x$ and $y$ such that $ax + by =
+                        \text{gcd}(a, b)$.</p>
+                    <p>This tells us that a linear Diophantine equation $ax + by = c$ has integer solutions if and only
+                        if $\text{gcd}(a, b)$ divides $c$!</p>
+                    <span class="mascot">🔗</span>
+                </section>
+            </section>
+
+            <section>
+                <section>
+                    <h2>Olympiad PYQs: Put Your Skills to the Test!</h2>
+                    <p>These problems are designed to make you think! Don't worry, we'll break them down.</p>
+                    <p class="fragment fade-in">Scroll down for Problem 1.</p>
+                    <span class="mascot">🏅</span>
+                </section>
+                <section>
+                    <h2>Olympiad Problem 1</h2>
+                    <div class="olympiad-problem">
+                        <h3>Problem 1 (PRMO Level):</h3>
+                        <p>Find the number of positive integers $n$ such that $n^2 + 1$ is divisible by $n+1$.</p>
+                        <div class="controls">
+                            <button onclick="toggleOlympiadSolution('prmo1')">Show Solution</button>
+                            <button onclick="tryOlympiadProblem('prmo1_try')">Try Yourself</button>
+                        </div>
+                        <div id="prmo1" class="olympiad-solution">
+                            <h4>Solution:</h4>
+                            <div class="step" data-step="1">
+                                <p>We are given that $n^2 + 1$ is divisible by $n+1$.</p>
+                                <p>We can use polynomial division or manipulate the expression:</p>
+                                <p>$n^2 + 1 = n^2 - 1 + 2 = (n-1)(n+1) + 2$.</p>
+                            </div>
+                            <div class="step" data-step="2">
+                                <p>Since $(n-1)(n+1)$ is clearly divisible by $n+1$, for $n^2+1$ to be divisible by
+                                    $n+1$, the remainder, which is 2, must be divisible by $n+1$.</p>
+                            </div>
+                            <div class="step" data-step="3">
+                                <p>So, $n+1$ must be a divisor of 2.</p>
+                                <p>The divisors of 2 are 1, 2, -1, -2.</p>
+                            </div>
+                            <div class="step" data-step="4">
+                                <p>If $n+1=1$, then $n=0$. Not a positive integer.</p>
+                                <p>If $n+1=2$, then $n=1$. This is a positive integer.</p>
+                                <p>If $n+1=-1$, then $n=-2$. Not a positive integer.</p>
+                                <p>If $n+1=-2$, then $n=-3$. Not a positive integer.</p>
+                            </div>
+                            <div class="step" data-step="5">
+                                <p>Therefore, the only positive integer $n$ for which $n^2+1$ is divisible by $n+1$ is
+                                    $n=1$.</p>
+                                <p>The number of such positive integers is <strong>1</strong>.</p>
+                            </div>
+                        </div>
+                        <div id="prmo1_try" style="margin-top: 15px; display: none;">
+                            <input type="text" placeholder="Your answer (e.g., 1)" id="prmo1_try_input">
+                            <button onclick="checkOlympiadAnswer('prmo1_try', '1')">Check Answer</button>
+                            <div id="prmo1_try_feedback"></div>
+                        </div>
+                    </div>
+                    <span class="mascot">🧠</span>
+                </section>
+                <section>
+                    <h2>Olympiad Problem 2</h2>
+                    <div class="olympiad-problem">
+                        <h3>Problem 2 (RMO Level):</h3>
+                        <p>Find the largest positive integer $k$ such that $2^k$ divides $20!$.</p>
+                        <div class="controls">
+                            <button onclick="toggleOlympiadSolution('rmo2')">Show Solution</button>
+                            <button onclick="tryOlympiadProblem('rmo2_try')">Try Yourself</button>
+                        </div>
+                        <div id="rmo2" class="olympiad-solution">
+                            <h4>Solution:</h4>
+                            <div class="step" data-step="1">
+                                <p>This problem uses Legendre's Formula. Legendre's Formula states that for a prime $p$
+                                    and a positive integer $n$, the exponent of the highest power of $p$ that divides
+                                    $n!$ is given by:</p>
+                                <p>$$ E_p(n!) = \sum_{i=1}^{\infty} \left\lfloor \frac{n}{p^i} \right\rfloor =
+                                    \left\lfloor \frac{n}{p} \right\rfloor + \left\lfloor \frac{n}{p^2} \right\rfloor +
+                                    \left\lfloor \frac{n}{p^3} \right\rfloor + \dots $$</p>
+                            </div>
+                            <div class="step" data-step="2">
+                                <p>In this case, $n=20$ and $p=2$.</p>
+                                <p>We need to find $E_2(20!)$.</p>
+                            </div>
+                            <div class="step" data-step="3">
+                                <p>Calculate the terms:</p>
+                                <ul>
+                                    <li>$\lfloor \frac{20}{2} \rfloor = 10$</li>
+                                    <li>$\lfloor \frac{20}{4} \rfloor = 5$</li>
+                                    <li>$\lfloor \frac{20}{8} \rfloor = 2$</li>
+                                    <li>$\lfloor \frac{20}{16} \rfloor = 1$</li>
+                                    <li>$\lfloor \frac{20}{32} \rfloor = 0$ (and all subsequent terms will be 0)</li>
+                                </ul>
+                            </div>
+                            <div class="step" data-step="4">
+                                <p>Summing these values:</p>
+                                <p>$k = 10 + 5 + 2 + 1 = 18$.</p>
+                            </div>
+                            <div class="step" data-step="5">
+                                <p>Therefore, the largest positive integer $k$ such that $2^k$ divides $20!$ is
+                                    <strong>18</strong>.
+                                </p>
+                            </div>
+                        </div>
+                        <div id="rmo2_try" style="margin-top: 15px; display: none;">
+                            <input type="text" placeholder="Your answer (e.g., 18)" id="rmo2_try_input">
+                            <button onclick="checkOlympiadAnswer('rmo2_try', '18')">Check Answer</button>
+                            <div id="rmo2_try_feedback"></div>
+                        </div>
+                    </div>
+                    <span class="mascot">🔢</span>
+                </section>
+                <section>
+                    <h2>More Olympiad Challenges!</h2>
+                    <p>These were just a taste! The world of Number Theory problems is vast and rewarding.</p>
+                    <p>Keep practicing and exploring!</p>
+                    <span class="mascot">🌟</span>
+                </section>
+
+                <h2>Real-Life Applications: Number Theory Powers Your World!</h2>
+                <p>Number theory might seem abstract, but it's everywhere, especially in keeping your digital life
+                    secure!</p>
+                <h3>Story: How Number Theory Powers RSA Encryption</h3>
+                <div class="rsa-animation-container">
+                    <div class="rsa-box" id="rsaBox1">
+                        <h4>Alice wants to send a secret message.</h4>
+                        <p>She uses Bob's Public Key.</p>
+                        <p>Public Key: $(n, e)$</p>
+                        <p>Where $n = p \times q$ (product of two HUGE primes!)</p>
+                    </div>
+                    <span class="rsa-arrow" style="left: 45%; top: 50%; transform: rotate(0deg);">→</span>
+                    <div class="rsa-box" id="rsaBox2">
+                        <h4>Bob receives the encrypted message.</h4>
+                        <p>He uses his Private Key to decrypt it.</p>
+                        <p>Private Key: $d$ (derived from $p, q$)</p>
+                        <p>Only Bob knows $p$ and $q$!</p>
+                    </div>
+                </div>
+                <p class="fragment fade-in" style="margin-top: 40px;">The security of RSA encryption relies on the fact
+                    that it's computationally very hard to factor a large number ($n$) back into its two prime factors
+                    ($p$ and $q$).</p>
+                <p class="fragment fade-in">This means finding those "secret" prime building blocks is super tough for
+                    hackers!</p>
+                <span class="mascot">🔒</span>
+            </section>
+
+            <section>
+                <h2>Gamified Quiz Round: Test Your Number Smarts!</h2>
+                <div class="score-counter">Score: <span id="score">0</span></div>
+                <div class="quiz-container">
+                    <h3 id="quizQuestion"></h3>
+                    <div class="quiz-options" id="quizOptions"></div>
+                    <div id="quizFeedback" class="quiz-feedback"></div>
+                    <div id="funFact" class="fun-fact"></div>
+                    <button id="nextQuizButton" onclick="nextQuestion()" style="display: none; margin-top: 25px;">Next
+                        Question</button>
+                </div>
+                <span class="mascot">🏆</span>
+            </section>
+
+            <section>
+                <h2>The Journey Continues!</h2>
+                <div class="mind-map-container">
+                    <div class="mind-map-node visible">Number Theory</div>
+                    <div class="line"></div>
+                    <div class="mind-map-node" data-node="primes">Prime Numbers</div>
+                    <div class="line"></div>
+                    <div class="mind-map-node" data-node="gcd">GCD & Euclidean Algorithm</div>
+                    <div class="line"></div>
+                    <div class="mind-map-node" data-node="modulo">Modular Arithmetic</div>
+                    <div class="line"></div>
+                    <div class="mind-map-node" data-node="applications">Real-World Applications (RSA)</div>
+                </div>
+                <p class="fragment fade-in" style="margin-top: 50px;">"An equation has no meaning to me unless it
+                    expresses a thought of God."<br>- Srinivasa Ramanujan</p>
+                <a href="https://artofproblemsolving.com/community/c3230_math_olympiads" target="_blank"
+                    class="explore-button fragment fade-in">Explore More Olympiad Resources!</a>
+                <span class="mascot">🌟</span>
+            </section>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/notes/notes.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/markdown/markdown.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/highlight/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/math/math.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
