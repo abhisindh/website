@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -105,5 +105,124 @@
     initParticles();
     animate();
   </script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ABCD Encoder/Decoder with CRC</title>
+  <style>
+    body { font-family: monospace; padding: 20px; }
+    textarea { width: 100%; height: 80px; margin: 5px 0; }
+    button { margin: 5px 0; padding: 5px 10px; }
+    .output { margin-top: 10px; padding: 5px; border: 1px solid #aaa; background: #f9f9f9; }
+  </style>
+</head>
+<body>
+  <h2>ABCD Encoder/Decoder with CRC</h2>
+  
+  <h3>Encode</h3>
+  <textarea id="inputText" placeholder="Enter string with A, B, C, D..."></textarea><br>
+  <button onclick="doEncode()">Encode</button>
+  <div id="encoded" class="output"></div>
+  
+  <h3>Decode</h3>
+  <textarea id="encodedText" placeholder="Paste encoded string..."></textarea><br>
+  <button onclick="doDecode()">Decode</button>
+  <div id="decoded" class="output"></div>
+  
+<script>
+// CRC-6 with polynomial x^6 + x + 1 (0x43)
+function crc6(bits) {
+  let crc = 0;
+  for (let b of bits) {
+    let bit = parseInt(b, 2);
+    let msb = (crc >> 5) & 1;
+    crc = ((crc << 1) & 0x3F) | bit;
+    if (msb ^ bit) crc ^= 0x43;
+  }
+  return crc & 0x3F;
+}
+
+const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+function toBase62(bits) {
+  let out = "";
+  for (let i = 0; i < bits.length; i += 6) {
+    let chunk = bits.slice(i, i + 6).padEnd(6, "0");
+    out += alphabet[parseInt(chunk, 2)];
+  }
+  return out;
+}
+
+function fromBase62(str) {
+  let bits = "";
+  for (let ch of str) {
+    let idx = alphabet.indexOf(ch);
+    if (idx < 0) throw new Error("Invalid base62 char");
+    bits += idx.toString(2).padStart(6, "0");
+  }
+  return bits;
+}
+
+// ENCODE
+function encodeABCD(input) {
+  let clean = input.toUpperCase().replace(/[^ABCD]/g, "");
+  clean = clean.padEnd(25, "A").slice(0, 25); // fixed length 25
+  let bits = clean
+    .replace(/A/g, "00")
+    .replace(/B/g, "01")
+    .replace(/C/g, "10")
+    .replace(/D/g, "11");
+
+  let crc = crc6(bits).toString(2).padStart(6, "0");
+  let fullBits = bits + crc; // 50 + 6 = 56 bits
+  return toBase62(fullBits);
+}
+
+// DECODE
+function decodeABCD(encoded) {
+  let bits = fromBase62(encoded);
+  let useful = bits.slice(0, 50);   // only original data
+  let checkCrcBits = bits.slice(50, 56);
+  let actualCrc = crc6(useful).toString(2).padStart(6, "0");
+
+  if (actualCrc !== checkCrcBits) throw new Error("CRC mismatch");
+
+  let output = "";
+  for (let i = 0; i < 50; i += 2) {
+    let pair = useful.slice(i, i + 2);
+    if (pair === "00") output += "A";
+    else if (pair === "01") output += "B";
+    else if (pair === "10") output += "C";
+    else if (pair === "11") output += "D";
+  }
+  return output;
+}
+
+// UI functions
+function doEncode() {
+  let input = document.getElementById("inputText").value;
+  try {
+    let encoded = encodeABCD(input);
+    document.getElementById("encoded").textContent = encoded;
+    document.getElementById("encodedText").value = encoded;
+  } catch (e) {
+    document.getElementById("encoded").textContent = "Error: " + e.message;
+  }
+}
+
+function doDecode() {
+  let input = document.getElementById("encodedText").value.trim();
+  try {
+    let decoded = decodeABCD(input);
+    document.getElementById("decoded").textContent = decoded;
+  } catch (e) {
+    document.getElementById("decoded").textContent = "Error: " + e.message;
+  }
+}
+</script>
 </body>
 </html>
