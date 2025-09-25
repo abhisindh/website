@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ABCD Encoder/Decoder</title>
+</head>
+<body>
+<h2>ABCD Encoder / Decoder</h2>
+
+<!-- Input field -->
+<input type="text" id="inputStr" placeholder="Enter string (a,b,c,d)">
+<button onclick="processInput()">Encode & Decode</button>
+
+<p><strong>Hex Output:</strong> <span id="hexOutput"></span></p>
+<p><strong>Decoded String:</strong> <span id="decodedOutput"></span></p>
+
+<script>
+function encodeABCD(input) {
+    const map = { a: '00', b: '01', c: '10', d: '11' };
+    let binaryStr = '';
+    for (let char of input) {
+        if (!map[char]) return null;
+        binaryStr += map[char];
+    }
+    // Pad to multiple of 4
+    while (binaryStr.length % 4 !== 0) binaryStr += '0';
+    let hexStr = '';
+    for (let i = 0; i < binaryStr.length; i += 4) {
+        hexStr += parseInt(binaryStr.substr(i, 4), 2).toString(16);
+    }
+    return { hex: hexStr.toUpperCase(), length: input.length };
+}
+
+function decodeHexToABCD(hexStr, originalLength) {
+    let binaryStr = '';
+    for (let char of hexStr) {
+        binaryStr += parseInt(char, 16).toString(2).padStart(4, '0');
+    }
+    const map = { '00': 'a', '01': 'b', '10': 'c', '11': 'd' };
+    let result = '';
+    for (let i = 0; i < binaryStr.length; i += 2) {
+        const pair = binaryStr.substr(i, 2);
+        if (map[pair]) result += map[pair];
+    }
+    return result.substr(0, originalLength); // Only original letters
+}
+
+// Usage
+const encoded = encodeABCD('b');
+console.log(encoded.hex); // 4
+console.log(decodeHexToABCD(encoded.hex, 1)); // b
+
+function processInput() {
+    const input = document.getElementById('inputStr').value;
+    if (!input) return;
+
+    const hex = encodeABCD(input);
+    if (!hex) {
+        alert('Invalid input! Only a, b, c, d allowed.');
+        return;
+    }
+
+    document.getElementById('hexOutput').innerText = hex;
+    document.getElementById('decodedOutput').innerText = decodeHexToABCD(hex);
+}
+
+// --- Get input from URL query if present ---
+const params = new URLSearchParams(window.location.search);
+const queryInput = params.get('input');
+if (queryInput) {
+    document.getElementById('inputStr').value = queryInput;
+    processInput();
+}
+</script>
+</body>
+</html>
