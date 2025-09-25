@@ -1,9 +1,9 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Access Denied</title>
+  <title>ABCD Encoder/Decoder with CRC - Secure Access</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body {
@@ -16,12 +16,14 @@
       overflow: hidden;
       font-family: 'Arial', sans-serif;
     }
-    .text-container {
+    .content-container {
       text-align: center;
       z-index: 10;
+      width: 80%;
+      max-width: 600px;
     }
-    .access-denied {
-      font-size: 4rem;
+    .title {
+      font-size: 2.5rem;
       color: white;
       text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
       animation: pulse 2s ease-in-out infinite;
@@ -38,15 +40,83 @@
       height: 100%;
       z-index: 1;
     }
+    textarea {
+      width: 100%;
+      height: 80px;
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.9);
+      color: #333;
+      font-family: monospace;
+    }
+    button {
+      padding: 8px 16px;
+      background: #ffffff;
+      color: #1e3a8a;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin: 5px 0;
+    }
+    button:hover {
+      background: #f0f0f0;
+    }
+    .output {
+      margin-top: 10px;
+      padding: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+    .hidden {
+      display: none;
+    }
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.9);
+      color: #333;
+    }
   </style>
 </head>
 <body>
-  <div class="text-container">
-    <h1 class="access-denied">Access Denied</h1>
-    <p class="text-white text-xl opacity-75">You do not have permission to view this page.</p>
+  <div class="content-container" id="login-container">
+    <h1 class="title">Secure Access</h1>
+    <p class="text-white text-lg opacity-75">Enter password to access the ABCD Encoder/Decoder</p>
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="checkPassword()">Submit</button>
   </div>
+
+  <div class="content-container hidden" id="denied-container">
+    <h1 class="title">Access Denied</h1>
+    <p class="text-white text-lg opacity-75">You do not have permission to view this page.</p>
+  </div>
+
+  <div class="content-container hidden" id="encoder-container">
+    <h1 class="title">ABCD Encoder/Decoder with CRC</h1>
+    
+    <h2 class="text-white text-xl mt-4">Encode</h2>
+    <textarea id="inputText" placeholder="Enter string with A, B, C, D..."></textarea>
+    <button onclick="doEncode()">Encode</button>
+    <div id="encoded" class="output"></div>
+    
+    <h2 class="text-white text-xl mt-4">Decode</h2>
+    <textarea id="encodedText" placeholder="Paste encoded string..."></textarea>
+    <button onclick="doDecode()">Decode</button>
+    <div id="decoded" class="output"></div>
+
+    <button onclick="logout()" class="mt-4">Logout</button>
+  </div>
+
   <canvas id="particles"></canvas>
+
   <script>
+    // Particles animation
     const canvas = document.getElementById('particles');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
@@ -104,125 +174,143 @@
 
     initParticles();
     animate();
+
+    // Authentication
+    const PASSWORD = 'password'; // I know it is hardcoded, but this is just a demo.
+
+    function checkAuth() {
+      if (localStorage.getItem('auth') === 'admin') {
+        showEncoder();
+      } else {
+        showLogin();
+      }
+    }
+
+    function checkPassword() {
+      const input = document.getElementById('password').value;
+      if (input === PASSWORD) {
+        localStorage.setItem('auth', 'admin');
+        showEncoder();
+      } else {
+        showDenied();
+      }
+    }
+
+    function logout() {
+      localStorage.removeItem('auth');
+      location.reload();
+    }
+
+    function showLogin() {
+      document.getElementById('login-container').classList.remove('hidden');
+      document.getElementById('denied-container').classList.add('hidden');
+      document.getElementById('encoder-container').classList.add('hidden');
+    }
+
+    function showDenied() {
+      document.getElementById('login-container').classList.add('hidden');
+      document.getElementById('denied-container').classList.remove('hidden');
+      document.getElementById('encoder-container').classList.add('hidden');
+    }
+
+    function showEncoder() {
+      document.getElementById('login-container').classList.add('hidden');
+      document.getElementById('denied-container').classList.add('hidden');
+      document.getElementById('encoder-container').classList.remove('hidden');
+    }
+
+    // CRC-6 with polynomial x^6 + x + 1 (0x43)
+    function crc6(bits) {
+      let crc = 0;
+      for (let b of bits) {
+        let bit = parseInt(b, 2);
+        let msb = (crc >> 5) & 1;
+        crc = ((crc << 1) & 0x3F) | bit;
+        if (msb ^ bit) crc ^= 0x43;
+      }
+      return crc & 0x3F;
+    }
+
+    const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    function toBase62(bits) {
+      let out = "";
+      for (let i = 0; i < bits.length; i += 6) {
+        let chunk = bits.slice(i, i + 6).padEnd(6, "0");
+        out += alphabet[parseInt(chunk, 2)];
+      }
+      return out;
+    }
+
+    function fromBase62(str) {
+      let bits = "";
+      for (let ch of str) {
+        let idx = alphabet.indexOf(ch);
+        if (idx < 0) throw new Error("Invalid base62 char");
+        bits += idx.toString(2).padStart(6, "0");
+      }
+      return bits;
+    }
+
+    // ENCODE
+    function encodeABCD(input) {
+      let clean = input.toUpperCase().replace(/[^ABCD]/g, "");
+      clean = clean.padEnd(25, "A").slice(0, 25); // fixed length 25
+      let bits = clean
+        .replace(/A/g, "00")
+        .replace(/B/g, "01")
+        .replace(/C/g, "10")
+        .replace(/D/g, "11");
+
+      let crc = crc6(bits).toString(2).padStart(6, "0");
+      let fullBits = bits + crc; // 50 + 6 = 56 bits
+      return toBase62(fullBits);
+    }
+
+    // DECODE
+    function decodeABCD(encoded) {
+      let bits = fromBase62(encoded);
+      let useful = bits.slice(0, 50);   // only original data
+      let checkCrcBits = bits.slice(50, 56);
+      let actualCrc = crc6(useful).toString(2).padStart(6, "0");
+
+      if (actualCrc !== checkCrcBits) throw new Error("CRC mismatch");
+
+      let output = "";
+      for (let i = 0; i < 50; i += 2) {
+        let pair = useful.slice(i, i + 2);
+        if (pair === "00") output += "A";
+        else if (pair === "01") output += "B";
+        else if (pair === "10") output += "C";
+        else if (pair === "11") output += "D";
+      }
+      return output;
+    }
+
+    // UI functions
+    function doEncode() {
+      let input = document.getElementById("inputText").value;
+      try {
+        let encoded = encodeABCD(input);
+        document.getElementById("encoded").textContent = encoded;
+        document.getElementById("encodedText").value = encoded;
+      } catch (e) {
+        document.getElementById("encoded").textContent = "Error: " + e.message;
+      }
+    }
+
+    function doDecode() {
+      let input = document.getElementById("encodedText").value.trim();
+      try {
+        let decoded = decodeABCD(input);
+        document.getElementById("decoded").textContent = decoded;
+      } catch (e) {
+        document.getElementById("decoded").textContent = "Error: " + e.message;
+      }
+    }
+
+    // Initialize
+    checkAuth();
   </script>
-</body>
-</html> -->
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>ABCD Encoder/Decoder with CRC</title>
-  <style>
-    body { font-family: monospace; padding: 20px; }
-    textarea { width: 100%; height: 80px; margin: 5px 0; }
-    button { margin: 5px 0; padding: 5px 10px; }
-    .output { margin-top: 10px; padding: 5px; border: 1px solid #aaa; background: #f9f9f9; }
-  </style>
-</head>
-<body>
-  <h2>ABCD Encoder/Decoder with CRC</h2>
-  
-  <h3>Encode</h3>
-  <textarea id="inputText" placeholder="Enter string with A, B, C, D..."></textarea><br>
-  <button onclick="doEncode()">Encode</button>
-  <div id="encoded" class="output"></div>
-  
-  <h3>Decode</h3>
-  <textarea id="encodedText" placeholder="Paste encoded string..."></textarea><br>
-  <button onclick="doDecode()">Decode</button>
-  <div id="decoded" class="output"></div>
-  
-<script>
-// CRC-6 with polynomial x^6 + x + 1 (0x43)
-function crc6(bits) {
-  let crc = 0;
-  for (let b of bits) {
-    let bit = parseInt(b, 2);
-    let msb = (crc >> 5) & 1;
-    crc = ((crc << 1) & 0x3F) | bit;
-    if (msb ^ bit) crc ^= 0x43;
-  }
-  return crc & 0x3F;
-}
-
-const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-function toBase62(bits) {
-  let out = "";
-  for (let i = 0; i < bits.length; i += 6) {
-    let chunk = bits.slice(i, i + 6).padEnd(6, "0");
-    out += alphabet[parseInt(chunk, 2)];
-  }
-  return out;
-}
-
-function fromBase62(str) {
-  let bits = "";
-  for (let ch of str) {
-    let idx = alphabet.indexOf(ch);
-    if (idx < 0) throw new Error("Invalid base62 char");
-    bits += idx.toString(2).padStart(6, "0");
-  }
-  return bits;
-}
-
-// ENCODE
-function encodeABCD(input) {
-  let clean = input.toUpperCase().replace(/[^ABCD]/g, "");
-  clean = clean.padEnd(25, "A").slice(0, 25); // fixed length 25
-  let bits = clean
-    .replace(/A/g, "00")
-    .replace(/B/g, "01")
-    .replace(/C/g, "10")
-    .replace(/D/g, "11");
-
-  let crc = crc6(bits).toString(2).padStart(6, "0");
-  let fullBits = bits + crc; // 50 + 6 = 56 bits
-  return toBase62(fullBits);
-}
-
-// DECODE
-function decodeABCD(encoded) {
-  let bits = fromBase62(encoded);
-  let useful = bits.slice(0, 50);   // only original data
-  let checkCrcBits = bits.slice(50, 56);
-  let actualCrc = crc6(useful).toString(2).padStart(6, "0");
-
-  if (actualCrc !== checkCrcBits) throw new Error("CRC mismatch");
-
-  let output = "";
-  for (let i = 0; i < 50; i += 2) {
-    let pair = useful.slice(i, i + 2);
-    if (pair === "00") output += "A";
-    else if (pair === "01") output += "B";
-    else if (pair === "10") output += "C";
-    else if (pair === "11") output += "D";
-  }
-  return output;
-}
-
-// UI functions
-function doEncode() {
-  let input = document.getElementById("inputText").value;
-  try {
-    let encoded = encodeABCD(input);
-    document.getElementById("encoded").textContent = encoded;
-    document.getElementById("encodedText").value = encoded;
-  } catch (e) {
-    document.getElementById("encoded").textContent = "Error: " + e.message;
-  }
-}
-
-function doDecode() {
-  let input = document.getElementById("encodedText").value.trim();
-  try {
-    let decoded = decodeABCD(input);
-    document.getElementById("decoded").textContent = decoded;
-  } catch (e) {
-    document.getElementById("decoded").textContent = "Error: " + e.message;
-  }
-}
-</script>
 </body>
 </html>
