@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Evening Belly Fat Workout Plan with Timer</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    background: #f4f6f8;
+    margin: 0;
+    padding: 0;
+  }
+  .container {
+    max-width: 850px;
+    margin: 2rem auto;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    padding: 2rem;
+  }
+  h1, h2 { text-align:center; color:#111; }
+  h2 { border-bottom:2px solid #ddd; padding-bottom:4px; }
+  .day { margin-bottom:2rem; }
+  .exercise {
+    background:#f9fafb;
+    border-left:4px solid #0078d7;
+    border-radius:8px;
+    padding:1rem;
+    margin:1rem 0;
+  }
+  .exercise img {
+    width:100%;
+    max-height:250px;
+    object-fit:cover;
+    border-radius:8px;
+    margin-top:0.5rem;
+  }
+  .video { position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:10px; margin-top:10px; }
+  .video iframe { position:absolute; top:0; left:0; width:100%; height:100%; border:0; }
+  .timer {
+    margin-top:10px;
+    text-align:center;
+  }
+  .timer button {
+    background:#0078d7;
+    color:white;
+    border:none;
+    border-radius:6px;
+    padding:6px 12px;
+    margin:4px;
+    cursor:pointer;
+  }
+  .timer button:hover { background:#005fa3; }
+  .time-display {
+    font-size:1.2rem;
+    font-weight:bold;
+    color:#111;
+  }
+  .tip {
+    background:#e8f0fe;
+    padding:1rem;
+    border-left:4px solid #4285f4;
+    border-radius:8px;
+    margin-top:1rem;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>7-Day Evening Workout Plan</h1>
+  <p><strong>Goal:</strong> Reduce belly fat, improve consistency, and build an evening fitness habit — no equipment needed. You can add a resistance band later.</p>
+  <p><strong>Each session:</strong> 25-35 min (warm-up + workout + stretch)</p>
+  <hr/>
+  <div id="workout-plan"></div>
+  <hr/>
+  <div class="tip">
+    <h3>💡 Tips</h3>
+    <ul>
+      <li>Workout after a light snack, not a heavy meal.</li>
+      <li>Stay hydrated and focus on breathing.</li>
+      <li>Increase reps or duration gradually.</li>
+    </ul>
+  </div>
+</div>
+
+<script>
+/* ===== URL VARIABLES ===== */
+const urls = {
+  jumpingJacksImg:"https://images.pexels.com/photos/4853080/pexels-photo-4853080.jpeg",
+  jumpingJacksVid:"https://www.youtube.com/embed/CWpmIW6l-YA?si=zUk4w5nGD6YC4fcC",
+  plankImg:"https://images.pexels.com/photos/3768901/pexels-photo-3768901.jpeg",
+  plankVid:"https://www.youtube.com/embed/pSHjTRCQxIw",
+  sideCrunchImg:"https://imgs.search.brave.com/8XZmzA6s9WZ3-cZjaEWZrttcdMfeYWgegIqGnYn1ee0/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zM2Fz/c2V0cy5za2ltYmxl/LmNvbS9hc3NldHMv/MTc3MzUwMS9pbWFn/ZV9mdWxsLmpwZw",
+  sideCrunchVid:"https://www.youtube.com/embed/Qn5_9n6G9tI",
+  marchImg:"https://www.inspireusafoundation.org/wp-content/uploads/2022/02/march-in-place.gif",
+  climbersImg:"https://www.inspireusafoundation.org/wp-content/uploads/2022/05/mountain-climbers.gif",
+  flutterImg:"https://www.inspireusafoundation.org/wp-content/uploads/2021/10/flutter-kicks.gif",
+  catCowImg:"https://www.inspireusafoundation.org/wp-content/uploads/2023/08/cat-cow-stretch.gif",
+  cobraImg:"https://www.inspireusafoundation.org/wp-content/uploads/2022/01/cobra-stretch.gif",
+  seatedBendImg:"https://www.inspireusafoundation.org/wp-content/uploads/2022/01/seated-forward-bend.gif",
+  squatImg:"https://www.inspireusafoundation.org/wp-content/uploads/2022/02/bodyweight-squat.gif",
+  legRaiseImg:"https://www.inspireusafoundation.org/wp-content/uploads/2021/10/leg-raises.gif",
+  sidePlankImg:"https://www.inspireusafoundation.org/wp-content/uploads/2021/10/side-plank.gif",
+  bandRowImg:"https://www.inspireusafoundation.org/wp-content/uploads/2021/10/band-rows.gif",
+  bandStepImg:"https://www.inspireusafoundation.org/wp-content/uploads/2021/10/band-side-steps.gif",
+  bicycleImg:"https://www.inspireusafoundation.org/wp-content/uploads/2021/10/bicycle-crunches.gif",
+  heelTouchImg:"https://www.inspireusafoundation.org/wp-content/uploads/2021/10/heel-touches.gif",
+  plankTapImg:"https://www.inspireusafoundation.org/wp-content/uploads/2022/05/plank-shoulder-taps.gif",
+  childsPoseImg:"https://www.inspireusafoundation.org/wp-content/uploads/2022/01/childs-pose.gif",
+  seatedTwistImg:"https://www.inspireusafoundation.org/wp-content/uploads/2022/01/seated-twist.gif",
+  hamStretchImg:"https://www.inspireusafoundation.org/wp-content/uploads/2022/01/standing-hamstring-stretch.gif"
+};
+
+/* ===== WORKOUT STRUCTURE ===== */
+const plan = [
+  { day:"Day 1 – Core Activation & Light Cardio", exercises:[
+    {name:"Jumping Jacks", sets:"3×40 s", img:urls.jumpingJacksImg, vid:urls.jumpingJacksVid, timer:40},
+    {name:"Plank", sets:"3×30 s", img:urls.plankImg, vid:urls.plankVid, timer:30},
+    {name:"Standing Side Crunches", sets:"3×15 ea", img:urls.sideCrunchImg, vid:urls.sideCrunchVid, timer:30}
+  ]},
+  { day:"Day 2 – Low-Impact HIIT", exercises:[
+    {name:"March in Place", sets:"3×45 s", img:urls.marchImg, timer:45},
+    {name:"Mountain Climbers", sets:"3×20 reps", img:urls.climbersImg, timer:40},
+    {name:"Flutter Kicks", sets:"3×20 reps", img:urls.flutterImg, timer:30}
+  ]},
+  { day:"Day 3 – Stretch & Mobility", exercises:[
+    {name:"Cat-Cow Stretch", sets:"3×30 s", img:urls.catCowImg, timer:30},
+    {name:"Cobra Stretch", sets:"3×30 s", img:urls.cobraImg, timer:30},
+    {name:"Seated Forward Bend", sets:"2×30 s", img:urls.seatedBendImg, timer:30}
+  ]},
+  { day:"Day 4 – Core & Lower Body", exercises:[
+    {name:"Squats", sets:"3×15", img:urls.squatImg, timer:45},
+    {name:"Leg Raises", sets:"3×15", img:urls.legRaiseImg, timer:40},
+    {name:"Side Plank", sets:"3×30 s ea", img:urls.sidePlankImg, timer:30}
+  ]},
+  { day:"Day 5 – Resistance Band (Optional)",
+    note:"If you have a resistance band, try these; otherwise repeat Day 4.",
+    exercises:[
+      {name:"Band Rows", sets:"3×12", img:urls.bandRowImg, timer:40},
+      {name:"Band Side Steps", sets:"3×15 ea", img:urls.bandStepImg, timer:40}
+    ]},
+  { day:"Day 6 – Core Finisher", exercises:[
+    {name:"Bicycle Crunches", sets:"3×20", img:urls.bicycleImg, timer:40},
+    {name:"Heel Touches", sets:"3×20", img:urls.heelTouchImg, timer:30},
+    {name:"Plank Shoulder Taps", sets:"3×20", img:urls.plankTapImg, timer:30}
+  ]},
+  { day:"Day 7 – Recovery Stretch", exercises:[
+    {name:"Child’s Pose", sets:"2×30 s", img:urls.childsPoseImg, timer:30},
+    {name:"Seated Twist", sets:"2×30 s ea", img:urls.seatedTwistImg, timer:30},
+    {name:"Standing Hamstring Stretch", sets:"2×30 s", img:urls.hamStretchImg, timer:30}
+  ]}
+];
+
+/* ===== RENDER PLAN ===== */
+const container=document.getElementById("workout-plan");
+
+plan.forEach((d,di)=>{
+  const dayDiv=document.createElement("div");
+  dayDiv.className="day";
+  let html=`<h2>${d.day}</h2>`;
+  if(d.note) html+=`<p><em>${d.note}</em></p>`;
+  d.exercises.forEach((ex,ei)=>{
+    html+=`
+      <div class="exercise">
+        <h3>${ex.name} <span style="font-weight:normal;">(${ex.sets})</span></h3>
+        <img loading="lazy" src="${ex.img}" alt="${ex.name}"/>
+        ${ex.vid?`<div class="video"><iframe loading="lazy" src="${ex.vid}" allowfullscreen></iframe></div>`:""}
+        <div class="timer">
+          <span class="time-display" id="time-${di}-${ei}">${ex.timer}s</span><br/>
+          <button onclick="startTimer(${ex.timer}, 'time-${di}-${ei}', this)">Start</button>
+          <button onclick="resetTimer(${ex.timer}, 'time-${di}-${ei}', this)">Reset</button>
+        </div>
+      </div>`;
+  });
+  dayDiv.innerHTML=html;
+  container.appendChild(dayDiv);
+});
+
+/* ===== TIMER LOGIC ===== */
+let timers={};
+function startTimer(duration,id,btn){
+  if(timers[id]) return;
+  let timeLeft=duration;
+  const display=document.getElementById(id);
+  btn.disabled=true;
+  display.textContent=timeLeft+"s";
+  timers[id]=setInterval(()=>{
+    timeLeft--;
+    display.textContent=timeLeft+"s";
+    if(timeLeft<=0){
+      clearInterval(timers[id]);
+      delete timers[id];
+      display.textContent="✅ Done!";
+      btn.disabled=false;
+    }
+  },1000);
+}
+function resetTimer(duration,id,btn){
+  if(timers[id]){ clearInterval(timers[id]); delete timers[id]; }
+  document.getElementById(id).textContent=duration+"s";
+  btn.disabled=false;
+}
+</script>
+</body>
+</html>

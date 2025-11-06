@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily Cipher Challenge</title>
+<style>
+  body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #f7f7f7; color: #333; margin: 0; padding: 20px; }
+  h1, h2 { text-align: center; }
+  .container { max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+  .puzzle { border-left: 5px solid #007bff; margin: 20px 0; padding: 15px; border-radius: 6px; }
+  .easy { border-color: #28a745; }
+  .medium { border-color: #ffc107; }
+  .hard { border-color: #dc3545; }
+  table { width: 100%; border-collapse: collapse; }
+  td { padding: 6px; border-bottom: 1px solid #ddd; }
+  .solution { display: none; color: #555; margin-top: 10px; }
+  button { margin: 10px; padding: 8px 16px; border: none; border-radius: 5px; cursor: pointer; background: #007bff; color: white; }
+  button:hover { background: #0056b3; }
+  @media print {
+    button, #solutionToggle { display: none; }
+    .solution { display: none !important; }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <h1>Questacon-2025 Practice</h1>
+    <h2>Cipher Challenge</h2>
+    <p style="text-align:center" id="date"></p>
+    <p>Guess the secret code based on the clues below. Each puzzle has a unique solution.</p>
+    <div id="puzzles"></div>
+    <div style="text-align:center;">
+      <button id="solutionToggle">Show/Hide Solutions</button>
+      <button onclick="window.print()">Print / Save as PDF</button>
+    </div>
+  </div>
+
+<script>
+function seedRandom(seed) {
+  let s = seed % 2147483647;
+  return function() {
+    s = s * 16807 % 2147483647;
+    return (s - 1) / 2147483646;
+  };
+}
+
+function allCodes(n=3) {
+  const digits = '0123456789'.split('');
+  const results = [];
+  function permute(prefix, arr) {
+    if (prefix.length === n) { results.push(prefix.join('')); return; }
+    for (let i=0;i<arr.length;i++) {
+      const newArr = arr.slice(); newArr.splice(i,1);
+      permute(prefix.concat(arr[i]), newArr);
+    }
+  }
+  permute([], digits);
+  return results;
+}
+
+function feedback(secret, guess) {
+  let bulls = 0, cows = 0;
+  for (let i=0;i<secret.length;i++) if (secret[i]===guess[i]) bulls++;
+  const set = new Set(guess);
+  set.forEach(d => { cows += Math.min(secret.split(d).length-1, guess.split(d).length-1); });
+  cows -= bulls;
+  return [bulls,cows];
+}
+
+function clueText(b,c) {
+  if (b===0 && c===0) return "Nothing is correct";
+  const total = b + c;
+  let bullStr = `${b} ${b===1 ? 'is' : 'are'} well placed`;
+  
+  if (total === 0) return "Nothing is correct";
+  if (total === 3) return `All 3 numbers are correct, and ${bullStr.toLowerCase()}`;
+  
+  if (b === 0) {
+    let cowStr = `${c} ${c===1 ? 'is' : 'are'} wrongly placed`;
+    return `${total} ${total===1 ? 'number is' : 'numbers are'} correct but ${cowStr}`;
+  }
+  if (c === 0) {
+    return `${total} ${total===1 ? 'number is' : 'numbers are'} correct and ${bullStr}`;
+  }
+  
+  return `${total} ${total===1 ? 'number is' : 'numbers are'} correct: ${b} ${b===1 ? 'is' : 'are'} well placed, ${c} ${c===1 ? 'is' : 'are'} wrongly placed`;
+}
+
+function consistentCodes(guessesClues,codes) {
+  return codes.filter(code=>guessesClues.every(([g,[b,c]])=>{
+    const [fb,fc]=feedback(code,g);
+    return fb===b && fc===c;
+  }));
+}
+
+function makePuzzle(rng) {
+  const difficulties = ["Easy","Medium","Hard"];
+  const difficulty = difficulties[Math.floor(rng()*3)];
+  const settings = {Easy:{n:3,g:5},Medium:{n:3,g:4},Hard:{n:3,g:3}};
+  const sett=settings[difficulty];
+  const CODES = allCodes(sett.n);
+  let attempts=0;
+  while(attempts<15000){
+    attempts++;
+    const secret=CODES[Math.floor(rng()*CODES.length)];
+    const guesses=[...CODES].filter(g=>g!==secret).sort(()=>rng()-0.5).slice(0,sett.g);
+    const guessesClues=guesses.map(g=>[g,feedback(secret,g)]);
+    const sol=consistentCodes(guessesClues,CODES);
+    if(sol.length===1 && sol[0]===secret){
+      const clues=guessesClues.map(([g,f])=>[g,clueText(...f)]);
+      return {secret,clues,difficulty};
+    }
+  }
+  return null;
+}
+
+function generatePuzzles(){
+  const today=new Date();
+  const seed=parseInt(`${today.getUTCFullYear()}${today.getUTCMonth()+1}${today.getUTCDate()}`);
+  const rng=seedRandom(seed);
+  const puzzles=[];
+  while(puzzles.length<10){
+    const p=makePuzzle(rng);
+    if(p)puzzles.push(p);
+  }
+  document.getElementById('date').textContent=today.toDateString();
+  const container=document.getElementById('puzzles');
+  container.innerHTML='';
+  puzzles.forEach((p,i)=>{
+    const div=document.createElement('div');
+    div.className=`puzzle ${p.difficulty.toLowerCase()}`;
+    div.innerHTML=`<strong>Puzzle ${i+1} (${p.difficulty})</strong><br><table>`+
+      p.clues.map(([g,c])=>`<tr><td><b>${g}</b></td><td>${c}</td></tr>`).join('')+
+      `</table><div class="solution">Solution: <b>${p.secret}</b></div>`;
+    container.appendChild(div);
+  });
+
+  document.getElementById('solutionToggle').onclick=()=>{
+    document.querySelectorAll('.solution').forEach(el=>{
+      el.style.display=(el.style.display==='none'||!el.style.display)?'block':'none';
+    });
+  };
+}
+
+generatePuzzles();
+</script>
+</body>
+</html>
