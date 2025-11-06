@@ -1,149 +1,399 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Daily Cipher Challenge</title>
-<style>
-  body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #f7f7f7; color: #333; margin: 0; padding: 20px; }
-  h1, h2 { text-align: center; }
-  .container { max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-  .puzzle { border-left: 5px solid #007bff; margin: 20px 0; padding: 15px; border-radius: 6px; }
-  .easy { border-color: #28a745; }
-  .medium { border-color: #ffc107; }
-  .hard { border-color: #dc3545; }
-  table { width: 100%; border-collapse: collapse; }
-  td { padding: 6px; border-bottom: 1px solid #ddd; }
-  .solution { display: none; color: #555; margin-top: 10px; }
-  button { margin: 10px; padding: 8px 16px; border: none; border-radius: 5px; cursor: pointer; background: #007bff; color: white; }
-  button:hover { background: #0056b3; }
-  @media print {
-    button, #solutionToggle { display: none; }
-    .solution { display: none !important; }
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daily Cipher Challenge</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 1rem;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #1a1a1a;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      font-size: 2rem;
+    }
+
+    h2 {
+      text-align: center;
+      color: #4a5568;
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+
+    .date-section {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+      color: #666;
+    }
+
+    #dateSelect {
+      padding: 0.5rem 0.75rem;
+      border: 2px solid #e2e8f0;
+      border-radius: 8px;
+      font-size: 1rem;
+      background: white;
+      cursor: pointer;
+      transition: border-color 0.2s ease;
+    }
+
+    #dateSelect:focus {
+      outline: none;
+      border-color: #007bff;
+    }
+
+    #dateSelect:hover {
+      border-color: #cbd5e0;
+    }
+
+    .date-display {
+      margin-left: 0.5rem;
+      font-style: italic;
+    }
+
+    .intro {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #666;
+      font-size: 1.05rem;
+    }
+
+    .puzzle {
+      background: #f8fafc;
+      border-left: 5px solid #e2e8f0;
+      margin: 1.5rem 0;
+      padding: 1.5rem;
+      border-radius: 12px;
+      transition: box-shadow 0.2s ease;
+    }
+
+    .puzzle:hover {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .puzzle.easy { border-left-color: #10b981; }
+    .puzzle.medium { border-left-color: #f59e0b; }
+    .puzzle.hard { border-left-color: #ef4444; }
+
+    .puzzle-header {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 1rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1rem;
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+
+    td {
+      padding: 1rem;
+      border-bottom: 1px solid #e2e8f0;
+      vertical-align: top;
+    }
+
+    td:first-child {
+      font-family: 'Courier New', monospace;
+      font-weight: 600;
+      font-size: 1.1rem;
+      width: 30%;
+      color: #374151;
+    }
+
+    td:last-child {
+      color: #4a5568;
+      font-size: 0.95rem;
+    }
+
+    .solution {
+      display: none;
+      background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+      border-left: 4px solid #10b981;
+      padding: 1rem;
+      margin-top: 1rem;
+      border-radius: 8px;
+      font-weight: 500;
+      color: #065f46;
+    }
+
+    .solution b {
+      color: #047857;
+    }
+
+    .button-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    button {
+      background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3);
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(0, 123, 255, 0.4);
+      background: linear-gradient(135deg, #0056b3 0%, #004494 100%);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    @media print {
+      body {
+        background: white !important;
+        padding: 0;
+      }
+      .container {
+        box-shadow: none;
+        padding: 1rem;
+        border-radius: 0;
+      }
+      button, #solutionToggle {
+        display: none;
+      }
+      .solution {
+        display: none !important;
+      }
+      .puzzle {
+        break-inside: avoid;
+        margin: 1rem 0;
+        box-shadow: none;
+      }
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .container {
+        padding: 1.5rem;
+        margin: 0.5rem;
+      }
+      h1 {
+        font-size: 1.75rem;
+      }
+      .puzzle {
+        padding: 1rem;
+      }
+      table {
+        font-size: 0.9rem;
+      }
+      td {
+        padding: 0.75rem;
+      }
+      .button-group {
+        flex-direction: column;
+        align-items: center;
+      }
+      button {
+        width: 100%;
+        max-width: 200px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 0.5rem;
+      }
+      .date-section {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      #dateSelect {
+        width: 100%;
+        max-width: 200px;
+      }
+      .puzzle-header {
+        font-size: 1rem;
+      }
+    }
+  </style>
 </head>
 <body>
   <div class="container">
     <h1>Questacon-2025 Practice</h1>
     <h2>Cipher Challenge</h2>
-    <p style="text-align:center" id="date"></p>
-    <p>Guess the secret code based on the clues below. Each puzzle has a unique solution.</p>
+    <div class="date-section">
+      <label for="dateSelect">Date: </label>
+      <input type="date" id="dateSelect">
+      <span class="date-display" id="dateDisplay"></span>
+    </div>
+    <p class="intro">Guess the secret code based on the clues below. Each puzzle has a unique solution.</p>
     <div id="puzzles"></div>
-    <div style="text-align:center;">
+    <div class="button-group">
       <button id="solutionToggle">Show/Hide Solutions</button>
       <button onclick="window.print()">Print / Save as PDF</button>
     </div>
   </div>
 
-<script>
-function seedRandom(seed) {
-  let s = seed % 2147483647;
-  return function() {
-    s = s * 16807 % 2147483647;
-    return (s - 1) / 2147483646;
-  };
-}
-
-function allCodes(n=3) {
-  const digits = '0123456789'.split('');
-  const results = [];
-  function permute(prefix, arr) {
-    if (prefix.length === n) { results.push(prefix.join('')); return; }
-    for (let i=0;i<arr.length;i++) {
-      const newArr = arr.slice(); newArr.splice(i,1);
-      permute(prefix.concat(arr[i]), newArr);
+  <script>
+    function seedRandom(seed) {
+      let s = seed % 2147483647;
+      return function() {
+        s = s * 16807 % 2147483647;
+        return (s - 1) / 2147483646;
+      };
     }
-  }
-  permute([], digits);
-  return results;
-}
 
-function feedback(secret, guess) {
-  let bulls = 0, cows = 0;
-  for (let i=0;i<secret.length;i++) if (secret[i]===guess[i]) bulls++;
-  const set = new Set(guess);
-  set.forEach(d => { cows += Math.min(secret.split(d).length-1, guess.split(d).length-1); });
-  cows -= bulls;
-  return [bulls,cows];
-}
-
-function clueText(b,c) {
-  if (b===0 && c===0) return "Nothing is correct";
-  const total = b + c;
-  let bullStr = `${b} ${b===1 ? 'is' : 'are'} well placed`;
-  
-  if (total === 0) return "Nothing is correct";
-  if (total === 3) return `All 3 numbers are correct, and ${bullStr.toLowerCase()}`;
-  
-  if (b === 0) {
-    let cowStr = `${c} ${c===1 ? 'is' : 'are'} wrongly placed`;
-    return `${total} ${total===1 ? 'number is' : 'numbers are'} correct but ${cowStr}`;
-  }
-  if (c === 0) {
-    return `${total} ${total===1 ? 'number is' : 'numbers are'} correct and ${bullStr}`;
-  }
-  
-  return `${total} ${total===1 ? 'number is' : 'numbers are'} correct: ${b} ${b===1 ? 'is' : 'are'} well placed, ${c} ${c===1 ? 'is' : 'are'} wrongly placed`;
-}
-
-function consistentCodes(guessesClues,codes) {
-  return codes.filter(code=>guessesClues.every(([g,[b,c]])=>{
-    const [fb,fc]=feedback(code,g);
-    return fb===b && fc===c;
-  }));
-}
-
-function makePuzzle(rng) {
-  const difficulties = ["Easy","Medium","Hard"];
-  const difficulty = difficulties[Math.floor(rng()*3)];
-  const settings = {Easy:{n:3,g:5},Medium:{n:3,g:4},Hard:{n:3,g:3}};
-  const sett=settings[difficulty];
-  const CODES = allCodes(sett.n);
-  let attempts=0;
-  while(attempts<15000){
-    attempts++;
-    const secret=CODES[Math.floor(rng()*CODES.length)];
-    const guesses=[...CODES].filter(g=>g!==secret).sort(()=>rng()-0.5).slice(0,sett.g);
-    const guessesClues=guesses.map(g=>[g,feedback(secret,g)]);
-    const sol=consistentCodes(guessesClues,CODES);
-    if(sol.length===1 && sol[0]===secret){
-      const clues=guessesClues.map(([g,f])=>[g,clueText(...f)]);
-      return {secret,clues,difficulty};
+    function allCodes(n=3) {
+      const digits = '0123456789'.split('');
+      const results = [];
+      function permute(prefix, arr) {
+        if (prefix.length === n) { results.push(prefix.join('')); return; }
+        for (let i=0; i<arr.length; i++) {
+          const newArr = arr.slice(); newArr.splice(i,1);
+          permute(prefix.concat(arr[i]), newArr);
+        }
+      }
+      permute([], digits);
+      return results;
     }
-  }
-  return null;
-}
 
-function generatePuzzles(){
-  const today=new Date();
-  const seed=parseInt(`${today.getUTCFullYear()}${today.getUTCMonth()+1}${today.getUTCDate()}`);
-  const rng=seedRandom(seed);
-  const puzzles=[];
-  while(puzzles.length<10){
-    const p=makePuzzle(rng);
-    if(p)puzzles.push(p);
-  }
-  document.getElementById('date').textContent=today.toDateString();
-  const container=document.getElementById('puzzles');
-  container.innerHTML='';
-  puzzles.forEach((p,i)=>{
-    const div=document.createElement('div');
-    div.className=`puzzle ${p.difficulty.toLowerCase()}`;
-    div.innerHTML=`<strong>Puzzle ${i+1} (${p.difficulty})</strong><br><table>`+
-      p.clues.map(([g,c])=>`<tr><td><b>${g}</b></td><td>${c}</td></tr>`).join('')+
-      `</table><div class="solution">Solution: <b>${p.secret}</b></div>`;
-    container.appendChild(div);
-  });
+    function feedback(secret, guess) {
+      let bulls = 0, cows = 0;
+      for (let i=0; i<secret.length; i++) if (secret[i]===guess[i]) bulls++;
+      const set = new Set(guess);
+      set.forEach(d => { cows += Math.min(secret.split(d).length-1, guess.split(d).length-1); });
+      cows -= bulls;
+      return [bulls, cows];
+    }
 
-  document.getElementById('solutionToggle').onclick=()=>{
-    document.querySelectorAll('.solution').forEach(el=>{
-      el.style.display=(el.style.display==='none'||!el.style.display)?'block':'none';
-    });
-  };
-}
+    function clueText(b, c) {
+      if (b === 0 && c === 0) return "Nothing is correct";
+      const total = b + c;
 
-generatePuzzles();
-</script>
+      if (total === 3) {
+        if (b === 3) return "All 3 numbers are correct and well placed";
+        if (b === 0) return "All 3 numbers are correct but wrongly placed";
+        let bullStr = `${b} ${b === 1 ? 'is' : 'are'} well placed`;
+        return `All 3 numbers are correct, and ${bullStr.toLowerCase()}`;
+      }
+
+      const numStr = `${total} ${total === 1 ? 'number is' : 'numbers are'}`;
+      const pluralBull = b === 1 ? 'is' : 'are';
+      const pluralCow = c === 1 ? 'is' : 'are';
+
+      if (b === 0) {
+        return `${numStr} correct but wrongly placed`;
+      }
+      if (c === 0) {
+        return `${numStr} correct and well placed`;
+      }
+
+      return `${numStr} correct: ${b} ${pluralBull} well placed, ${c} ${pluralCow} wrongly placed`;
+    }
+
+    function consistentCodes(guessesClues, codes) {
+      return codes.filter(code => guessesClues.every(([g, [b, c]]) => {
+        const [fb, fc] = feedback(code, g);
+        return fb === b && fc === c;
+      }));
+    }
+
+    function makePuzzle(rng) {
+      const difficulties = ["Easy", "Medium", "Hard"];
+      const difficulty = difficulties[Math.floor(rng()*3)];
+      const settings = {Easy: {n:3, g:5}, Medium: {n:3, g:4}, Hard: {n:3, g:3}};
+      const sett = settings[difficulty];
+      const CODES = allCodes(sett.n);
+      let attempts = 0;
+      while (attempts < 15000) {
+        attempts++;
+        const secret = CODES[Math.floor(rng()*CODES.length)];
+        const guesses = [...CODES].filter(g => g !== secret).sort(() => rng() - 0.5).slice(0, sett.g);
+        const guessesClues = guesses.map(g => [g, feedback(secret, g)]);
+        const sol = consistentCodes(guessesClues, CODES);
+        if (sol.length === 1 && sol[0] === secret) {
+          const clues = guessesClues.map(([g, f]) => [g, clueText(...f)]);
+          return {secret, clues, difficulty};
+        }
+      }
+      return null;
+    }
+
+    function generatePuzzles(selectedDate) {
+      const seed = parseInt(`${selectedDate.getUTCFullYear()}${selectedDate.getUTCMonth() + 1}${selectedDate.getUTCDate()}`);
+      const rng = seedRandom(seed);
+      const puzzles = [];
+      while (puzzles.length < 10) {
+        const p = makePuzzle(rng);
+        if (p) puzzles.push(p);
+      }
+      // document.getElementById('dateDisplay').textContent = selectedDate.toDateString();
+      const container = document.getElementById('puzzles');
+      container.innerHTML = '';
+      puzzles.forEach((p, i) => {
+        const div = document.createElement('div');
+        div.className = `puzzle ${p.difficulty.toLowerCase()}`;
+        div.innerHTML = `
+          <div class="puzzle-header">Puzzle ${i + 1} (${p.difficulty})</div>
+          <table>${p.clues.map(([g, c]) => `<tr><td>${g}</td><td>${c}</td></tr>`).join('')}</table>
+          <div class="solution">Solution: <b>${p.secret}</b></div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function initDateSelector() {
+      const today = new Date();
+      const minDate = new Date('2025-11-05');
+      const maxDateStr = today.toISOString().split('T')[0];
+      const dateSelect = document.getElementById('dateSelect');
+      dateSelect.min = '2025-11-05';
+      dateSelect.max = maxDateStr;
+      dateSelect.value = maxDateStr;
+      generatePuzzles(today);
+      dateSelect.addEventListener('change', (e) => {
+        const selected = new Date(e.target.value);
+        if (selected >= minDate && selected <= today) {
+          generatePuzzles(selected);
+        }
+      });
+    }
+
+    document.getElementById('solutionToggle').onclick = () => {
+      document.querySelectorAll('.solution').forEach(el => {
+        el.style.display = (el.style.display === 'none' || !el.style.display) ? 'block' : 'none';
+      });
+    };
+
+    initDateSelector();
+  </script>
 </body>
 </html>
