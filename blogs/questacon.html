@@ -378,6 +378,8 @@
       dateSelect.min = '2025-11-05';
       dateSelect.max = maxDateStr;
       dateSelect.value = maxDateStr;
+      console.log(today.toISOString());
+      
       generatePuzzles(today);
       dateSelect.addEventListener('change', (e) => {
         const selected = new Date(e.target.value);
