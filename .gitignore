@@ -1,2 +1,21 @@
-/archive
-/.vscode
+# Local Codex and cloud-tool configuration
+.agents/
+.aws/
+.codex/
+
+# Private planning and maintainer notes
+/portfolio_website_brainstorming_minutes.md
+/README.maintenance.md
+
+# Operating system and editor files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.idea/
+
+# Local dependencies and generated output
+node_modules/
+dist/
+build/
