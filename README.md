@@ -14,4 +14,4 @@ The site introduces my academic background, teaching, and work connecting mathem
 
 ## View the site
 
-abhisindh.netlify.app
+[abhisindh.netlify.app](https://abhisindh.netlify.app/)
