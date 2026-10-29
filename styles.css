@@ -94,6 +94,9 @@ h1 em, h2 em { font-family: var(--serif); font-weight: 400; }
 .work-heading { display: flex; justify-content: space-between; align-items: end; margin: -12px 0 42px; }
 .work-heading > p { max-width: 290px; color: var(--muted); font-size: .85rem; line-height: 1.8; margin: 0 0 4px; }
 .project-card { position: relative; min-height: 380px; background: #dce7d9; padding: 33px 42px; overflow: hidden; }
+.project-card + .project-card { margin-top: 20px; }
+.project-card-timetable { background: #e4e6d5; }
+.project-card-timetable::after { content: "02"; color: rgba(49,91,72,.06); }
 .project-card::after { content: "A⁺"; position: absolute; right: 7%; bottom: -23%; font: 700 21rem/.8 var(--serif); color: rgba(49,91,72,.07); transform: rotate(-11deg); pointer-events: none; }
 .project-top, .project-bottom { position: relative; z-index: 1; display: flex; justify-content: space-between; align-items: center; }
 .project-type, .project-number { color: #607364; font-size: .58rem; }
@@ -125,14 +128,20 @@ h1 em, h2 em { font-family: var(--serif); font-weight: 400; }
 .writing-card p { color: var(--muted); font-size: .78rem; }
 .writing-card-foot { border-top: 1px solid rgba(49,91,72,.2); padding-top: 14px; margin-top: auto; color: #738476; font-size: .53rem; display: flex; justify-content: space-between; }
 .cv-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 10%; }
+.cv-print-photo { display: none; }
 .cv-name { color: var(--muted); font-size: .68rem; font-weight: 700; letter-spacing: .08em; margin-bottom: 24px; text-transform: uppercase; }
 .cv-name span { color: #96a05f; margin: 0 5px; }
 .cv-copy { max-width: 310px; margin: 25px 0; }
+.cv-print-help { max-width: 290px; color: #858b81; font-size: .65rem; line-height: 1.6; margin: 12px 0 0; }
 .cv-list { border-top: 1px solid var(--line); }
-.cv-row { display: grid; grid-template-columns: 100px 1fr; gap: 20px; padding: 21px 0; border-bottom: 1px solid var(--line); }
-.cv-year { color: #8c9585; font-size: .55rem; padding-top: 4px; }
-.cv-row h3 { font: 600 .9rem var(--display); margin: 0 0 6px; }
-.cv-row p { color: var(--muted); font-size: .71rem; margin: 0; line-height: 1.6; }
+.cv-group { padding: 20px 0 4px; border-bottom: 1px solid var(--line); }
+.cv-group-title { color: var(--green); font-size: .62rem; text-transform: uppercase; letter-spacing: .12em; margin: 0 0 10px; }
+.cv-row { padding: 10px 0; }
+.cv-row + .cv-row { border-top: 1px solid rgba(217,216,207,.65); }
+.cv-row h4 { font: 600 .84rem var(--display); margin: 0 0 5px; }
+.cv-row p, .cv-profiles p { color: var(--muted); font-size: .71rem; margin: 0; line-height: 1.6; }
+.cv-row a, .cv-profiles a { color: var(--green); text-decoration: underline; text-underline-offset: 2px; }
+.cv-profiles p { display: flex; gap: 16px; }
 .contact-section { background: var(--green); color: #f4f3eb; }
 .contact-section .section-kicker { color: #b5c3b0; }
 .contact-section .section-kicker span:first-child { color: var(--lime); }
@@ -205,25 +214,35 @@ h1 em, h2 em { font-family: var(--serif); font-weight: 400; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
 }
+@page { size: A4; margin: 17mm 19mm; }
 @media print {
+  :root { color-scheme: light; font-family: Arial, Helvetica, sans-serif; color: #202820; background: #fff; font-size: 10pt; }
+  body { min-width: 0; margin: 0; background: #fff; color: #202820; }
   body > * { display: none !important; }
   body > main { display: block !important; }
   main > * { display: none !important; }
   main > #cv { display: block !important; }
-  #cv .section-wrap { display: block !important; }
-  #cv .section-kicker, #cv .cv-grid, #cv .cv-list, #cv .cv-row, #cv .cv-grid > div { display: grid !important; }
-  #cv .cv-grid { grid-template-columns: 1fr !important; gap: 10px !important; }
-  #cv .cv-grid > div { display: block !important; }
-  #cv .cv-list { display: block !important; }
-  #cv .cv-row { display: grid !important; }
-  #cv .button { display: none !important; }
-  body, :root { background: white; color: #111; }
-  .section-wrap { width: 100%; }
-  #cv.section-pad { padding: 10px 0; }
-  #cv .section-kicker { margin-bottom: 18px; }
-  #cv h2 { font-size: 24pt; margin-bottom: 8px; }
-  #cv .cv-copy { margin: 0 0 15px; }
-  #cv .cv-list { margin-top: 5px; }
-  #cv .cv-row { padding: 12px 0; }
-  a { text-decoration: none; }
+  #cv, #cv .section-wrap { width: 100% !important; max-width: none !important; margin: 0 !important; }
+  #cv.section-pad { padding: 0 !important; }
+  #cv .section-kicker { display: none !important; }
+  #cv .cv-grid { display: block !important; }
+  #cv .cv-intro { display: block !important; padding: 0 0 13pt; border-bottom: 1.5pt solid #315b48; }
+  #cv .cv-intro { position: relative; min-height: 92pt; padding-right: 92pt; }
+  #cv .cv-print-photo { display: block; position: absolute; top: 0; right: 0; width: 76pt; height: 88pt; object-fit: cover; object-position: center 35%; border-radius: 2pt; }
+  #cv .cv-name { margin: 0 0 4pt; color: #315b48; font: 700 9pt Arial, sans-serif; letter-spacing: .08em; }
+  #cv .cv-name span { color: #315b48; }
+  #cv h2 { margin: 0 0 5pt; color: #202820; font: 700 25pt/1.08 Arial, Helvetica, sans-serif; letter-spacing: -.04em; }
+  #cv h2 em { font: inherit; }
+  #cv .cv-copy { max-width: none; margin: 0; color: #59645a; font-size: 10pt; line-height: 1.45; }
+  #cv .button, #cv .cv-print-help { display: none !important; }
+  #cv .cv-list { margin: 12pt 0 0; border: 0; }
+  #cv .cv-group { padding: 7pt 0 4pt; border: 0; break-inside: avoid; }
+  #cv .cv-group-title { margin: 0 0 3pt; padding-bottom: 3pt; border-bottom: .6pt solid #b8c3b6; color: #315b48; font: 700 9pt Arial, sans-serif; letter-spacing: .1em; text-transform: uppercase; }
+  #cv .cv-row { padding: 4pt 0; break-inside: avoid; }
+  #cv .cv-row + .cv-row { border: 0; }
+  #cv .cv-row h4 { margin: 0 0 1.5pt; color: #202820; font: 700 10pt Arial, sans-serif; }
+  #cv .cv-row p, #cv .cv-profiles p { margin: 0; color: #4b554d; font-size: 9pt; line-height: 1.4; }
+  #cv .cv-row a, #cv .cv-profiles a { color: #202820; text-decoration: underline; }
+  #cv .cv-profiles p { display: flex; gap: 14pt; }
+  a { color: inherit; }
 }
